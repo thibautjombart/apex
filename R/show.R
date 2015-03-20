@@ -8,6 +8,9 @@
 #'
 #' @export
 #'
+#' @aliases show,multidna-method
+#' @aliases show.multidna
+#'
 #' @param object a multidna object
 #'
 #' @author Thibaut Jombart \email{t.jombart@@imperial.ac.uk}

@@ -17,6 +17,11 @@
 #'
 #' @import ape
 #'
+#' @aliases plot,multidna-method
+#' @aliases plot.multidna
+#'
+#' @docType method
+#'
 #' @examples
 #' ## simple conversion with nicely ordered output
 #' data(woodmouse)

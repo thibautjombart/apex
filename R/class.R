@@ -17,6 +17,11 @@ setClassUnion("data.frameOrNULL", c("data.frame", "NULL"))
 #'
 #' @rdname multidna
 #'
+#' @aliases multidna
+#' @aliases multidna-class
+#' @aliases listOrNULL
+#' @aliases data.frameOrNULL
+#'
 #' @slot dna a list of DNAbin matrices; empty slot should be NULL
 #' @slot labels a vector of labels of individuals
 #' @slot n.ind the number of individuals
@@ -24,8 +29,6 @@ setClassUnion("data.frameOrNULL", c("data.frame", "NULL"))
 #' @slot ind.info a data.frame containing information on the individuals, where individuals are in rows; empty slot should be NULL
 #' @slot gene.info a data.frame containing information on the genes, where genes are in rows; empty slot should be NULL
 #'
-#' @aliases listOrNULL
-#' @aliases data.frameOrNULL
 #' @export
 #'
 #' @import ape

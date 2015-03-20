@@ -2,7 +2,7 @@
 % Please edit documentation in R/class.R
 \docType{class}
 \name{multidna-class}
-\alias{listOrNULL}
+\alias{multidna}
 \alias{multidna-class}
 \title{multidna: class for multiple gene data}
 \description{
