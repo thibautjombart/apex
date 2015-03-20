@@ -27,7 +27,7 @@
 #' files
 #'
 #' ## read files
-#' x <- read.multiFATSA(files)
+#' x <- read.multiFASTA(files)
 #' x
 #' plot(x)
 #'
