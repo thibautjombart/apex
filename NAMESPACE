@@ -2,6 +2,7 @@
 
 export(concatenate)
 export(dist.multidna)
+export(multidna2genind)
 export(read.multiFASTA)
 export(read.multidna)
 exportClasses(multidna)
@@ -11,3 +12,4 @@ exportMethods(plot)
 exportMethods(show)
 import(ape)
 import(methods)
+importFrom(adegenet,DNAbin2genind)

@@ -6,6 +6,7 @@ Authors@R: c(TJ=person("Thibaut", "Jombart", , "t.jombart@imperial.ac.uk", role 
 	   RH=person("Rebecca", "Harris", email="rbharris@uw.edu", role = c("aut")))
 Description: This package implements the new S4 class multidna and associated methods to handle aligned DNA sequences from multiple genes.
 Depends: R (>= 3.1.3), methods, ape
+Imports: adegenet
 License: GPL (>=2)
 LazyData: true
-Collate: multidna.class.R show.R multidna.constructor.R accessors.R handling.R plot.R readfiles.R datasets.R dist.R
+Collate: multidna.class.R show.R multidna.constructor.R accessors.R handling.R plot.R readfiles.R datasets.R dist.R exports.R
