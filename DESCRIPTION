@@ -1,8 +1,9 @@
 Package: apex
-Title: What the Package Does (one line, title case)
+Title: Extension to ape for multiple gene data
 Version: 0.0.0.9000
-Authors@R: person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph)
-Depends: R (>= 3.1.3)
-License: What license is it under?
+Authors@R: person("Thibaut", "Jombart", , "t.jombart@imperial.ac.uk", role = c("aut", "cre"))
+Description: This package implements new classes and methods to handle aligned DNA sequences from multiple genes.
+Depends: R (>= 3.1.3), methods, ape
+License: GPL (>=2)
 LazyData: true
+Collate: class.R constructor.R accessors.R
