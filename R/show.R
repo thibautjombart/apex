@@ -10,6 +10,8 @@
 #'
 #' @param object a multidna object
 #'
+#' @author Thibaut Jombart \email{t.jombart@@imperial.ac.uk}
+#'
 setMethod ("show", "multidna", function(object){
     ## INFO FOR PRINTING ##
     x <- object

@@ -2,6 +2,7 @@
 
 exportClasses(multidna)
 exportMethods(initialize)
+exportMethods(plot)
 exportMethods(show)
 import(ape)
 import(methods)
