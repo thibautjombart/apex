@@ -43,7 +43,7 @@ read.multidna <- function(files, ...){
 #'
 #' @rdname readfiles
 #' @export
-read.multiFATSA <- function(files){
+read.multiFASTA <- function(files){
     gene.names <- gsub(".fasta","",sapply(strsplit(files, "/"), tail, 1))
     dna <- lapply(files, read.FASTA)
     names(dna) <- gene.names
