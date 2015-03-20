@@ -21,6 +21,14 @@
 \description{
 Default printing for multidna objects
 }
+\examples{
+## simple conversion with nicely ordered output
+data(woodmouse)
+genes <- list(gene1=woodmouse[,1:500], gene2=woodmouse[,501:965])
+x <- new("multidna", genes)
+x
+plot(x)
+}
 \author{
 Thibaut Jombart \email{t.jombart@imperial.ac.uk}
 }

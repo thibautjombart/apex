@@ -17,6 +17,14 @@
 #'
 #' @import ape
 #'
+#' @examples
+#' ## simple conversion with nicely ordered output
+#' data(woodmouse)
+#' genes <- list(gene1=woodmouse[,1:500], gene2=woodmouse[,501:965])
+#' x <- new("multidna", genes)
+#' x
+#' plot(x)
+#'
 setMethod ("plot", "multidna", function(x, y, rows=TRUE, ask=FALSE, ...){
     ## HANDLE ARGUMENTS ##
     n.genes <- length(x@dna)
