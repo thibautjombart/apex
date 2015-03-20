@@ -20,6 +20,16 @@ They are relying on ape's original functions \code{\link[ape]{read.dna}} and \co
 
 
 }
+\examples{
+## get path to the files
+files <- dir(system.file(package="apex"),patter="patr", full=TRUE)
+files
+
+## read files
+x <- read.multiFATSA(files)
+x
+plot(x)
+}
 \author{
 Thibaut Jombart \email{t.jombart@imperial.ac.uk}
 }

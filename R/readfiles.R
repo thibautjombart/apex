@@ -19,6 +19,17 @@
 #' \item  \code{\link[ape]{read.FASTA}}
 #' }
 #'
+#' @export
+#'
+#' @examples
+#' ## get path to the files
+#' files <- dir(system.file(package="apex"),patter="patr", full=TRUE)
+#' files
+#'
+#' ## read files
+#' x <- read.multiFATSA(files)
+#' x
+#' plot(x)
 #'
 read.multidna <- function(files, ...){
     out <- new("multidna", dna=lapply(files, read.dna, ...))
@@ -28,7 +39,7 @@ read.multidna <- function(files, ...){
 
 #'
 #' @rdname readfiles
-#'
+#' @export
 read.multiFATSA <- function(files){
     out <- new("multidna", dna=lapply(files, read.FASTA))
     return(out)
