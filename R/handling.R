@@ -26,3 +26,62 @@ concatenate <- function(x, genes=TRUE){
     out <- do.call(cbind.DNAbin, x@dna[genes])
     return(out[x@labels,,drop=FALSE])
 }
+
+
+
+
+
+
+
+#################
+## '[' operator
+#################
+#' Subset multidna objects
+#'
+#' Individuals in a \linkS4class{multidna} object can be subsetted like the rows of a matrix, with the form x[i,].
+#' Genes can be subsetted like the columns of a matrix, i.e. with the form x[,j].
+#'
+#' @aliases [,multidna-method
+#' @aliases [.multidna
+#'
+#' @param x the \linkS4class{multidna} object to subset.
+#' @param i a vector of logical, integers or characters to subset data by individuals; characters will be matched against individual labels.
+#' @param i a vector of logical, integers or characters to subset data by genes; characters will be matched against gene names labels.
+#' @param ... further arguments to be passed to other methods; currently ignored.
+#'
+#' @docType methods
+#'
+#' @author Thibaut Jombart \email{t.jombart@@imperial.ac.uk}
+#'
+#' @export
+#'
+#' @examples
+#'
+#' data(woodmouse)
+#' genes <- list(gene1=woodmouse[,1:500], gene2=woodmouse[,501:965])
+#' x <- new("multidna", genes)
+#' x
+#' plot(x)
+#'
+#' ## keep only the first 5 individuals
+#' x[1:5,]
+#' plot(x[1:5,])
+#'
+#' ## keep individuals 2,4,6 and the second gene
+#' x[c(2,4,6),2]
+#' plot(x[c(2,4,6),2])
+#' 
+setMethod("[", signature(x="multidna", i="ANY", j="ANY", drop="ANY"), function(x, i, j, ...) {
+    if (missing(i)) i <- TRUE
+    if (missing(j)) j <- TRUE
+
+    ## subset data
+    x@dna <- x@dna[j]
+    for(i in 1:length(x@dna)) x@dna[[i]] <- x@dna[[i]][i,,drop=FALSE]
+    x@labels <- x@labels[i]
+
+    ## adjust counters
+    x@n.ind <- length(x@labels)
+    x@n.seq <- sum(sapply(x@dna, nrow))
+    return(x)
+}) # end [] for SNPbin
