@@ -140,34 +140,3 @@
 
 
 
-
-## ######################
-## ####  SHOW METHOD ####
-## ######################
-## setMethod ("show", "multidna", function(object){
-##     nLoc <- get.nlocus(object)
-##     nSeq <- get.nsequences(object)
-##     seqword <- ifelse(nSeq>1, "sequences", "sequence")
-##     locword <- ifelse(nLoc>1, "loci", "locus")
-
-##     cat(paste("= @dna =\n",sep=""))
-##     cat(paste("[", nSeq,"DNA", seqword, "in", nLoc, locword,"]\n"))
-##     if(nLoc>0) print(object@dna)
-
-##     cat(paste("\n= @meta =\n",sep=""))
-##     cat("[ meta information on the sequences ]\n")
-##     if(nLoc>0) {
-##         if(nrow(object@meta)>10){
-##             print(head(object@meta,4))
-##             cat("\n...\n")
-##             print(tail(object@meta,4))
-##         } else {
-##             print(object@meta)
-##         }
-##     }
-## })
-
-
-
-
-

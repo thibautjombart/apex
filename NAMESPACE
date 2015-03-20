@@ -2,5 +2,6 @@
 
 exportClasses(multidna)
 exportMethods(initialize)
+exportMethods(show)
 import(ape)
 import(methods)
