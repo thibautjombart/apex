@@ -83,9 +83,19 @@ plot(x[1:3,2:4])
 y <- concatenate(x)
 y
 image(y)
+```
+
+
+#### Exporting data
+```r
+## read data in
+files <- dir(system.file(package="apex"),patter="patr", full=TRUE)
+files
+     
+## read files
+x <- read.multiFASTA(files)
 
 ## export to genind
 obj <- multidna2genind(x)
 obj
-
 ```
