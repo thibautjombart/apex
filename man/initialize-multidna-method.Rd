@@ -50,6 +50,9 @@ image(x@dna[[2]])
 Thibaut Jombart \email{t.jombart@imperial.ac.uk}
 }
 \seealso{
-the \linkS4class{multidna} class.
+\itemize{
+\item the \linkS4class{multidna} class
+\item \code{\link{read.multidna}} and \code{\link{read.multidna}}
+}
 }
 

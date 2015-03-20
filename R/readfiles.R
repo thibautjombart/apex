@@ -13,8 +13,11 @@
 #'
 #' @author Thibaut Jombart \email{t.jombart@@imperial.ac.uk}
 #'
-#' @seealso  \code{\link[ape]{read.dna}}, \code{\link[ape]{read.FASTA}}
-#'
+#' @seealso
+#' \itemize{
+#' \item \code{\link[ape]{read.dna}}
+#' \item  \code{\link[ape]{read.FASTA}}
+#' }
 #'
 #'
 read.multidna <- function(files, ...){

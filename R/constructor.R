@@ -21,8 +21,11 @@
 #' @param quiet a logical indicating if messages should be shown; defaults to FALSE.
 #' @param ... further arguments to be passed to other methods
 #'
-#' @seealso the \linkS4class{multidna} class.
-#'
+#' @seealso
+#' \itemize{
+#' \item the \linkS4class{multidna} class
+#' \item \code{\link{read.multidna}} and \code{\link{read.multidna}}
+#' }
 #' @examples
 #'
 #' ## empty object
