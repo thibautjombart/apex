@@ -14,7 +14,7 @@ install_github("thibautjombart/apex")
 Functionalities
 ----------------
 
-### Classes of object
+#### Classes of object
 
 See the classes:
 * **multidna:** formal (S4) class, storing data using a list of DNAbin objects.
@@ -42,7 +42,7 @@ x
 plot(x)
 ```
 
-### Reading data from multiple files
+#### Reading data from multiple files
 See the functions:
 * **read.multidna:** reads multiple DNA alignments with various formats
 * **read.multiFASTA:** same for FASTA files
@@ -57,9 +57,14 @@ x <- read.multiFATSA(files)
 x
 plot(x)
 ```
-### Data handling
+
+
+
+#### Data handling
 See the functions:
 * **concatenate:** concatenate seeral genes into a single DNAbin matrix 
+* **x[i,j]:** subset x by individuals (i) and/or genes (j)
+* **multidna2genind:** concatenate genes and export data to genind object
 
 Example code:
 ```r
@@ -67,10 +72,20 @@ files <- dir(system.file(package="apex"),patter="patr", full=TRUE)
 files
      
 ## read files
-x <- read.multiFATSA(files)
+x <- read.multiFASTA(files)
 x
 plot(x)
+
+## subset
+plot(x[1:3,2:4])
+
+## concatenate
 y <- concatenate(x)
 y
 image(y)
+
+## export to genind
+obj <- multidna2genind(x)
+obj
+
 ```
