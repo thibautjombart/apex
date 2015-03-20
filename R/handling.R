@@ -46,7 +46,8 @@ concatenate <- function(x, genes=TRUE){
 #'
 #' @param x the \linkS4class{multidna} object to subset.
 #' @param i a vector of logical, integers or characters to subset data by individuals; characters will be matched against individual labels.
-#' @param i a vector of logical, integers or characters to subset data by genes; characters will be matched against gene names labels.
+#' @param j a vector of logical, integers or characters to subset data by genes; characters will be matched against gene names labels.
+#' @param drop present for compatibility with the generic; currently not used.
 #' @param ... further arguments to be passed to other methods; currently ignored.
 #'
 #' @docType methods
@@ -70,7 +71,7 @@ concatenate <- function(x, genes=TRUE){
 #' ## keep individuals 2,4,6 and the second gene
 #' x[c(2,4,6),2]
 #' plot(x[c(2,4,6),2])
-#' 
+#'
 setMethod("[", signature(x="multidna", i="ANY", j="ANY", drop="ANY"), function(x, i, j, ...) {
     if (missing(i)) i <- TRUE
     if (missing(j)) j <- TRUE

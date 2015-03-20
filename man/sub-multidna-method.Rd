@@ -12,9 +12,11 @@
 
 \item{i}{a vector of logical, integers or characters to subset data by individuals; characters will be matched against individual labels.}
 
+\item{j}{a vector of logical, integers or characters to subset data by genes; characters will be matched against gene names labels.}
+
 \item{...}{further arguments to be passed to other methods; currently ignored.}
 
-\item{i}{a vector of logical, integers or characters to subset data by genes; characters will be matched against gene names labels.}
+\item{drop}{present for compatibility with the generic; currently not used.}
 }
 \description{
 Individuals in a \linkS4class{multidna} object can be subsetted like the rows of a matrix, with the form x[i,].
