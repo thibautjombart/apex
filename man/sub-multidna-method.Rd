@@ -2,7 +2,6 @@
 % Please edit documentation in R/handling.R
 \docType{methods}
 \name{[,multidna-method}
-\alias{"[,multidna-method"}
 \alias{[,multidna-method}
 \title{Subset multidna objects}
 \usage{
