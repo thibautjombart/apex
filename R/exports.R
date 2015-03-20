@@ -18,7 +18,7 @@
 #'
 #' @export
 #'
-#' @importFrom adegenet DNAbin2genind
+#' @importFrom adegenet DNAbin2genind df2genind
 #'
 #' @return a \linkS4class{genind} object
 #'
@@ -31,7 +31,19 @@
 #' x
 #'
 #'
-multidna2genind <- function(x, genes=TRUE){
+multidna2genind <- function(x, genes=TRUE, mlst=FALSE){
+  if (!mlst){
     return(DNAbin2genind(concatenate(x, genes=genes)))
+  } 
+  xlist  <- lapply(x@dna, function(i) apply(as.character(i), 1, paste, collapse = ""))
+  xdf    <- data.frame(xlist)
+  xdfnum <- data.frame(lapply(xdf, as.numeric))
+  xlevs  <- lapply(xdf, levels)
+  xgid   <- df2genind(xdfnum, ploidy = 1, ind.names = x@labels)
+  names(xlevs) <- names(xgid@all.names)
+  xgid@all.names <- xlevs
+  xgid@other$ind.info <- x@ind.info
+  xgid@other$gene.info <- x@gene.info
+  return(xgid)
 }
 
