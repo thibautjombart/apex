@@ -29,7 +29,7 @@ x <- new("multidna", genes)
 x
 }
 \author{
-Thibaut Jombart \email{t.jombart@imperial.ac.uk} Zhian N. Kamvar
+Thibaut Jombart \email{t.jombart@imperial.ac.uk}, Zhian N. Kamvar
 }
 \seealso{
 \itemize{
