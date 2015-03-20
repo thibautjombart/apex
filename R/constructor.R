@@ -7,6 +7,8 @@
 #' New \linkS4class{multidna} objects can be created using \code{new("multidna", ...)} where "..." are arguments documented below.
 #' The main input is a list of DNAbin matrices. The constructor ensures that all matrices will be reordered in the same way, and genes with missing individuals will be filled by sequences of gaps ("-").
 #'
+#' @author Thibaut Jombart \email{t.jombart@@imperial.ac.uk}
+#'
 #' @export
 #'
 #' @aliases initialize,multidna-methods
@@ -19,8 +21,11 @@
 #' @param quiet a logical indicating if messages should be shown; defaults to FALSE.
 #' @param ... further arguments to be passed to other methods
 #'
-#' @seealso the \linkS4class{multidna} class.
-#'
+#' @seealso
+#' \itemize{
+#' \item the \linkS4class{multidna} class
+#' \item \code{\link{read.multidna}} and \code{\link{read.multidna}}
+#' }
 #' @examples
 #'
 #' ## empty object

@@ -8,6 +8,8 @@
 #'
 #' @export
 #'
+#' @author Thibaut Jombart \email{t.jombart@@imperial.ac.uk}
+#'
 #' @param x a multidna object
 #' @param y an integer vector indicating the genes to plot
 #' @param rows a logical indicating if different genes should be displayed in separate rows
@@ -20,7 +22,7 @@
 #' @aliases plot,multidna-method
 #' @aliases plot.multidna
 #'
-#' @docType method
+#' @docType methods
 #'
 #' @examples
 #' ## simple conversion with nicely ordered output

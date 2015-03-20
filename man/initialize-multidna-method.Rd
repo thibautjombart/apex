@@ -46,7 +46,13 @@ x
 image(x@dna[[1]])
 image(x@dna[[2]])
 }
+\author{
+Thibaut Jombart \email{t.jombart@imperial.ac.uk}
+}
 \seealso{
-the \linkS4class{multidna} class.
+\itemize{
+\item the \linkS4class{multidna} class
+\item \code{\link{read.multidna}} and \code{\link{read.multidna}}
+}
 }
 
