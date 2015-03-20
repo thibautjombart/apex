@@ -14,10 +14,11 @@ install_github("thibautjombart/apex")
 Functionalities
 ----------------
 
-### the S4 class *multidna*
+### Classes of object
 
-The main (formal/S4) class is *multidna*.
-
+See the classes:
+* **multidna:** formal (S4) class, storing data using a list of DNAbin objects.
+* 
 Example code:
 ```r
 library("apex")
