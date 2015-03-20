@@ -3,7 +3,7 @@
 #apex
 Extension of the R package ape for multiple genes.
 
-Using the *apex* package
+Installing *apex*
 -------------
 To install the development version from github: 
 ```r
@@ -11,9 +11,14 @@ library(devtools)
 install_github("thibautjombart/apex")
 ```
 
+Functionalities
+----------------
+
+### the S4 class *multidna*
+
 The main (formal/S4) class is *multidna*.
-See ?multidna for more information.
-Here is a short example:
+
+Example code:
 ```r
 library("apex")
 ## empty object
@@ -36,3 +41,35 @@ x
 plot(x)
 ```
 
+### Reading data from multiple files
+See the functions:
+* **read.multidna:** reads multiple DNA alignments with various formats
+* **read.multiFASTA:** same for FASTA files
+
+Example code:
+```r
+files <- dir(system.file(package="apex"),patter="patr", full=TRUE)
+files
+     
+## read files
+x <- read.multiFATSA(files)
+x
+plot(x)
+```
+### Data handling
+See the functions:
+* **concatenate:** concatenate seeral genes into a single DNAbin matrix 
+
+Example code:
+```r
+files <- dir(system.file(package="apex"),patter="patr", full=TRUE)
+files
+     
+## read files
+x <- read.multiFATSA(files)
+x
+plot(x)
+y <- concatenate(x)
+y
+image(y)
+```
