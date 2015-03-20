@@ -32,7 +32,10 @@
 #' plot(x)
 #'
 read.multidna <- function(files, ...){
-    out <- new("multidna", dna=lapply(files, read.dna, ...))
+    gene.names <- gsub(".fasta","",sapply(strsplit(files, "/"), tail, 1))
+    dna <- lapply(files, read.dna, ...)
+    names(dna) <- gene.names
+    out <- new("multidna", dna=dna)
     return(out)
 }
 
@@ -41,6 +44,9 @@ read.multidna <- function(files, ...){
 #' @rdname readfiles
 #' @export
 read.multiFATSA <- function(files){
-    out <- new("multidna", dna=lapply(files, read.FASTA))
+    gene.names <- gsub(".fasta","",sapply(strsplit(files, "/"), tail, 1))
+    dna <- lapply(files, read.FASTA)
+    names(dna) <- gene.names
+    out <- new("multidna", dna=dna)
     return(out)
 }

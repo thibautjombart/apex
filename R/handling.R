@@ -12,7 +12,17 @@
 #'
 #' @export
 #'
+#' @examples
+#'
+#' ## simple conversion with nicely ordered output
+#' data(woodmouse)
+#' genes <- list(gene1=woodmouse[,1:500], gene2=woodmouse[,501:965])
+#' x <- new("multidna", genes)
+#' x
+#' plot(x)
+#'
+#' image(concatenate(x))
 concatenate <- function(x, genes=TRUE){
     out <- do.call(cbind.DNAbin, x@dna[genes])
-    return(out)
+    return(out[x@labels,,drop=FALSE])
 }

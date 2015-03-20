@@ -14,6 +14,16 @@ concatenate(x, genes = TRUE)
 \description{
 This function concatenates separate DNA alignments into a single DNAbin matrix.
 }
+\examples{
+## simple conversion with nicely ordered output
+data(woodmouse)
+genes <- list(gene1=woodmouse[,1:500], gene2=woodmouse[,501:965])
+x <- new("multidna", genes)
+x
+plot(x)
+
+image(concatenate(x))
+}
 \author{
 Thibaut Jombart \email{t.jombart@imperial.ac.uk}
 }
