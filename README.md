@@ -33,9 +33,6 @@ image(x@dna[[2]])
 genes <- list(gene1=woodmouse[,1:500], gene2=woodmouse[c(5:1,14:15),501:965])
 x <- new("multidna", genes)
 x
-par(mfrow=c(2,1))
-image(x@dna[[1]])
-image(x@dna[[2]])
-
+plot(x)
 ```
 
