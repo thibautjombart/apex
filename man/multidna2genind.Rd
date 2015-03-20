@@ -4,12 +4,16 @@
 \alias{multidna2genind}
 \title{Convert multidna into genind}
 \usage{
-multidna2genind(x, genes = TRUE)
+multidna2genind(x, genes = TRUE, mlst = FALSE, gapIsNA = FALSE)
 }
 \arguments{
 \item{x}{a \linkS4class{multidna} object.}
 
 \item{genes}{an optional vector indicating the genes to retain for the concatenation; any way to subset the list in x@dna is acceptable; by default, all genes are used.}
+
+\item{mlst}{if \code{TRUE}, each gene will result in a single locus in the genind object. (Default to \code{FALSE})}
+
+\item{gapIsNA}{if \code{TRUE} and \code{mlst = TRUE}, sequences that consist entirely of gaps will be considered as NAs. (Default to \code{FALSE})}
 }
 \value{
 a \linkS4class{genind} object
@@ -25,7 +29,7 @@ x <- new("multidna", genes)
 x
 }
 \author{
-Thibaut Jombart \email{t.jombart@imperial.ac.uk}
+Thibaut Jombart \email{t.jombart@imperial.ac.uk} Zhian N. Kamvar
 }
 \seealso{
 \itemize{
