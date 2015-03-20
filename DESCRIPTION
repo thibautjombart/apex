@@ -1,8 +1,8 @@
 Package: apex
-Title: Extension to ape for multiple gene data
+Title: Extension to Ape for Multiple Gene Data
 Version: 0.0.0.9000
 Authors@R: person("Thibaut", "Jombart", , "t.jombart@imperial.ac.uk", role = c("aut", "cre"))
-Description: This package implements new classes and methods to handle aligned DNA sequences from multiple genes.
+Description: This package implements the new S4 class multidna and associated methods to handle aligned DNA sequences from multiple genes.
 Depends: R (>= 3.1.3), methods, ape
 License: GPL (>=2)
 LazyData: true
