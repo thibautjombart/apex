@@ -2,8 +2,8 @@
 % Please edit documentation in R/handling.R
 \docType{methods}
 \name{[,multidna,ANY,ANY,ANY-method}
+\alias{"[,multidna-method"}
 \alias{[,multidna,ANY,ANY,ANY-method}
-\alias{[,multidna-method}
 \title{Subset multidna objects}
 \usage{
 \S4method{[}{multidna,ANY,ANY,ANY}(x, i, j, ..., drop = TRUE)

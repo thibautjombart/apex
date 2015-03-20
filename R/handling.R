@@ -41,8 +41,8 @@ concatenate <- function(x, genes=TRUE){
 #' Individuals in a \linkS4class{multidna} object can be subsetted like the rows of a matrix, with the form x[i,].
 #' Genes can be subsetted like the columns of a matrix, i.e. with the form x[,j].
 #'
-#' @aliases [,multidna-method
-#' @aliases [.multidna
+#' @aliases "[,multidna-method"
+#' @aliases "[.multidna"
 #'
 #' @param x the \linkS4class{multidna} object to subset.
 #' @param i a vector of logical, integers or characters to subset data by individuals; characters will be matched against individual labels.
@@ -77,9 +77,9 @@ setMethod("[", signature(x="multidna", i="ANY", j="ANY", drop="ANY"), function(x
     if (missing(j)) j <- TRUE
 
     ## subset data
-    x@dna <- x@dna[j]
-    for(i in 1:length(x@dna)) x@dna[[i]] <- x@dna[[i]][i,,drop=FALSE]
+    for(k in 1:length(x@dna)) x@dna[[k]] <- x@dna[[k]][i,,drop=FALSE]
     x@labels <- x@labels[i]
+    x@dna <- x@dna[j]
 
     ## adjust counters
     x@n.ind <- length(x@labels)
