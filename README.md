@@ -8,7 +8,7 @@ Using the *apex* package
 To install the development version from github: 
 ```r
 library(devtools)
-install_github("Hackout2/apex")
+install_github("thibautjombart/apex")
 ```
 
 The main (formal/S4) class is *multidna*.
