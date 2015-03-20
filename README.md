@@ -64,7 +64,6 @@ plot(x)
 See the functions:
 * **concatenate:** concatenate seeral genes into a single DNAbin matrix 
 * **x[i,j]:** subset x by individuals (i) and/or genes (j)
-* **multidna2genind:** concatenate genes and export data to genind object
 
 Example code:
 ```r
@@ -87,6 +86,10 @@ image(y)
 
 
 #### Exporting data
+Check functions:
+* **multidna2genind:** concatenate genes and export to genind
+
+Example:
 ```r
 ## read data in
 files <- dir(system.file(package="apex"),patter="patr", full=TRUE)
