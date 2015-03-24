@@ -11,7 +11,6 @@
 #' 
 #'
 #' @param files a vector of characters indicating the paths to the files to read from
-#' @param ... further arguments passed to \code{\link[ape]{read.dna}} or \code{\link[phangorn]{read.phyDat}}
 #'
 #' @author Thibaut Jombart \email{t.jombart@@imperial.ac.uk}
 #' @author Klaus Schliep \email{klaus.schliep@@gmail.com}
