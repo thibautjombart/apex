@@ -3,10 +3,11 @@ Title: Extensions of Ape for Multiple Gene Data
 Version: 0.0.0.9000
 Authors@R: c(TJ=person("Thibaut", "Jombart", , "t.jombart@imperial.ac.uk", role = c("aut", "cre")), 
 	   MH=person("Michael", "Hohle", email="hoehle@math.su.se", role = c("aut")), 
-	   RH=person("Rebecca", "Harris", email="rbharris@uw.edu", role = c("aut")))
-Description: This package implements the new S4 class multidna and associated methods to handle aligned DNA sequences from multiple genes.
-Depends: R (>= 3.1.3), methods, ape
+	   RH=person("Rebecca", "Harris", email="rbharris@uw.edu", role = c("aut")),
+     KS=person("Klaus", "Schliep", email="klaus.schliep@umb.edu", role = c("aut")))
+Description: This package implements the new S4 classes multidna, multiphyDat and associated methods to handle aligned DNA sequences from multiple genes.
+Depends: R (>= 3.1.3), methods, ape, phangorn
 Imports: adegenet
 License: GPL (>=2)
 LazyData: true
-Collate: multidna.class.R show.R multidna.constructor.R accessors.R handling.R plot.R readfiles.R datasets.R dist.R exports.R
+Collate: multidna.class.R multiphyDat.class.R show.R multidna.constructor.R multiphyDat.constructor.R accessors.R handling.R plot.R readfiles.R datasets.R dist.R exports.R

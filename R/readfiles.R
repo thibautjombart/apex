@@ -7,16 +7,20 @@
 #' @rdname readfiles
 #' @aliases read.multidna
 #' @aliases read.multiFASTA
+#' @aliases read.multiphyDat
+#' 
 #'
 #' @param files a vector of characters indicating the paths to the files to read from
-#' @param ... further arguments passed to \code{\link[ape]{read.dna}}
+#' @param ... further arguments passed to \code{\link[ape]{read.dna}} or \code{\link[phangorn]{read.phyDat}}
 #'
 #' @author Thibaut Jombart \email{t.jombart@@imperial.ac.uk}
+#' @author Klaus Schliep \email{klaus.schliep@@gmail.com}
 #'
 #' @seealso
 #' \itemize{
 #' \item \code{\link[ape]{read.dna}}
 #' \item  \code{\link[ape]{read.FASTA}}
+#' \item \code{\link[phangorn]{read.phyDat}}
 #' }
 #'
 #' @export
@@ -30,6 +34,9 @@
 #' x <- read.multiFASTA(files)
 #' x
 #' plot(x)
+#'
+#' y <- read.multiphyDat(files, format="fasta")
+#' y
 #'
 read.multidna <- function(files, ...){
     gene.names <- gsub(".fasta","",sapply(strsplit(files, "/"), tail, 1))
@@ -49,4 +56,16 @@ read.multiFASTA <- function(files){
     names(dna) <- gene.names
     out <- new("multidna", dna=dna)
     return(out)
+}
+
+
+#'
+#' @rdname readfiles
+#' @export
+read.multiphyDat <- function(files, ...){
+  gene.names <- gsub(".fasta","",sapply(strsplit(files, "/"), tail, 1))
+  dna <- lapply(files, read.phyDat, ...)
+  names(dna) <- gene.names
+  out <- new("multiphyDat", dna=dna)
+  return(out)
 }
