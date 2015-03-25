@@ -3,20 +3,23 @@
 \name{read.multidna}
 \alias{read.multiFASTA}
 \alias{read.multidna}
+\alias{read.multiphyDat}
 \title{Read multiple DNA alignments}
 \usage{
 read.multidna(files, ...)
 
 read.multiFASTA(files)
+
+read.multiphyDat(files, ...)
 }
 \arguments{
 \item{files}{a vector of characters indicating the paths to the files to read from}
-
-\item{...}{further arguments passed to \code{\link[ape]{read.dna}}}
 }
 \description{
 These functions read multiple DNA alignments and store the output in a \linkS4class{multidna} object.
 They are relying on ape's original functions \code{\link[ape]{read.dna}} and \code{\link[ape]{read.FASTA}}.
+
+
 
 
 }
@@ -29,14 +32,20 @@ files
 x <- read.multiFASTA(files)
 x
 plot(x)
+
+y <- read.multiphyDat(files, format="fasta")
+y
 }
 \author{
 Thibaut Jombart \email{t.jombart@imperial.ac.uk}
+
+Klaus Schliep \email{klaus.schliep@gmail.com}
 }
 \seealso{
 \itemize{
 \item \code{\link[ape]{read.dna}}
 \item  \code{\link[ape]{read.FASTA}}
+\item \code{\link[phangorn]{read.phyDat}}
 }
 }
 
