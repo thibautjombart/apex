@@ -25,30 +25,27 @@
 #' @seealso
 #' \itemize{
 #' \item the \linkS4class{multiphyDat} class
-#' \item \code{\link{read.multiphyDat}} and \code{\link{read.multiphyDat}}
+#' \item \code{\link{read.multiphyDat}} 
 #' }
 #' @examples
-#' \dontrun{
-#' ## empty object
-#' new("multiphyDat")
-#'
-#' ## simple conversion with nicely ordered output
 #' data(Laurasiatherian)
+#' #' ## empty object
+#' new("multiphyDat")
+#' 
+#' ## simple conversion with nicely ordered output
+#' \dontrun{
 #' genes <- list(gene1=subset(Laurasiatherian,, 1:1600, FALSE),
-#'          gene2=subset(Laurasiatherian,, 1601:3179, FALSE))
+#'     gene2=subset(Laurasiatherian,, 1601:3179, FALSE))
 #' x <- new("multiphyDat", genes)
 #' x
-#' image(woodmouse)
-#' image(x@@dna[[1]])
-#' image(x@@dna[[2]])
-#'
+#' }
+#' 
 #' ## trickier conversion with missing sequences / wrong order
-#' genes <- list(gene1=subset(Laurasiatherian, 1:40), gene2=subset(Laurasiatherian, 8:47))
+#' genes <- list(gene1=subset(Laurasiatherian, 1:40),
+#'     gene2=subset(Laurasiatherian, 8:47))
 #' x <- new("multiphyDat", genes)
 #' x
-#' image(x@@dna[[1]])
-#' image(x@@dna[[2]])
-#'}
+#' 
 setMethod("initialize", "multiphyDat", function(.Object, dna=NULL, ind.info=NULL, gene.info=NULL, quiet=FALSE, ...) {
 
     ## RETRIEVE PROTOTYPED OBJECT ##

@@ -36,21 +36,23 @@ setClassUnion("data.frameOrNULL", c("data.frame", "NULL"))
 #' @import methods
 #'
 #' @examples
-#' \dontrun{
+#' data(Laurasiatherian)
+#' 
 #' ## empty object
 #' new("multiphyDat")
 #'
 #' ## simple conversion with nicely ordered output
-#' data(Laurasiatherian)
+#' \dontrun{
 #' genes <- list(gene1=subset(Laurasiatherian,,1:1600, FALSE),
 #'     gene2=subset(Laurasiatherian,,1601:3179, FALSE))
 #' x <- new("multiphyDat", genes)
 #' x
-#'
+#' }
+#' 
 #' ## trickier conversion with missing sequences / wrong order
-#' genes <- list(gene1=subset(Laurasiatherian,1:40), gene2=subset(Laurasiatherian,8:47))
+#' genes <- list(gene1=subset(Laurasiatherian,1:40), 
+#'     gene2=subset(Laurasiatherian,8:47))
 #' x <- new("multiphyDat", genes)
 #' x
-#'}
 setClass("multiphyDat", representation(dna="listOrNULL", labels="character", n.ind="integer", n.seq="integer", ind.info="data.frameOrNULL", gene.info="data.frameOrNULL"),
          prototype(dna=NULL, labels=character(0), n.ind=0L, n.seq=0L, ind.info=NULL, gene.info=NULL))
