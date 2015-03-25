@@ -26,6 +26,7 @@ The rows of the separate matrices all correspond to the same individuals, ordere
 \item{\code{gene.info}}{a data.frame containing information on the genes, where genes are in rows; empty slot should be NULL}
 }}
 \examples{
+\dontrun{
 ## empty object
 new("multiphyDat")
 
@@ -40,6 +41,7 @@ x
 genes <- list(gene1=subset(Laurasiatherian,1:40), gene2=subset(Laurasiatherian,8:47))
 x <- new("multiphyDat", genes)
 x
+}
 }
 \author{
 Klaus Schliep \email{klaus.schliep@gmail.com}

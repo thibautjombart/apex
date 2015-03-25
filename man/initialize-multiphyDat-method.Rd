@@ -27,12 +27,14 @@ New \linkS4class{multiphyDat} objects can be created using \code{new("multiphyDa
 The main input is a list of phyDat matrices. The constructor ensures that all matrices will be reordered in the same way, and genes with missing individuals will be filled by sequences of gaps ("-").
 }
 \examples{
+\dontrun{
 ## empty object
 new("multiphyDat")
 
 ## simple conversion with nicely ordered output
 data(Laurasiatherian)
-genes <- list(gene1=subset(Laurasiatherian,, 1:1600, FALSE), gene2=subset(Laurasiatherian,, 1601:3179, FALSE))
+genes <- list(gene1=subset(Laurasiatherian,, 1:1600, FALSE),
+         gene2=subset(Laurasiatherian,, 1601:3179, FALSE))
 x <- new("multiphyDat", genes)
 x
 image(woodmouse)
@@ -45,6 +47,7 @@ x <- new("multiphyDat", genes)
 x
 image(x@dna[[1]])
 image(x@dna[[2]])
+}
 }
 \author{
 Klaus Schliep \email{klaus.schliep@gmail.com}

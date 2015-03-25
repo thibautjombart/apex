@@ -14,6 +14,8 @@ read.multiphyDat(files, ...)
 }
 \arguments{
 \item{files}{a vector of characters indicating the paths to the files to read from}
+
+\item{...}{further arguments to be passed to the functions \code{\link[ape]{read.dna}} and \code{\link[ape]{read.FASTA}}.}
 }
 \description{
 These functions read multiple DNA alignments and store the output in a \linkS4class{multidna} object.

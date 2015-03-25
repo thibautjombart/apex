@@ -8,9 +8,10 @@
 #' @aliases read.multidna
 #' @aliases read.multiFASTA
 #' @aliases read.multiphyDat
-#' 
+#'
 #'
 #' @param files a vector of characters indicating the paths to the files to read from
+#' @param ... further arguments to be passed to the functions \code{\link[ape]{read.dna}} and \code{\link[ape]{read.FASTA}}.
 #'
 #' @author Thibaut Jombart \email{t.jombart@@imperial.ac.uk}
 #' @author Klaus Schliep \email{klaus.schliep@@gmail.com}

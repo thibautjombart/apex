@@ -28,13 +28,14 @@
 #' \item \code{\link{read.multiphyDat}} and \code{\link{read.multiphyDat}}
 #' }
 #' @examples
-#'
+#' \dontrun{
 #' ## empty object
 #' new("multiphyDat")
 #'
 #' ## simple conversion with nicely ordered output
 #' data(Laurasiatherian)
-#' genes <- list(gene1=subset(Laurasiatherian,, 1:1600, FALSE), gene2=subset(Laurasiatherian,, 1601:3179, FALSE))
+#' genes <- list(gene1=subset(Laurasiatherian,, 1:1600, FALSE),
+#'          gene2=subset(Laurasiatherian,, 1601:3179, FALSE))
 #' x <- new("multiphyDat", genes)
 #' x
 #' image(woodmouse)
@@ -47,7 +48,7 @@
 #' x
 #' image(x@@dna[[1]])
 #' image(x@@dna[[2]])
-#'
+#'}
 setMethod("initialize", "multiphyDat", function(.Object, dna=NULL, ind.info=NULL, gene.info=NULL, quiet=FALSE, ...) {
 
     ## RETRIEVE PROTOTYPED OBJECT ##
@@ -92,7 +93,7 @@ setMethod("initialize", "multiphyDat", function(.Object, dna=NULL, ind.info=NULL
 
 
     ## AUXILIARY FUNCTIONS ##
- 
+
     ## HANDLE LABELS ##
     ## handle missing labels ##
 #    missing.labels <- any(sapply(dna, function(e) is.null(labels(e))))
