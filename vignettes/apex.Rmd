@@ -1,0 +1,113 @@
+
+
+```{r setup, echo=FALSE}
+# set global chunk options: images will be 7x5 inches
+knitr::opts_chunk$set(fig.width=7, fig.height=10, fig.path="figs/")
+options(digits = 4)
+```
+
+#apex
+Extension of the R package ape for multiple genes.
+
+Installing *apex*
+-------------
+To install the development version from github: 
+```{r install, eval=FALSE}
+library(devtools)
+install_github("thibautjombart/apex")
+```
+
+Functionalities
+----------------
+
+#### Classes of object
+
+See the classes:
+* **multidna:** formal (S4) class, storing data using a list of DNAbin objects.
+* 
+Example code:
+```{r class}
+library("apex")
+## empty object
+new("multidna")
+
+## simple conversion with nicely ordered output
+data(woodmouse)
+genes <- list(gene1=woodmouse[,1:500], gene2=woodmouse[,501:965])
+x <- new("multidna", genes)
+x
+par(mfrow=c(3,1), mar=c(6,6,2,1))
+image(woodmouse)
+image(x@dna[[1]])
+image(x@dna[[2]])
+
+## trickier conversion with missing sequences / wrong order
+genes <- list(gene1=woodmouse[,1:500], gene2=woodmouse[c(5:1,14:15),501:965])
+x <- new("multidna", genes)
+x
+par(mar=c(6,6,2,1))
+plot(x)
+```
+
+#### Reading data from multiple files
+See the functions:
+* **read.multidna:** reads multiple DNA alignments with various formats
+* **read.multiFASTA:** same for FASTA files
+
+Example code:
+```{r readfiles}
+files <- dir(system.file(package="apex"),patter="patr", full=TRUE)
+ 
+## read files
+x <- read.multiFASTA(files)
+x
+par(mar=c(6,11,2,1))
+plot(x)
+```
+
+
+
+#### Data handling
+See the functions:
+* **concatenate:** concatenate seeral genes into a single DNAbin matrix
+* **x[i,j]:** subset x by individuals (i) and/or genes (j)
+
+Example code:
+```{r handling}
+files <- dir(system.file(package="apex"),patter="patr", full=TRUE)
+files
+
+## read files
+x <- read.multiFASTA(files)
+x
+par(mar=c(6,11,2,1))
+plot(x)
+
+## subset
+plot(x[1:3,2:4])
+
+## concatenate
+y <- concatenate(x)
+y
+par(mar=c(5,8,2,1))
+image(y)
+```
+
+
+#### Exporting data
+Check functions:
+* **multidna2genind:** concatenate genes and export to genind
+
+Example:
+```{r export}
+## read data in
+files <- dir(system.file(package="apex"),patter="patr", full=TRUE)
+files
+     
+## read files
+x <- read.multiFASTA(files)
+
+## export to genind
+obj <- multidna2genind(x)
+obj
+```

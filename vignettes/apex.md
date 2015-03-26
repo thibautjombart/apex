@@ -1,6 +1,3 @@
-[![Travis-CI Build Status](https://travis-ci.org/thibautjombart/apex.png?branch=master)](https://travis-ci.org/thibautjombart/apex)
-
-!INLCUDE "includetest.md"
 
 
 
@@ -29,14 +26,6 @@ Example code:
 
 ```r
 library("apex")
-```
-
-```
-## Loading required package: ape
-## Loading required package: phangorn
-```
-
-```r
 ## empty object
 new("multidna")
 ```
@@ -97,7 +86,7 @@ image(x@dna[[1]])
 image(x@dna[[2]])
 ```
 
-![plot of chunk class](READMEfig/class-1.png) 
+![plot of chunk class](figs/class-1.png) 
 
 ```r
 ## trickier conversion with missing sequences / wrong order
@@ -143,7 +132,7 @@ par(mar=c(6,6,2,1))
 plot(x)
 ```
 
-![plot of chunk class](READMEfig/class-2.png) 
+![plot of chunk class](figs/class-2.png) 
 
 #### Reading data from multiple files
 See the functions:
@@ -219,7 +208,7 @@ par(mar=c(6,11,2,1))
 plot(x)
 ```
 
-![plot of chunk readfiles](READMEfig/readfiles-1.png) 
+![plot of chunk readfiles](figs/readfiles-1.png) 
 
 
 
@@ -307,14 +296,14 @@ par(mar=c(6,11,2,1))
 plot(x)
 ```
 
-![plot of chunk handling](READMEfig/handling-1.png) 
+![plot of chunk handling](figs/handling-1.png) 
 
 ```r
 ## subset
 plot(x[1:3,2:4])
 ```
 
-![plot of chunk handling](READMEfig/handling-2.png) 
+![plot of chunk handling](figs/handling-2.png) 
 
 ```r
 ## concatenate
@@ -339,7 +328,7 @@ par(mar=c(5,8,2,1))
 image(y)
 ```
 
-![plot of chunk handling](READMEfig/handling-3.png) 
+![plot of chunk handling](figs/handling-3.png) 
 
 
 #### Exporting data
