@@ -1,0 +1,18 @@
+[![Travis-CI Build Status](https://travis-ci.org/thibautjombart/apex.png?branch=master)](https://travis-ci.org/thibautjombart/apex)
+
+```{r compileVignette, results="hide",echo=FALSE,message=FALSE}
+## recompile vignette
+setwd("vignettes")
+knit("apex.Rmd")
+setwd("../")
+```
+
+```{r include, results="asis", echo=FALSE, warning=FALSE}
+## read md of the vignette
+mdInput <- readLines("vignettes/apex.md")
+
+## restore right path for figures
+mdInput <- gsub("figs/","vignettes/figs/",mdInput)
+cat(paste(mdInput,collapse="\n"))
+```
+

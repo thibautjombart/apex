@@ -26,22 +26,24 @@ The rows of the separate matrices all correspond to the same individuals, ordere
 \item{\code{gene.info}}{a data.frame containing information on the genes, where genes are in rows; empty slot should be NULL}
 }}
 \examples{
-\dontrun{
+data(Laurasiatherian)
+
 ## empty object
 new("multiphyDat")
 
 ## simple conversion with nicely ordered output
-data(Laurasiatherian)
+\dontrun{
 genes <- list(gene1=subset(Laurasiatherian,,1:1600, FALSE),
     gene2=subset(Laurasiatherian,,1601:3179, FALSE))
 x <- new("multiphyDat", genes)
 x
+}
 
 ## trickier conversion with missing sequences / wrong order
-genes <- list(gene1=subset(Laurasiatherian,1:40), gene2=subset(Laurasiatherian,8:47))
+genes <- list(gene1=subset(Laurasiatherian,1:40),
+    gene2=subset(Laurasiatherian,8:47))
 x <- new("multiphyDat", genes)
 x
-}
 }
 \author{
 Klaus Schliep \email{klaus.schliep@gmail.com}
