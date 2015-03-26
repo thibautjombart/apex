@@ -3,7 +3,7 @@
 
 ```{r setup, echo=FALSE}
 # set global chunk options: images will be 7x5 inches
-knitr::opts_chunk$set(fig.width=7, fig.height=5, fig.path="READMEfig/")
+knitr::opts_chunk$set(fig.width=7, fig.height=10, fig.path="READMEfig/")
 options(digits = 4)
 ```
 
@@ -58,8 +58,7 @@ See the functions:
 Example code:
 ```{r readfiles}
 files <- dir(system.file(package="apex"),patter="patr", full=TRUE)
-files
-     
+ 
 ## read files
 x <- read.multiFASTA(files)
 x
