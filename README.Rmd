@@ -61,7 +61,7 @@ files <- dir(system.file(package="apex"),patter="patr", full=TRUE)
 files
      
 ## read files
-x <- read.multiFATSA(files)
+x <- read.multiFASTA(files)
 x
 plot(x)
 ```
