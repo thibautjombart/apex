@@ -2,8 +2,7 @@
 
 
 
-#apex
-Extension of the R package ape for multiple genes.
+#apex: extension of the R package ape for multiple genes.
 
 Installing *apex*
 -------------
