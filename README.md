@@ -1,5 +1,6 @@
 [![Travis-CI Build Status](https://travis-ci.org/thibautjombart/apex.png?branch=master)](https://travis-ci.org/thibautjombart/apex)
 
+<<[includetest.md]
 
 
 
@@ -28,6 +29,14 @@ Example code:
 
 ```r
 library("apex")
+```
+
+```
+## Loading required package: ape
+## Loading required package: phangorn
+```
+
+```r
 ## empty object
 new("multidna")
 ```
