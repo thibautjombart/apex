@@ -31,7 +31,8 @@ library("apex")
 ```
 
 ```
-## Error in library("apex"): there is no package called 'apex'
+## Loading required package: ape
+## Loading required package: phangorn
 ```
 
 ```r
@@ -40,99 +41,107 @@ new("multidna")
 ```
 
 ```
-## Error in getClass(Class, where = topenv(parent.frame())): "multidna" is not a defined class
+## === multidna ===
+## [ 0 DNA sequence in 0 gene ]
+## 
+## @n.ind: 0 individual
+## @n.seq: 0 sequence in total
+## @labels:
 ```
 
 ```r
 ## simple conversion with nicely ordered output
 data(woodmouse)
-```
-
-```
-## Warning in data(woodmouse): data set 'woodmouse' not found
-```
-
-```r
 genes <- list(gene1=woodmouse[,1:500], gene2=woodmouse[,501:965])
-```
-
-```
-## Error in eval(expr, envir, enclos): object 'woodmouse' not found
-```
-
-```r
 x <- new("multidna", genes)
-```
-
-```
-## Error in getClass(Class, where = topenv(parent.frame())): "multidna" is not a defined class
-```
-
-```r
 x
 ```
 
 ```
-## Error in eval(expr, envir, enclos): object 'x' not found
+## === multidna ===
+## [ 30 DNA sequences in 2 genes ]
+## 
+## @n.ind: 15 individuals
+## @n.seq: 30 sequences in total
+## @labels: No305 No304 No306 No0906S No0908S No0909S...
+## 
+## @dna:
+## $gene1
+## 15 DNA sequences in binary format stored in a matrix.
+## 
+## All sequences of same length: 500 
+## 
+## Labels: No305 No304 No306 No0906S No0908S No0909S ...
+## 
+## Base composition:
+##     a     c     g     t 
+## 0.326 0.230 0.147 0.297 
+## 
+## $gene2
+## 15 DNA sequences in binary format stored in a matrix.
+## 
+## All sequences of same length: 465 
+## 
+## Labels: No305 No304 No306 No0906S No0908S No0909S ...
+## 
+## Base composition:
+##     a     c     g     t 
+## 0.286 0.295 0.103 0.316
 ```
 
 ```r
 par(mfrow=c(3,1))
 image(woodmouse)
-```
-
-```
-## Error in image(woodmouse): object 'woodmouse' not found
-```
-
-```r
 image(x@dna[[1]])
-```
-
-```
-## Error in image(x@dna[[1]]): object 'x' not found
-```
-
-```r
 image(x@dna[[2]])
 ```
 
-```
-## Error in image(x@dna[[2]]): object 'x' not found
-```
+![plot of chunk class](READMEfig/class-1.png) 
 
 ```r
 ## trickier conversion with missing sequences / wrong order
 genes <- list(gene1=woodmouse[,1:500], gene2=woodmouse[c(5:1,14:15),501:965])
-```
-
-```
-## Error in eval(expr, envir, enclos): object 'woodmouse' not found
-```
-
-```r
 x <- new("multidna", genes)
-```
-
-```
-## Error in getClass(Class, where = topenv(parent.frame())): "multidna" is not a defined class
-```
-
-```r
 x
 ```
 
 ```
-## Error in eval(expr, envir, enclos): object 'x' not found
+## === multidna ===
+## [ 22 DNA sequences in 2 genes ]
+## 
+## @n.ind: 15 individuals
+## @n.seq: 22 sequences in total
+## @labels: No305 No304 No306 No0906S No0908S No0909S...
+## 
+## @dna:
+## $gene1
+## 15 DNA sequences in binary format stored in a matrix.
+## 
+## All sequences of same length: 500 
+## 
+## Labels: No305 No304 No306 No0906S No0908S No0909S ...
+## 
+## Base composition:
+##     a     c     g     t 
+## 0.326 0.230 0.147 0.297 
+## 
+## $gene2
+## 15 DNA sequences in binary format stored in a matrix.
+## 
+## All sequences of same length: 465 
+## 
+## Labels: No305 No304 No306 No0906S No0908S No0909S ...
+## 
+## Base composition:
+##     a     c     g     t 
+## 0.286 0.294 0.103 0.316
 ```
 
 ```r
 plot(x)
 ```
 
-```
-## Error in plot(x): object 'x' not found
-```
+![plot of chunk class](READMEfig/class-2.png) 
 
 #### Reading data from multiple files
 See the functions:
@@ -147,7 +156,10 @@ files
 ```
 
 ```
-## character(0)
+## [1] "/home/thibaut/R/x86_64-unknown-linux-gnu-library/3.3/apex/patr_poat43.fasta"
+## [2] "/home/thibaut/R/x86_64-unknown-linux-gnu-library/3.3/apex/patr_poat47.fasta"
+## [3] "/home/thibaut/R/x86_64-unknown-linux-gnu-library/3.3/apex/patr_poat48.fasta"
+## [4] "/home/thibaut/R/x86_64-unknown-linux-gnu-library/3.3/apex/patr_poat49.fasta"
 ```
 
 ```r
@@ -164,16 +176,42 @@ x
 ```
 
 ```
-## Error in eval(expr, envir, enclos): object 'x' not found
+## === multidna ===
+## [ 22 DNA sequences in 2 genes ]
+## 
+## @n.ind: 15 individuals
+## @n.seq: 22 sequences in total
+## @labels: No305 No304 No306 No0906S No0908S No0909S...
+## 
+## @dna:
+## $gene1
+## 15 DNA sequences in binary format stored in a matrix.
+## 
+## All sequences of same length: 500 
+## 
+## Labels: No305 No304 No306 No0906S No0908S No0909S ...
+## 
+## Base composition:
+##     a     c     g     t 
+## 0.326 0.230 0.147 0.297 
+## 
+## $gene2
+## 15 DNA sequences in binary format stored in a matrix.
+## 
+## All sequences of same length: 465 
+## 
+## Labels: No305 No304 No306 No0906S No0908S No0909S ...
+## 
+## Base composition:
+##     a     c     g     t 
+## 0.286 0.294 0.103 0.316
 ```
 
 ```r
 plot(x)
 ```
 
-```
-## Error in plot(x): object 'x' not found
-```
+![plot of chunk readfiles](READMEfig/readfiles-1.png) 
 
 
 
@@ -190,67 +228,108 @@ files
 ```
 
 ```
-## character(0)
+## [1] "/home/thibaut/R/x86_64-unknown-linux-gnu-library/3.3/apex/patr_poat43.fasta"
+## [2] "/home/thibaut/R/x86_64-unknown-linux-gnu-library/3.3/apex/patr_poat47.fasta"
+## [3] "/home/thibaut/R/x86_64-unknown-linux-gnu-library/3.3/apex/patr_poat48.fasta"
+## [4] "/home/thibaut/R/x86_64-unknown-linux-gnu-library/3.3/apex/patr_poat49.fasta"
 ```
 
 ```r
 ## read files
 x <- read.multiFASTA(files)
-```
-
-```
-## Error in eval(expr, envir, enclos): could not find function "read.multiFASTA"
-```
-
-```r
 x
 ```
 
 ```
-## Error in eval(expr, envir, enclos): object 'x' not found
+## === multidna ===
+## [ 24 DNA sequences in 4 genes ]
+## 
+## @n.ind: 8 individuals
+## @n.seq: 24 sequences in total
+## @labels: 2340_50156.ab1  2340_50149.ab1  2340_50674.ab1  2370_45312.ab1  2340_50406.ab1  2370_45424.ab1 ...
+## 
+## @dna:
+## $patr_poat43
+## 8 DNA sequences in binary format stored in a matrix.
+## 
+## All sequences of same length: 764 
+## 
+## Labels: 2340_50156.ab1  2340_50149.ab1  2340_50674.ab1  2370_45312.ab1  2340_50406.ab1  2370_45424.ab1  ...
+## 
+## Base composition:
+##     a     c     g     t 
+## 0.320 0.158 0.166 0.356 
+## 
+## $patr_poat47
+## 8 DNA sequences in binary format stored in a matrix.
+## 
+## All sequences of same length: 626 
+## 
+## Labels: 2340_50156.ab1  2340_50149.ab1  2340_50674.ab1  2370_45312.ab1  2340_50406.ab1  2370_45424.ab1  ...
+## 
+## Base composition:
+##     a     c     g     t 
+## 0.227 0.252 0.256 0.266 
+## 
+## $patr_poat48
+## 8 DNA sequences in binary format stored in a matrix.
+## 
+## All sequences of same length: 560 
+## 
+## Labels: 2340_50156.ab1  2340_50149.ab1  2340_50674.ab1  2370_45312.ab1  2340_50406.ab1  2370_45424.ab1  ...
+## 
+## Base composition:
+##     a     c     g     t 
+## 0.305 0.185 0.182 0.327 
+## 
+## $patr_poat49
+## 8 DNA sequences in binary format stored in a matrix.
+## 
+## All sequences of same length: 556 
+## 
+## Labels: 2340_50156.ab1  2340_50149.ab1  2340_50674.ab1  2370_45312.ab1  2340_50406.ab1  2370_45424.ab1  ...
+## 
+## Base composition:
+##     a     c     g     t 
+## 0.344 0.149 0.187 0.320
 ```
 
 ```r
 plot(x)
 ```
 
-```
-## Error in plot(x): object 'x' not found
-```
+![plot of chunk handling](READMEfig/handling-1.png) 
 
 ```r
 ## subset
 plot(x[1:3,2:4])
 ```
 
-```
-## Error in plot(x[1:3, 2:4]): object 'x' not found
-```
+![plot of chunk handling](READMEfig/handling-2.png) 
 
 ```r
 ## concatenate
 y <- concatenate(x)
-```
-
-```
-## Error in eval(expr, envir, enclos): could not find function "concatenate"
-```
-
-```r
 y
 ```
 
 ```
-## Error in eval(expr, envir, enclos): object 'y' not found
+## 8 DNA sequences in binary format stored in a matrix.
+## 
+## All sequences of same length: 2506 
+## 
+## Labels: 2340_50156.ab1  2340_50149.ab1  2340_50674.ab1  2370_45312.ab1  2340_50406.ab1  2370_45424.ab1  ...
+## 
+## Base composition:
+##     a     c     g     t 
+## 0.298 0.187 0.197 0.319
 ```
 
 ```r
 image(y)
 ```
 
-```
-## Error in image(y): object 'y' not found
-```
+![plot of chunk handling](READMEfig/handling-3.png) 
 
 
 #### Exporting data
@@ -266,31 +345,44 @@ files
 ```
 
 ```
-## character(0)
+## [1] "/home/thibaut/R/x86_64-unknown-linux-gnu-library/3.3/apex/patr_poat43.fasta"
+## [2] "/home/thibaut/R/x86_64-unknown-linux-gnu-library/3.3/apex/patr_poat47.fasta"
+## [3] "/home/thibaut/R/x86_64-unknown-linux-gnu-library/3.3/apex/patr_poat48.fasta"
+## [4] "/home/thibaut/R/x86_64-unknown-linux-gnu-library/3.3/apex/patr_poat49.fasta"
 ```
 
 ```r
 ## read files
 x <- read.multiFASTA(files)
-```
 
-```
-## Error in eval(expr, envir, enclos): could not find function "read.multiFASTA"
-```
-
-```r
 ## export to genind
 obj <- multidna2genind(x)
-```
-
-```
-## Error in eval(expr, envir, enclos): could not find function "multidna2genind"
-```
-
-```r
 obj
 ```
 
 ```
-## Error in eval(expr, envir, enclos): object 'obj' not found
+## 
+##    #####################
+##    ### Genind object ### 
+##    #####################
+## - genotypes of individuals - 
+## 
+## S4 class:  genind
+## @call: DNAbin2genind(x = concatenate(x, genes = genes))
+## 
+## @tab:  8 x 22 matrix of genotypes
+## 
+## @ind.names: vector of  8 individual names
+## @loc.names: vector of  11 locus names
+## @loc.nall: number of alleles per locus
+## @loc.fac: locus factor for the  22 columns of @tab
+## @all.names: list of  11 components yielding allele names for each locus
+## @ploidy:  1 1 1 1 1 1
+## @type:  codom
+## 
+## Optional contents: 
+## @pop:  - empty -
+## @pop.names:  - empty -
+## 
+## @other: - empty -
 ```
