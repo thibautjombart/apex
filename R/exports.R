@@ -1,16 +1,20 @@
 #'
 #' Convert multidna into genind
 #'
-#' This function concatenates separate DNA alignments, and then extracts SNPs of the resulting alignment into a \linkS4class{genind} object.
+#' The functions \code{multidna2genind} and \code{multiphyDat2genind} concatenates separate DNA alignments, and then extracts SNPs of the resulting alignment into a \linkS4class{genind} object. The functions \code{multidna2multiphyDat} and \code{multiphyDat2multidna} convert between the different formats. 
 #'
-#' @param x a \linkS4class{multidna} object.
+#' @param x a \linkS4class{multidna} or \linkS4class{multiphyDat} object.
 #' @param genes an optional vector indicating the genes to retain for the concatenation; any way to subset the list in x@@dna is acceptable; by default, all genes are used.
 #' @param mlst if \code{TRUE}, each gene will result in a single locus in the genind object. (Default to \code{FALSE})
 #' @param gapIsNA if \code{TRUE} and \code{mlst = TRUE}, sequences that consist entirely of gaps will be considered as NAs. (Default to \code{FALSE})
 #'
-#' @author Thibaut Jombart \email{t.jombart@@imperial.ac.uk}, Zhian N. Kamvar
+#' @author Thibaut Jombart \email{t.jombart@@imperial.ac.uk}, Zhian N. Kamvar, Klaus Schliep
 #'
+#' @rdname multidna2genind
 #' @aliases multidna2genind
+#' @aliases multiphyDat2genind
+#' @aliases multidna2multiphyDat
+#' @aliases multiphyDat2multidna
 #'
 #' @seealso
 #' \itemize{
@@ -31,7 +35,12 @@
 #' genes <- list(gene1=woodmouse[,1:500], gene2=woodmouse[,501:965])
 #' x <- new("multidna", genes)
 #' x
-#'
+#' y <- multidna2multiphyDat(x)
+#' y
+#' z1 <- multidna2genind(x)
+#' z1
+#' z2 <- multiphyDat2genind(y)
+#' all.equal(z1, z2)
 #'
 multidna2genind <- function(x, genes=TRUE, mlst=FALSE, gapIsNA=FALSE){
   if (!mlst){
@@ -54,6 +63,34 @@ multidna2genind <- function(x, genes=TRUE, mlst=FALSE, gapIsNA=FALSE){
   xgid@other$gene.info <- x@gene.info
   return(xgid)
 }
+
+
+#'
+#' @rdname multidna2genind
+#' @export
+multidna2multiphyDat <- function(x){
+    x@dna <- lapply(x@dna, phyDat)
+    x
+} 
+
+
+#'
+#' @rdname multidna2genind
+#' @export
+multiphyDat2multidna <- function(x){
+    tmp <- lapply(x@dna, as.character)
+    new("multidna",tmp)
+}
+
+
+#'
+#' @rdname multidna2genind
+#' @export
+multiphyDat2genind <- function(x){
+    tmp <- multiphyDat2multidna(x)
+    multidna2genind(tmp)
+} 
+
 
 find_gap_sequence <- function(x){
   wheregaps <- lapply(x, function(i) which(grepl("^\\-+?$", i)))
