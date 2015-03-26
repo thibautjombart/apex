@@ -82,7 +82,7 @@ x
 ```
 
 ```r
-par(mfrow=c(3,1))
+par(mfrow=c(3,1), mar=c(6,6,2,1))
 image(woodmouse)
 image(x@dna[[1]])
 image(x@dna[[2]])
@@ -130,6 +130,7 @@ x
 ```
 
 ```r
+par(mar=c(6,6,2,1))
 plot(x)
 ```
 
@@ -205,6 +206,7 @@ x
 ```
 
 ```r
+par(mar=c(6,11,2,1))
 plot(x)
 ```
 
@@ -214,7 +216,7 @@ plot(x)
 
 #### Data handling
 See the functions:
-* **concatenate:** concatenate seeral genes into a single DNAbin matrix 
+* **concatenate:** concatenate seeral genes into a single DNAbin matrix
 * **x[i,j]:** subset x by individuals (i) and/or genes (j)
 
 Example code:
@@ -292,6 +294,7 @@ x
 ```
 
 ```r
+par(mar=c(6,11,2,1))
 plot(x)
 ```
 
@@ -323,6 +326,7 @@ y
 ```
 
 ```r
+par(mar=c(5,8,2,1))
 image(y)
 ```
 
