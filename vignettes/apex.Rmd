@@ -1,4 +1,6 @@
 
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{apex: extension of the R package ape for multiple genes.}
 
 ```{r setup, echo=FALSE}
 # set global chunk options: images will be 7x5 inches
