@@ -12,7 +12,7 @@ setwd("../")
 mdInput <- readLines("vignettes/apex.md")
 
 ## remove vignette-specific headers
-toRemove <- grep("Vignette",mdInput)
+toRemove <- 1:max(grep("---",mdInput))
 mdInput <- mdInput[-toRemove]
 
 ## restore right path for figures

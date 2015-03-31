@@ -2,32 +2,6 @@
 
 
 
----
-title: "Phylogenetic Methods for Multiple Gene Data"
-author: "Thibaut Jombart"
-date: "2015-03-31"
-output: rmarkdown::html_vignette
-vignette: >
- \usepackage[utf8]{inputenc}
----
-
-
-
-
-apex: Phylogenetic Methods for Multiple Gene Data
-=================================================
-
-Installing *apex*
--------------
-To install the development version from github: 
-
-```r
-library(devtools)
-install_github("thibautjombart/apex")
-```
-
-Functionalities
-----------------
 
 #### Classes of object
 
@@ -38,14 +12,6 @@ Example code:
 
 ```r
 library("apex")
-```
-
-```
-## Loading required package: ape
-## Loading required package: phangorn
-```
-
-```r
 ## empty object
 new("multidna")
 ```
