@@ -1,4 +1,6 @@
 
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{apex: extension of the R package ape for multiple genes.}
 
 
 
@@ -25,6 +27,14 @@ Example code:
 
 ```r
 library("apex")
+```
+
+```
+## Loading required package: ape
+## Loading required package: phangorn
+```
+
+```r
 ## empty object
 new("multidna")
 ```
@@ -379,6 +389,8 @@ obj
 ## @type:  codom
 ## 
 ## Optional contents: 
+## @strata: - empty -
+## @hierarchy:  - empty -
 ## @pop:  - empty -
 ## @pop.names:  - empty -
 ## 
