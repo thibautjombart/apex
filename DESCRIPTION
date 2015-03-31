@@ -12,3 +12,4 @@ License: GPL (>=2)
 LazyData: true
 Collate: doc.R multidna.class.R multiphyDat.class.R show.R multidna.constructor.R multiphyDat.constructor.R accessors.R handling.R plot.R readfiles.R datasets.R dist.R exports.R
 VignetteBuilder: knitr
+Suggests: testthat
