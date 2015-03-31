@@ -1,6 +1,6 @@
 
 %\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{apex: extension of the R package ape for multiple genes.}
+%\VignetteIndexEntry{apex: Phylogenetic Methods for Multiple Gene Data.}
 
 
 

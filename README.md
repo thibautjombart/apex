@@ -3,6 +3,11 @@
 
 
 
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{apex: Phylogenetic Methods for Multiple Gene Data.}
+
+
+
 #apex: extension of the R package ape for multiple genes.
 
 Installing *apex*
@@ -26,6 +31,14 @@ Example code:
 
 ```r
 library("apex")
+```
+
+```
+## Loading required package: ape
+## Loading required package: phangorn
+```
+
+```r
 ## empty object
 new("multidna")
 ```
@@ -380,6 +393,8 @@ obj
 ## @type:  codom
 ## 
 ## Optional contents: 
+## @strata: - empty -
+## @hierarchy:  - empty -
 ## @pop:  - empty -
 ## @pop.names:  - empty -
 ## 
