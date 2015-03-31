@@ -2,8 +2,20 @@
 
 
 
+---
+title: "Phylogenetic Methods for Multiple Gene Data"
+author: "Thibaut Jombart"
+date: "2015-03-31"
+output: rmarkdown::html_vignette
+vignette: >
+ \usepackage[utf8]{inputenc}
+---
 
-#apex: Phylogenetic Methods for Multiple Gene Data
+
+
+
+apex: Phylogenetic Methods for Multiple Gene Data
+=================================================
 
 Installing *apex*
 -------------

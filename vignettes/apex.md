@@ -12,7 +12,8 @@ vignette: >
 
 
 
-#apex: Phylogenetic Methods for Multiple Gene Data
+apex: Phylogenetic Methods for Multiple Gene Data
+=================================================
 
 Installing *apex*
 -------------
