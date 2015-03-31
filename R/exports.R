@@ -52,7 +52,11 @@ multidna2genind <- function(x, genes=TRUE, mlst=FALSE, gapIsNA=FALSE){
   if (gapIsNA){
     xgap <- find_gap_sequence(xlevs)
     for (i in names(xgap)){
-      levels(xdf[[i]])[xgap[[i]]] <- NA
+      the_gap <- xgap[[i]]
+      levels(xdf[[i]])[the_gap] <- NA
+      if (length(the_gap) > 0){
+        xlevs[[i]] <- xlevs[[i]][-the_gap]        
+      }
     }    
   }
   xdfnum <- data.frame(lapply(xdf, as.numeric))
