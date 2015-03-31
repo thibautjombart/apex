@@ -6,6 +6,8 @@ setwd("vignettes")
 knit("apex.Rmd")
 setwd("../")
 ```
+apex: Phylogenetic Methods for Multiple Gene Data
+=================================================
 
 ```{r include, results="asis", echo=FALSE, warning=FALSE}
 ## read md of the vignette

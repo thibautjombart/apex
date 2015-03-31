@@ -36,6 +36,14 @@ Example code:
 
 ```r
 library("apex")
+```
+
+```
+## Loading required package: ape
+## Loading required package: phangorn
+```
+
+```r
 ## empty object
 new("multidna")
 ```

@@ -1,6 +1,8 @@
 [![Travis-CI Build Status](https://travis-ci.org/thibautjombart/apex.png?branch=master)](https://travis-ci.org/thibautjombart/apex)
 
 
+apex: Phylogenetic Methods for Multiple Gene Data
+=================================================
 
 
 #### Classes of object
@@ -12,6 +14,14 @@ Example code:
 
 ```r
 library("apex")
+```
+
+```
+## Loading required package: ape
+## Loading required package: phangorn
+```
+
+```r
 ## empty object
 new("multidna")
 ```
