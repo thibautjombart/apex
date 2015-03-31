@@ -1,6 +1,14 @@
-
+---
+title: "Phylogenetic Methods for Multiple Gene Data"
+author: "Thibaut Jombart"
+date: "2015-03-31"
+output: rmarkdown::html_vignette
+vignette: >
 %\VignetteEngine{knitr::knitr}
 %\VignetteIndexEntry{apex: Phylogenetic Methods for Multiple Gene Data.}
+ \usepackage[utf8]{inputenc}
+---
+
 
 
 

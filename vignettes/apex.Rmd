@@ -1,6 +1,14 @@
-
+---
+title: "Phylogenetic Methods for Multiple Gene Data"
+author: "Thibaut Jombart"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
 %\VignetteEngine{knitr::knitr}
 %\VignetteIndexEntry{apex: Phylogenetic Methods for Multiple Gene Data.}
+ \usepackage[utf8]{inputenc}
+---
+
 
 ```{r setup, echo=FALSE}
 # set global chunk options: images will be 7x5 inches

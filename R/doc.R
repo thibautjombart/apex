@@ -4,5 +4,4 @@
 #'
 #' @docType package
 #' @name apex
-#' @import knitr
 NULL
