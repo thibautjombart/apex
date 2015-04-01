@@ -40,6 +40,15 @@ Then, to load the package, use:
 library("apex")
 ```
 
+```
+## Loading required package: ape
+## Loading required package: phangorn
+```
+
+```
+## Warning: package 'phangorn' was built under R version 3.2.0
+```
+
 
 New object classes
 ------------------
@@ -569,6 +578,8 @@ obj
 ## @type:  codom
 ## 
 ## Optional contents: 
+## @strata: - empty -
+## @hierarchy:  - empty -
 ## @pop:  - empty -
 ## @pop.names:  - empty -
 ## 
