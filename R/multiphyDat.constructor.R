@@ -12,8 +12,7 @@
 #'
 #' @export
 #'
-#' @aliases initialize,multiphyDat-methods
-#' @aliases new.multiphyDat
+#' @aliases initialize,multiphyDat-methods new.multiphyDat
 #'
 #' @param .Object the object skeleton, automatically generated when calling \code{new}.
 #' @param dna a list of phyDat matrices (1 per gene); rows should be labelled and indicate individuals, but different individuals and different orders can be used in different matrices.
@@ -25,13 +24,13 @@
 #' @seealso
 #' \itemize{
 #' \item the \linkS4class{multiphyDat} class
-#' \item \code{\link{read.multiphyDat}} 
+#' \item \code{\link{read.multiphyDat}}
 #' }
 #' @examples
 #' data(Laurasiatherian)
 #' #' ## empty object
 #' new("multiphyDat")
-#' 
+#'
 #' ## simple conversion with nicely ordered output
 #' \dontrun{
 #' genes <- list(gene1=subset(Laurasiatherian,, 1:1600, FALSE),
@@ -39,13 +38,13 @@
 #' x <- new("multiphyDat", genes)
 #' x
 #' }
-#' 
+#'
 #' ## trickier conversion with missing sequences / wrong order
 #' genes <- list(gene1=subset(Laurasiatherian, 1:40),
 #'     gene2=subset(Laurasiatherian, 8:47))
 #' x <- new("multiphyDat", genes)
 #' x
-#' 
+#'
 setMethod("initialize", "multiphyDat", function(.Object, dna=NULL, ind.info=NULL, gene.info=NULL, quiet=FALSE, ...) {
 
     ## RETRIEVE PROTOTYPED OBJECT ##

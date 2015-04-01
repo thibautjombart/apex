@@ -4,6 +4,7 @@
 \name{initialize,multiphyDat-method}
 \alias{initialize,multiphyDat-method}
 \alias{initialize,multiphyDat-methods}
+\alias{new.multiphyDat}
 \title{multiphyDat constructor}
 \usage{
 \S4method{initialize}{multiphyDat}(.Object, dna = NULL, ind.info = NULL,

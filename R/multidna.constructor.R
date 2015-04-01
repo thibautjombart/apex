@@ -11,8 +11,7 @@
 #'
 #' @export
 #'
-#' @aliases initialize,multidna-methods
-#' @aliases new.multidna
+#' @aliases initialize,multidna-methods new.multidna
 #'
 #' @param .Object the object skeleton, automatically generated when calling \code{new}.
 #' @param dna a list of DNAbin matrices (1 per gene); rows should be labelled and indicate individuals, but different individuals and different orders can be used in different matrices.
