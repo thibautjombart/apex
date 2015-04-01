@@ -14,7 +14,7 @@ apex: Phylogenetic Methods for Multiple Gene Data
 mdInput <- readLines("vignettes/apex.md")
 
 ## remove vignette-specific headers
-toRemove <- 1:max(grep("---",mdInput))
+toRemove <- 1:10
 mdInput <- mdInput[-toRemove]
 
 ## restore right path for figures
