@@ -1,8 +1,6 @@
 [![Travis-CI Build Status](https://travis-ci.org/thibautjombart/apex.png?branch=master)](https://travis-ci.org/thibautjombart/apex)
 
 
-apex: Phylogenetic Methods for Multiple Gene Data
-=================================================
 
 
 *apex*: Phylogenetic Methods for Multiple Gene Data
