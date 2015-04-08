@@ -70,16 +70,17 @@ setMethod("initialize", "multiphyDat", function(.Object, dna=NULL, ind.info=NULL
     if(is.matrix(dna)) dna <- list(dna)
 
     ## coerce items in DNA to matrices ##
-    dna <- lapply(dna, as.matrix)
-    N.SEQ <- sum(sapply(dna, nrow))
+    # dna <- lapply(dna, as.matrix)
+    fun <- function(x)ifelse(is.matrix(x),nrow(x),length(x))
+    N.SEQ <- sum(sapply(dna, fun))
     if(N.SEQ==0){
         x@dna <- NULL
         x@ind.info <- x@gene.info <- NULL
         return(x)
     }
 
-    ## convert matrices of characters into DNAbin ##
-    N.GENES <- length(dna)
+    ## convert matrices of characters into phyDat ##
+    N.GENES <- length(dna)  
     for(i in 1:N.GENES){
         if(is.character(dna[[i]])) dna[[i]] <- phyDat(dna[[i]])
     }
@@ -102,7 +103,7 @@ setMethod("initialize", "multiphyDat", function(.Object, dna=NULL, ind.info=NULL
 #    }
 
     ## get list of all labels ##
-    all.labels <- unique(unlist(lapply(dna,rownames)))
+    all.labels <- unique(unlist(lapply(dna, names)))
     N.IND <- length(all.labels)
 
 

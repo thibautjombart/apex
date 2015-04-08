@@ -23,11 +23,16 @@
 #'
 #' image(concatenate(x))
 concatenate <- function(x, genes=TRUE){
-    out <- do.call(cbind.DNAbin, x@dna[genes])
-    return(out[x@labels,,drop=FALSE])
+    if(inherits(x, "multidna")){
+        out <- do.call(cbind.DNAbin, x@dna[genes])
+        return(out[x@labels,,drop=FALSE])
+    }
+    if(inherits(x, "multiphyDat")){
+        out <- do.call(cbind.phyDat, x@dna[genes])
+        return(out)
+    }
+    return(x)
 }
-
-
 
 
 

@@ -23,7 +23,7 @@ test_that("genind conversion works as expected", {
 })
 
 test_that("multiphyDat conversion works as expected", {
-	expect_that(mulphy, is_a("multidna"))
+	expect_that(mulphy, is_a("multiphyDat"))
 	expect_that(sample(mulphy@dna, 1)[[1]], is_a("phyDat"))
 	expect_that(muldna, is_a("multidna"))
 	expect_that(sample(muldna@dna, 1)[[1]], is_a("DNAbin"))
