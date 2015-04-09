@@ -12,8 +12,7 @@
 #'
 #' @export
 #'
-#' @aliases initialize,multiphyDat-methods
-#' @aliases new.multiphyDat
+#' @aliases initialize,multiphyDat-methods new.multiphyDat
 #'
 #' @param .Object the object skeleton, automatically generated when calling \code{new}.
 #' @param dna a list of phyDat matrices (1 per gene); rows should be labelled and indicate individuals, but different individuals and different orders can be used in different matrices.
@@ -25,13 +24,13 @@
 #' @seealso
 #' \itemize{
 #' \item the \linkS4class{multiphyDat} class
-#' \item \code{\link{read.multiphyDat}} 
+#' \item \code{\link{read.multiphyDat}}
 #' }
 #' @examples
 #' data(Laurasiatherian)
 #' #' ## empty object
 #' new("multiphyDat")
-#' 
+#'
 #' ## simple conversion with nicely ordered output
 #' \dontrun{
 #' genes <- list(gene1=subset(Laurasiatherian,, 1:1600, FALSE),
@@ -39,13 +38,13 @@
 #' x <- new("multiphyDat", genes)
 #' x
 #' }
-#' 
+#'
 #' ## trickier conversion with missing sequences / wrong order
 #' genes <- list(gene1=subset(Laurasiatherian, 1:40),
 #'     gene2=subset(Laurasiatherian, 8:47))
 #' x <- new("multiphyDat", genes)
 #' x
-#' 
+#'
 setMethod("initialize", "multiphyDat", function(.Object, dna=NULL, ind.info=NULL, gene.info=NULL, quiet=FALSE, ...) {
 
     ## RETRIEVE PROTOTYPED OBJECT ##
@@ -71,16 +70,17 @@ setMethod("initialize", "multiphyDat", function(.Object, dna=NULL, ind.info=NULL
     if(is.matrix(dna)) dna <- list(dna)
 
     ## coerce items in DNA to matrices ##
-    dna <- lapply(dna, as.matrix)
-    N.SEQ <- sum(sapply(dna, nrow))
+    # dna <- lapply(dna, as.matrix)
+    fun <- function(x)ifelse(is.matrix(x),nrow(x),length(x))
+    N.SEQ <- sum(sapply(dna, fun))
     if(N.SEQ==0){
         x@dna <- NULL
         x@ind.info <- x@gene.info <- NULL
         return(x)
     }
 
-    ## convert matrices of characters into DNAbin ##
-    N.GENES <- length(dna)
+    ## convert matrices of characters into phyDat ##
+    N.GENES <- length(dna)  
     for(i in 1:N.GENES){
         if(is.character(dna[[i]])) dna[[i]] <- phyDat(dna[[i]])
     }
@@ -103,7 +103,7 @@ setMethod("initialize", "multiphyDat", function(.Object, dna=NULL, ind.info=NULL
 #    }
 
     ## get list of all labels ##
-    all.labels <- unique(unlist(lapply(dna,rownames)))
+    all.labels <- unique(unlist(lapply(dna, names)))
     N.IND <- length(all.labels)
 
 

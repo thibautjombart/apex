@@ -6,15 +6,13 @@ setwd("vignettes")
 knit("apex.Rmd")
 setwd("../")
 ```
-apex: Phylogenetic Methods for Multiple Gene Data
-=================================================
 
 ```{r include, results="asis", echo=FALSE, warning=FALSE}
 ## read md of the vignette
 mdInput <- readLines("vignettes/apex.md")
 
 ## remove vignette-specific headers
-toRemove <- 1:max(grep("---",mdInput))
+toRemove <- 1:10
 mdInput <- mdInput[-toRemove]
 
 ## restore right path for figures

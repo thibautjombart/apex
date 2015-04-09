@@ -73,8 +73,8 @@ multidna2genind <- function(x, genes=TRUE, mlst=FALSE, gapIsNA=FALSE){
 #' @rdname multidna2genind
 #' @export
 multidna2multiphyDat <- function(x){
-    x@dna <- lapply(x@dna, phyDat)
-    x
+    tmp <- lapply(x@dna, phyDat)
+    new("multiphyDat",tmp)
 } 
 
 

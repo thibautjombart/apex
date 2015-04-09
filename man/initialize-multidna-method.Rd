@@ -4,6 +4,7 @@
 \name{initialize,multidna-method}
 \alias{initialize,multidna-method}
 \alias{initialize,multidna-methods}
+\alias{new.multidna}
 \title{multidna constructor}
 \usage{
 \S4method{initialize}{multidna}(.Object, dna = NULL, ind.info = NULL,
