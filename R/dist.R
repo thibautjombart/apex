@@ -40,12 +40,17 @@
 #' plot(tree, main="Pooled distances")
 #'
 dist.multidna <- function(x, pool=FALSE, genes=TRUE, ...){
+    ## subset data
+    x <- x[,genes]
+
+    ## if genes are  pooled
     if(pool){
-        x <- concatenate(x, genes=genes)
+        x <- concatenate(x)
         out <- dist.dna(x, ...)
         return(out)
     }
 
+    ## otherwise: one tree per gene
     out <- lapply(x@dna, dist.dna, ...)
     names(out) <- names(x@dna)
     return(out)
