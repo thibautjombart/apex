@@ -16,11 +16,11 @@
 #' @param ... further arguments passed to the tree reconstruction method defined by 'method'.
 #'
 #'
-#' @aliases dist.multidna
+#' @aliases getTree
 #'
-#' @seealso \code{\link[ape]{dist.dna}}
+#' @seealso \code{\link{dist.multidna}}
 #'
-#' @return a \code{\link[multiphylo]{multiPhylo}} object
+#' @return a \code{multiPhylo} object
 #'
 #' @examples
 #'
