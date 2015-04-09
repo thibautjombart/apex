@@ -2,6 +2,7 @@
 
 export(concatenate)
 export(dist.multidna)
+export(getTree)
 export(multidna2genind)
 export(multidna2multiphyDat)
 export(multiphyDat2genind)
