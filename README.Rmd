@@ -11,6 +11,10 @@ setwd("../")
 ## read md of the vignette
 mdInput <- readLines("vignettes/apex.md")
 
+## remove vignette-specific headers
+toRemove <- 1:10
+mdInput <- mdInput[-toRemove]
+
 ## restore right path for figures
 mdInput <- gsub("figs/","vignettes/figs/",mdInput)
 cat(paste(mdInput,collapse="\n"))

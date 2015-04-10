@@ -2,12 +2,21 @@
 % Please edit documentation in R/exports.R
 \name{multidna2genind}
 \alias{multidna2genind}
+\alias{multidna2multiphyDat}
+\alias{multiphyDat2genind}
+\alias{multiphyDat2multidna}
 \title{Convert multidna into genind}
 \usage{
 multidna2genind(x, genes = TRUE, mlst = FALSE, gapIsNA = FALSE)
+
+multidna2multiphyDat(x)
+
+multiphyDat2multidna(x)
+
+multiphyDat2genind(x)
 }
 \arguments{
-\item{x}{a \linkS4class{multidna} object.}
+\item{x}{a \linkS4class{multidna} or \linkS4class{multiphyDat} object.}
 
 \item{genes}{an optional vector indicating the genes to retain for the concatenation; any way to subset the list in x@dna is acceptable; by default, all genes are used.}
 
@@ -19,7 +28,13 @@ multidna2genind(x, genes = TRUE, mlst = FALSE, gapIsNA = FALSE)
 a \linkS4class{genind} object
 }
 \description{
-This function concatenates separate DNA alignments, and then extracts SNPs of the resulting alignment into a \linkS4class{genind} object.
+The functions \code{multidna2genind} and \code{multiphyDat2genind} concatenates separate DNA alignments, and then extracts SNPs of the resulting alignment into a \linkS4class{genind} object. The functions \code{multidna2multiphyDat} and \code{multiphyDat2multidna} convert between the different formats.
+
+
+
+
+
+
 }
 \examples{
 ## simple conversion with nicely ordered output
@@ -27,9 +42,15 @@ data(woodmouse)
 genes <- list(gene1=woodmouse[,1:500], gene2=woodmouse[,501:965])
 x <- new("multidna", genes)
 x
+y <- multidna2multiphyDat(x)
+y
+z1 <- multidna2genind(x)
+z1
+z2 <- multiphyDat2genind(y)
+all.equal(z1, z2)
 }
 \author{
-Thibaut Jombart \email{t.jombart@imperial.ac.uk}, Zhian N. Kamvar
+Thibaut Jombart \email{t.jombart@imperial.ac.uk}, Zhian N. Kamvar, Klaus Schliep
 }
 \seealso{
 \itemize{
