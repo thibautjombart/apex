@@ -5,7 +5,8 @@
 \title{Build phylogenies from multiple gene data}
 \usage{
 getTree(x, pool = FALSE, genes = TRUE, model = "N",
-  pairwise.deletion = TRUE, method = nj, ladderize = TRUE, ...)
+  pairwise.deletion = TRUE, method = nj, ladderize = TRUE,
+  negative.branch.length = FALSE, ...)
 }
 \arguments{
 \item{x}{a \linkS4class{multidna} object.}
@@ -21,6 +22,8 @@ getTree(x, pool = FALSE, genes = TRUE, model = "N",
 \item{method}{a function building a tree from a matrix of pairwise genetic distances.}
 
 \item{ladderize}{a logical indicating if the tree should be ladderized; defaults to TRUE.}
+
+\item{negative.branch.length}{a logical indicating if negative branch lengths should be allowed (e.g. in the case of Neighbor-Joining reconstruction), or not, in which case they are set to 0 (FALSE, default).}
 
 \item{...}{further arguments passed to the tree reconstruction method defined by 'method'.}
 }
