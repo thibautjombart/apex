@@ -36,16 +36,12 @@ library("apex")
 ## Loading required package: phangorn
 ```
 
-```
-## Warning: package 'phangorn' was built under R version 3.2.0
-```
-
 
 New object classes
 ------------------
 Two new classes of object extend existing data structure for multiple genes:
 * **multidna:** based on *ape*'s `DNAbin` class
-* **xxxx:** based on ...
+* **multiphyDat:** based on *phangorn*'s `phyDat` class
 
 ###  multidna
 This formal (S4) class can be seen as a multi-gene extension of *ape*'s `DNAbin` class.
@@ -267,10 +263,10 @@ files # this will change on your computer
 ```
 
 ```
-## [1] "/usr/local/lib/R/site-library/apex/patr_poat43.fasta"
-## [2] "/usr/local/lib/R/site-library/apex/patr_poat47.fasta"
-## [3] "/usr/local/lib/R/site-library/apex/patr_poat48.fasta"
-## [4] "/usr/local/lib/R/site-library/apex/patr_poat49.fasta"
+## [1] "/home/thibaut/R/x86_64-unknown-linux-gnu-library/3.3/apex/patr_poat43.fasta"
+## [2] "/home/thibaut/R/x86_64-unknown-linux-gnu-library/3.3/apex/patr_poat47.fasta"
+## [3] "/home/thibaut/R/x86_64-unknown-linux-gnu-library/3.3/apex/patr_poat48.fasta"
+## [4] "/home/thibaut/R/x86_64-unknown-linux-gnu-library/3.3/apex/patr_poat49.fasta"
 ```
 
 ```r
@@ -348,12 +344,57 @@ plot(x)
 
 ![plot of chunk readfiles](vignettes/figs/readfiles-1.png) 
 
+Additionally:
+* **read.multiphyDat:** reads multiple DNA alignments with various formats.
+The arguments are the same as the single-gene `read.phyDat` in *phangorn*:
+
+```r
+z <- read.multiphyDat(files, format="fasta")
+z
+```
+
+```
+## An object of class "multiphyDat"
+## Slot "dna":
+## $patr_poat43
+## 5 sequences with 764 character and 8 different site patterns.
+## The states are a c g t 
+## 
+## $patr_poat47
+## 6 sequences with 626 character and 29 different site patterns.
+## The states are a c g t 
+## 
+## $patr_poat48
+## 8 sequences with 560 character and 24 different site patterns.
+## The states are a c g t 
+## 
+## $patr_poat49
+## 5 sequences with 556 character and 8 different site patterns.
+## The states are a c g t 
+## 
+## 
+## Slot "labels":
+## [1] "2340_50156.ab1 " "2340_50149.ab1 " "2340_50674.ab1 " "2370_45312.ab1 "
+## [5] "2340_50406.ab1 " "2370_45424.ab1 " "2370_45311.ab1 " "2370_45521.ab1 "
+## 
+## Slot "n.ind":
+## [1] 8
+## 
+## Slot "n.seq":
+## [1] 24
+## 
+## Slot "ind.info":
+## NULL
+## 
+## Slot "gene.info":
+## NULL
+```
 
 
 Handling data
 --------------
 Several functions facilitate data handling:
-* **concatenate:** concatenate several genes into a single DNAbin matrix
+* **concatenate:** concatenate several genes into a single DNAbin or phyDat matrix
 * **x[i,j]:** subset x by individuals (i) and/or genes (j)
 
 Example code:
@@ -364,10 +405,10 @@ files
 ```
 
 ```
-## [1] "/usr/local/lib/R/site-library/apex/patr_poat43.fasta"
-## [2] "/usr/local/lib/R/site-library/apex/patr_poat47.fasta"
-## [3] "/usr/local/lib/R/site-library/apex/patr_poat48.fasta"
-## [4] "/usr/local/lib/R/site-library/apex/patr_poat49.fasta"
+## [1] "/home/thibaut/R/x86_64-unknown-linux-gnu-library/3.3/apex/patr_poat43.fasta"
+## [2] "/home/thibaut/R/x86_64-unknown-linux-gnu-library/3.3/apex/patr_poat47.fasta"
+## [3] "/home/thibaut/R/x86_64-unknown-linux-gnu-library/3.3/apex/patr_poat48.fasta"
+## [4] "/home/thibaut/R/x86_64-unknown-linux-gnu-library/3.3/apex/patr_poat49.fasta"
 ```
 
 ```r
@@ -469,12 +510,125 @@ image(y)
 
 ![plot of chunk concat](vignettes/figs/concat-1.png) 
 
+```r
+## concatenate multiphyDat object
+z <- multidna2multiphyDat(x)
+u <- concatenate(z)
+u
+```
+
+```
+## 8 sequences with 2506 character and 69 different site patterns.
+## The states are a c g t
+```
+
+```r
+tree <- pratchet(u, trace=0)
+plot(tree, "u")
+```
+
+![plot of chunk concat](vignettes/figs/concat-2.png) 
+
+Building trees
+---------------
+One can build neighbor joining trees from for each gene or pooled genes for multidna objects
+
+```r
+## make trees, default parameters
+trees <- getTree(x)
+trees
+```
+
+```
+## 4 phylogenetic trees
+```
+
+```r
+plot(trees, 4, type="unrooted")
+```
+![plot of chunk plotMultiPhylo](vignettes/figs/plotMultiPhylo-1.png) 
+
+```
+## 
+## Phylogenetic tree with 8 tips and 6 internal nodes.
+## 
+## Tip labels:
+## 	2340_50156.ab1 , 2340_50149.ab1 , 2340_50674.ab1 , 2370_45312.ab1 , 2340_50406.ab1 , 2370_45424.ab1 , ...
+## 
+## Unrooted; includes branch lengths.
+```
+
+![plot of chunk plotPhyloSingle](vignettes/figs/plotPhyloSingle-1.png) 
+
+or can uses functions from `phangorn` to estimate with maximum likelihood models
+
+```r
+pp <- pmlPart(bf ~ edge + nni, z, control = pml.control(trace = 0))
+```
+
+```
+## Warning in pml(tree, x, ...): negative edges length changed to 0!
+```
+
+```
+## Warning in pml(tree, x, ...): negative edges length changed to 0!
+```
+
+```
+## Warning in pml(tree, x, ...): negative edges length changed to 0!
+```
+
+```
+## Warning in pml(tree, x, ...): negative edges length changed to 0!
+```
+
+```
+## [1] -3510
+## [1] -3510
+## [1] -3510
+## [1] -3510
+```
+
+```r
+pp
+```
+
+```
+## 
+## loglikelihood: -3510 
+## 
+## loglikelihood of partitions:
+##   -1021 -933.9 -788.8 -767 
+## AIC:  7131  BIC:  7451 
+## 
+## Proportion of invariant sites: 0 0 0 0 
+## 
+## Rates:
+## 1 1 1 1 
+## 
+## Base frequencies:  
+##        [,1]   [,2]   [,3]   [,4]
+## [1,] 0.2989 0.1888 0.1946 0.3177
+## 
+## Rate matrix:
+##      [,1] [,2] [,3] [,4] [,5] [,6]
+## [1,]    1    1    1    1    1    1
+```
+
+```r
+trees <- pmlPart2multiPhylo(pp)
+```
+
+```r
+plot(trees, 4)
+```
+![plot of chunk plotPmlPart](vignettes/figs/plotPmlPart-1.png) 
 
 Exporting data
 ---------------
 The following functions enable the export from *apex* to other packages:
 * **multidna2genind:** concatenates genes and export to genind
-
+* **multiphyDat2genind:** does the same for multiphyDat object
 This is illustrated below:
 
 ```r
@@ -542,8 +696,8 @@ x
 
 ```r
 ## export to genind
-obj <- multidna2genind(x)
-obj
+obj1 <- multidna2genind(x)
+obj1
 ```
 
 ```
@@ -573,5 +727,14 @@ obj
 ## @pop.names:  - empty -
 ## 
 ## @other: - empty -
+```
+
+```r
+obj2 <- multiphyDat2genind(x)
+identical(obj1, obj2)
+```
+
+```
+## [1] TRUE
 ```
 
