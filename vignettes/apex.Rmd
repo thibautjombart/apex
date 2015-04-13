@@ -166,8 +166,11 @@ par(mar=c(5,8,2,1))
 image(y)
 
 ## concatenate multiphyDat object
+z <- multidna2multiphyDat(x)
 u <- concatenate(z)
+u
 tree <- pratchet(u, trace=0)
+par()
 plot(tree, "u")
 ```
 
@@ -178,7 +181,13 @@ One can build neighbor joining trees from for each gene or pooled genes for mult
 ## make trees, default parameters
 trees <- getTree(x)
 trees
+```
+```{r hidePlotMultiPhylo, echo=TRUE,eval=FALSE}
 plot(trees, 4, type="unrooted")
+```
+```{r plotMultiPhylo, echo=FALSE,eval=TRUE}
+par(mfrow=c(2,2)); lapply(trees, plot)
+```
 
 ## make one single tree based on concatenated genes
 tree <- getTree(x, pool=TRUE)
@@ -188,7 +197,7 @@ plot(tree, type="unrooted")
 ```
 
 or can uses functions from `phangorn` to estimate with maximum likelihood models
-```{r pmlPart}
+```{r pmlPart,eval=FALSE}
 pp <- pmlPart(bf ~ edge + nni, z, rooted=TRUE)
 pp
 trees <- pmlPart2multiPhylo(pp)
