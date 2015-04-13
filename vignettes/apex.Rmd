@@ -170,7 +170,6 @@ z <- multidna2multiphyDat(x)
 u <- concatenate(z)
 u
 tree <- pratchet(u, trace=0)
-par()
 plot(tree, "u")
 ```
 
@@ -186,9 +185,9 @@ trees
 plot(trees, 4, type="unrooted")
 ```
 ```{r plotMultiPhylo, echo=FALSE,eval=TRUE}
-par(mfrow=c(2,2)); lapply(trees, plot)
+par(mfrow=c(2,2)); for(i in 1:length(trees))plot(trees[[i]])
 ```
-
+```{r plotPhyloSingle, echo=FALSE,eval=TRUE}
 ## make one single tree based on concatenated genes
 tree <- getTree(x, pool=TRUE)
 tree
@@ -197,14 +196,17 @@ plot(tree, type="unrooted")
 ```
 
 or can uses functions from `phangorn` to estimate with maximum likelihood models
-```{r pmlPart,eval=FALSE}
-pp <- pmlPart(bf ~ edge + nni, z, rooted=TRUE)
+```{r pmlPart}
+pp <- pmlPart(bf ~ edge + nni, z, control = pml.control(trace = 0))
 pp
 trees <- pmlPart2multiPhylo(pp)
-par(mar = c(2,2,2,2))
+```
+```{r hidePlotMultiPhylo2, echo=TRUE,eval=FALSE}
 plot(trees, 4)
 ```
-
+```{r plotPmlPart, echo=FALSE,eval=TRUE}
+par(mfrow=c(2,2)); for(i in 1:length(trees))plot(trees[[i]])
+```
 
 Exporting data
 ---------------
