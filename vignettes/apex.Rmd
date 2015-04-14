@@ -195,6 +195,7 @@ plot(trees, 4, type="unrooted")
 ```{r plotMultiPhylo, echo=FALSE,eval=TRUE}
 par(mfrow=c(2,2)); for(i in 1:length(trees))plot(trees[[i]])
 ```
+
 As an alternative, all genes can be pooled into a single alignment to obtain a single tree using:
 ```{r plotPhyloSingle, echo=FALSE,eval=TRUE}
 ## make one single tree based on concatenated genes
@@ -247,10 +248,11 @@ obj2 <- multiphyDat2genind(x)
 identical(obj1, obj2)
 ```
 
-The MLST option is particularly useful for a quick diagnostic of diversity amongst individuals.
-```r
+The MLST option can be useful for a quick diagnostic of diversity amongst individuals.
+While it is best suited to clonal organisms, we illustrate this procedure using our toy dataset:
+```{r mlst}
 obj3 <- multidna2genind(x, mlst=TRUE)
 obj3
 ## alleles of the first locus (=sequences)
 obj3@all.names[[1]]
-``` 
+```
