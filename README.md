@@ -88,6 +88,7 @@ new("multidna")
 ## 
 ## @n.ind: 0 individual
 ## @n.seq: 0 sequence in total
+## @n.seq: 0 gap-only (missing) sequence
 ## @labels:
 ```
 
@@ -121,6 +122,7 @@ x
 ## 
 ## @n.ind: 15 individuals
 ## @n.seq: 30 sequences in total
+## @n.seq: 0 gap-only (missing) sequence
 ## @labels: No305 No304 No306 No0906S No0908S No0909S...
 ## 
 ## @dna:
@@ -237,6 +239,7 @@ x
 ## 
 ## @n.ind: 15 individuals
 ## @n.seq: 30 sequences in total
+## @n.seq: 8 gap-only (missing) sequences
 ## @labels: No305 No304 No306 No0906S No0908S No0909S...
 ## 
 ## @dna:
@@ -290,10 +293,10 @@ files # this will change on your computer
 ```
 
 ```
-## [1] "/home/thibaut/dev/apex/inst/patr_poat43.fasta"
-## [2] "/home/thibaut/dev/apex/inst/patr_poat47.fasta"
-## [3] "/home/thibaut/dev/apex/inst/patr_poat48.fasta"
-## [4] "/home/thibaut/dev/apex/inst/patr_poat49.fasta"
+## [1] "/usr/local/lib/R/site-library/apex/patr_poat43.fasta"
+## [2] "/usr/local/lib/R/site-library/apex/patr_poat47.fasta"
+## [3] "/usr/local/lib/R/site-library/apex/patr_poat48.fasta"
+## [4] "/usr/local/lib/R/site-library/apex/patr_poat49.fasta"
 ```
 
 ```r
@@ -308,6 +311,7 @@ x
 ## 
 ## @n.ind: 8 individuals
 ## @n.seq: 32 sequences in total
+## @n.seq: 8 gap-only (missing) sequences
 ## @labels: 2340_50156.ab1  2340_50149.ab1  2340_50674.ab1  2370_45312.ab1  2340_50406.ab1  2370_45424.ab1 ...
 ## 
 ## @dna:
@@ -436,10 +440,10 @@ files
 ```
 
 ```
-## [1] "/home/thibaut/dev/apex/inst/patr_poat43.fasta"
-## [2] "/home/thibaut/dev/apex/inst/patr_poat47.fasta"
-## [3] "/home/thibaut/dev/apex/inst/patr_poat48.fasta"
-## [4] "/home/thibaut/dev/apex/inst/patr_poat49.fasta"
+## [1] "/usr/local/lib/R/site-library/apex/patr_poat43.fasta"
+## [2] "/usr/local/lib/R/site-library/apex/patr_poat47.fasta"
+## [3] "/usr/local/lib/R/site-library/apex/patr_poat48.fasta"
+## [4] "/usr/local/lib/R/site-library/apex/patr_poat49.fasta"
 ```
 
 ```r
@@ -454,6 +458,7 @@ x
 ## 
 ## @n.ind: 8 individuals
 ## @n.seq: 32 sequences in total
+## @n.seq: 8 gap-only (missing) sequences
 ## @labels: 2340_50156.ab1  2340_50149.ab1  2340_50674.ab1  2370_45312.ab1  2340_50406.ab1  2370_45424.ab1 ...
 ## 
 ## @dna:
@@ -728,6 +733,7 @@ x
 ## 
 ## @n.ind: 8 individuals
 ## @n.seq: 32 sequences in total
+## @n.seq: 8 gap-only (missing) sequences
 ## @labels: 2340_50156.ab1  2340_50149.ab1  2340_50674.ab1  2370_45312.ab1  2340_50406.ab1  2370_45424.ab1 ...
 ## 
 ## @dna:
