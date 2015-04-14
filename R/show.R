@@ -30,7 +30,7 @@ setMethod ("show", "multidna", function(object){
 
     cat("\n@n.ind:", x@n.ind, indword)
     cat("\n@n.seq:", x@n.seq, seqword, "in total")
-    cat("\n@n.seq:", x@n.seq.miss, "gap-only (missing)", seqmissword)
+    cat("\n@n.seq.miss:", x@n.seq.miss, "gap-only (missing)", seqmissword)
     cat("\n@labels:", head(x@labels))
     if(length(x@labels>6)) cat("...")
 
