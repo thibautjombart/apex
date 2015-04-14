@@ -13,7 +13,7 @@ multidna2multiphyDat(x)
 
 multiphyDat2multidna(x)
 
-multiphyDat2genind(x)
+multiphyDat2genind(x, genes = TRUE, mlst = FALSE, gapIsNA = FALSE)
 }
 \arguments{
 \item{x}{a \linkS4class{multidna} or \linkS4class{multiphyDat} object.}
