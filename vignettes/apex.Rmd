@@ -18,8 +18,8 @@ options(digits = 4)
 
 *apex*: Phylogenetic Methods for Multiple Gene Data
 =================================================
-*apex* implements some new classes to handle DNA sequences from different genes and individuals.
-It implements new classes extending object classes from *ape* and *phangorn* to store multiple gene data, and some useful wrappers mimicking existing functionalities for multiple genes.
+*apex* implements new classes and methods for analysing DNA sequences from multiple genes.
+It implements new classes extending object classes from *ape* and *phangorn* to store multiple gene data, and some useful wrappers mimicking existing functionalities of these packages for multiple genes.
 This document provides an overview of the package's content.
 
 
@@ -44,19 +44,20 @@ library("apex")
 
 New object classes
 ------------------
-Two new classes of object extend existing data structure for multiple genes:
-* **multidna:** based on *ape*'s `DNAbin` class
-* **multiphyDat:** based on *phangorn*'s `phyDat` class
+Two new classes of object extend existing data structures for multiple genes:
+* **multidna:** based on *ape*'s `DNAbin` class, useful for distance-based trees.
+* **multiphyDat:** based on *phangorn*'s `phyDat` class, useful for likelihood-based and parsimony trees.
+Conversion between these classes can be done using `multidna2multiPhydat` and `multiPhydat2multidna`.
 
 ###  multidna
 This formal (S4) class can be seen as a multi-gene extension of *ape*'s `DNAbin` class.
 Data is stored as a list of DNAbin objects, with additional slots for extra information.
 The class definition can be obtained by:
-```r
+```{r multidnaDef}
 getClassDef("multidna")
 ```
-* **@dna**: list of `DNAbin` matrices, with matching rows
-* **@labels**: labels of the individuals (rows of the matrices in `dna`)
+* **@dna**: list of `DNAbin` matrices, each corresponding to a given gene/locus, with matching rows (individuals)
+* **@labels**: labels of the individuals (rows of the matrices in `@dna`)
 * **@n.ind**: the number of individuals
 * **@n.seq**: the total number of sequences in the dataset
 * **@ind.info**: an optional dataset storing individual metadata 
@@ -78,6 +79,7 @@ new("multidna")
 
 ## using a list of genes as input
 data(woodmouse)
+woodmouse
 genes <- list(gene1=woodmouse[,1:500], gene2=woodmouse[,501:965])
 x <- new("multidna", genes)
 x
@@ -108,6 +110,7 @@ plot(x)
 
 Importing data
 --------------
+### *ape* wrappers
 Two simple functions permit to import data from multiple alignements into `multidna` objects:
 * **read.multidna:** reads multiple DNA alignments with various formats
 * **read.multiFASTA:** same for FASTA files
@@ -128,7 +131,8 @@ par(mar=c(6,11,2,1))
 plot(x)
 ```
 
-Additionally:
+### *phangorn* wrappers
+In addition to the above functions for importing data:
 * **read.multiphyDat:** reads multiple DNA alignments with various formats.
 The arguments are the same as the single-gene `read.phyDat` in *phangorn*:
 ```{r readfiles phyDat}
@@ -142,6 +146,9 @@ Handling data
 Several functions facilitate data handling:
 * **concatenate:** concatenate several genes into a single DNAbin or phyDat matrix
 * **x[i,j]:** subset x by individuals (i) and/or genes (j)
+* **multidna2multiphyDat:** converts from `multidna` to `multiphyDat`
+* **multiphyDat2multidna:** converts from `multiphyDat` to `multidna`
+
 
 Example code:
 ```{r handling}
@@ -175,7 +182,8 @@ plot(tree, "u")
 
 Building trees
 ---------------
-One can build neighbor joining trees from for each gene or pooled genes for multidna objects
+### Distance-based trees
+Distance-based trees (e.g. Neighbor Joining) can be obtained for each gene in a `multidna` object using `getTree`
 ```{r gettree}
 ## make trees, default parameters
 trees <- getTree(x)
@@ -187,6 +195,7 @@ plot(trees, 4, type="unrooted")
 ```{r plotMultiPhylo, echo=FALSE,eval=TRUE}
 par(mfrow=c(2,2)); for(i in 1:length(trees))plot(trees[[i]])
 ```
+As an alternative, all genes can be pooled into a single alignment to obtain a single tree using:
 ```{r plotPhyloSingle, echo=FALSE,eval=TRUE}
 ## make one single tree based on concatenated genes
 tree <- getTree(x, pool=TRUE)
@@ -195,10 +204,16 @@ par(mfrow=c(1,1))
 plot(tree, type="unrooted")
 ```
 
-or can uses functions from `phangorn` to estimate with maximum likelihood models
+### Likelihood-based trees
+It is also possible to use functions from `phangorn` to estimate with maximum likelihood trees.
+Here is an example using the `multiphyDat` object `z` created in the previous section:
 ```{r pmlPart}
+## input object
+z
+## build trees
 pp <- pmlPart(bf ~ edge + nni, z, control = pml.control(trace = 0))
 pp
+## convert trees for plotting
 trees <- pmlPart2multiPhylo(pp)
 ```
 ```{r hidePlotMultiPhylo2, echo=TRUE,eval=FALSE}
@@ -208,11 +223,13 @@ plot(trees, 4)
 par(mfrow=c(2,2)); for(i in 1:length(trees))plot(trees[[i]])
 ```
 
+
 Exporting data
 ---------------
 The following functions enable the export from *apex* to other packages:
-* **multidna2genind:** concatenates genes and export to genind
+* **multidna2genind:** concatenates genes and export SNPs into a `genind` object; alternatively, Multi-Locus Sequence Type (MLST) can be used to treat genes as separate locus and unique sequences as alleles.
 * **multiphyDat2genind:** does the same for multiphyDat object
+
 This is illustrated below:
 ```{r export}
 ## find source files in apex
@@ -222,10 +239,18 @@ files <- dir(system.file(package="apex"),patter="patr", full=TRUE)
 x <- read.multiFASTA(files)
 x
 
-## export to genind
+## extract SNPs and export to genind
 obj1 <- multidna2genind(x)
 obj1
 
 obj2 <- multiphyDat2genind(x)
 identical(obj1, obj2)
 ```
+
+The MLST option is particularly useful for a quick diagnostic of diversity amongst individuals.
+```r
+obj3 <- multidna2genind(x, mlst=TRUE)
+obj3
+## alleles of the first locus (=sequences)
+obj3@all.names[[1]]
+``` 

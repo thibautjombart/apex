@@ -5,8 +5,8 @@
 
 *apex*: Phylogenetic Methods for Multiple Gene Data
 =================================================
-*apex* implements some new classes to handle DNA sequences from different genes and individuals.
-It implements new classes extending object classes from *ape* and *phangorn* to store multiple gene data, and some useful wrappers mimicking existing functionalities for multiple genes.
+*apex* implements new classes and methods for analysing DNA sequences from multiple genes.
+It implements new classes extending object classes from *ape* and *phangorn* to store multiple gene data, and some useful wrappers mimicking existing functionalities of these packages for multiple genes.
 This document provides an overview of the package's content.
 
 
@@ -31,27 +31,36 @@ Then, to load the package, use:
 library("apex")
 ```
 
-```
-## Loading required package: ape
-## Loading required package: phangorn
-```
-
 
 New object classes
 ------------------
-Two new classes of object extend existing data structure for multiple genes:
-* **multidna:** based on *ape*'s `DNAbin` class
-* **multiphyDat:** based on *phangorn*'s `phyDat` class
+Two new classes of object extend existing data structures for multiple genes:
+* **multidna:** based on *ape*'s `DNAbin` class, useful for distance-based trees.
+* **multiphyDat:** based on *phangorn*'s `phyDat` class, useful for likelihood-based and parsimony trees.
+Conversion between these classes can be done using `multidna2multiPhydat` and `multiPhydat2multidna`.
 
 ###  multidna
 This formal (S4) class can be seen as a multi-gene extension of *ape*'s `DNAbin` class.
 Data is stored as a list of DNAbin objects, with additional slots for extra information.
 The class definition can be obtained by:
+
 ```r
 getClassDef("multidna")
 ```
-* **@dna**: list of `DNAbin` matrices, with matching rows
-* **@labels**: labels of the individuals (rows of the matrices in `dna`)
+
+```
+## Class "multidna" [package "apex"]
+## 
+## Slots:
+##                                                                           
+## Name:               dna           labels            n.ind            n.seq
+## Class:       listOrNULL        character          integer          integer
+##                                         
+## Name:          ind.info        gene.info
+## Class: data.frameOrNULL data.frameOrNULL
+```
+* **@dna**: list of `DNAbin` matrices, each corresponding to a given gene/locus, with matching rows (individuals)
+* **@labels**: labels of the individuals (rows of the matrices in `@dna`)
 * **@n.ind**: the number of individuals
 * **@n.seq**: the total number of sequences in the dataset
 * **@ind.info**: an optional dataset storing individual metadata 
@@ -84,6 +93,22 @@ new("multidna")
 ```r
 ## using a list of genes as input
 data(woodmouse)
+woodmouse
+```
+
+```
+## 15 DNA sequences in binary format stored in a matrix.
+## 
+## All sequences of same length: 965 
+## 
+## Labels: No305 No304 No306 No0906S No0908S No0909S ...
+## 
+## Base composition:
+##     a     c     g     t 
+## 0.307 0.261 0.126 0.306
+```
+
+```r
 genes <- list(gene1=woodmouse[,1:500], gene2=woodmouse[,501:965])
 x <- new("multidna", genes)
 x
@@ -248,6 +273,7 @@ plot(x)
 
 Importing data
 --------------
+### *ape* wrappers
 Two simple functions permit to import data from multiple alignements into `multidna` objects:
 * **read.multidna:** reads multiple DNA alignments with various formats
 * **read.multiFASTA:** same for FASTA files
@@ -263,10 +289,10 @@ files # this will change on your computer
 ```
 
 ```
-## [1] "/home/thibaut/R/x86_64-unknown-linux-gnu-library/3.3/apex/patr_poat43.fasta"
-## [2] "/home/thibaut/R/x86_64-unknown-linux-gnu-library/3.3/apex/patr_poat47.fasta"
-## [3] "/home/thibaut/R/x86_64-unknown-linux-gnu-library/3.3/apex/patr_poat48.fasta"
-## [4] "/home/thibaut/R/x86_64-unknown-linux-gnu-library/3.3/apex/patr_poat49.fasta"
+## [1] "/home/thibaut/dev/apex/inst/patr_poat43.fasta"
+## [2] "/home/thibaut/dev/apex/inst/patr_poat47.fasta"
+## [3] "/home/thibaut/dev/apex/inst/patr_poat48.fasta"
+## [4] "/home/thibaut/dev/apex/inst/patr_poat49.fasta"
 ```
 
 ```r
@@ -344,7 +370,8 @@ plot(x)
 
 ![plot of chunk readfiles](vignettes/figs/readfiles-1.png) 
 
-Additionally:
+### *phangorn* wrappers
+In addition to the above functions for importing data:
 * **read.multiphyDat:** reads multiple DNA alignments with various formats.
 The arguments are the same as the single-gene `read.phyDat` in *phangorn*:
 
@@ -396,6 +423,9 @@ Handling data
 Several functions facilitate data handling:
 * **concatenate:** concatenate several genes into a single DNAbin or phyDat matrix
 * **x[i,j]:** subset x by individuals (i) and/or genes (j)
+* **multidna2multiphyDat:** converts from `multidna` to `multiphyDat`
+* **multiphyDat2multidna:** converts from `multiphyDat` to `multidna`
+
 
 Example code:
 
@@ -405,10 +435,10 @@ files
 ```
 
 ```
-## [1] "/home/thibaut/R/x86_64-unknown-linux-gnu-library/3.3/apex/patr_poat43.fasta"
-## [2] "/home/thibaut/R/x86_64-unknown-linux-gnu-library/3.3/apex/patr_poat47.fasta"
-## [3] "/home/thibaut/R/x86_64-unknown-linux-gnu-library/3.3/apex/patr_poat48.fasta"
-## [4] "/home/thibaut/R/x86_64-unknown-linux-gnu-library/3.3/apex/patr_poat49.fasta"
+## [1] "/home/thibaut/dev/apex/inst/patr_poat43.fasta"
+## [2] "/home/thibaut/dev/apex/inst/patr_poat47.fasta"
+## [3] "/home/thibaut/dev/apex/inst/patr_poat48.fasta"
+## [4] "/home/thibaut/dev/apex/inst/patr_poat49.fasta"
 ```
 
 ```r
@@ -531,7 +561,8 @@ plot(tree, "u")
 
 Building trees
 ---------------
-One can build neighbor joining trees from for each gene or pooled genes for multidna objects
+### Distance-based trees
+Distance-based trees (e.g. Neighbor Joining) can be obtained for each gene in a `multidna` object using `getTree`
 
 ```r
 ## make trees, default parameters
@@ -547,6 +578,7 @@ trees
 plot(trees, 4, type="unrooted")
 ```
 ![plot of chunk plotMultiPhylo](vignettes/figs/plotMultiPhylo-1.png) 
+As an alternative, all genes can be pooled into a single alignment to obtain a single tree using:
 
 ```
 ## 
@@ -560,9 +592,54 @@ plot(trees, 4, type="unrooted")
 
 ![plot of chunk plotPhyloSingle](vignettes/figs/plotPhyloSingle-1.png) 
 
-or can uses functions from `phangorn` to estimate with maximum likelihood models
+### Likelihood-based trees
+It is also possible to use functions from `phangorn` to estimate with maximum likelihood trees.
+Here is an example using the `multiphyDat` object `z` created in the previous section:
 
 ```r
+## input object
+z
+```
+
+```
+## An object of class "multiphyDat"
+## Slot "dna":
+## $patr_poat43
+## 8 sequences with 764 character and 8 different site patterns.
+## The states are a c g t 
+## 
+## $patr_poat47
+## 8 sequences with 626 character and 29 different site patterns.
+## The states are a c g t 
+## 
+## $patr_poat48
+## 8 sequences with 560 character and 24 different site patterns.
+## The states are a c g t 
+## 
+## $patr_poat49
+## 8 sequences with 556 character and 8 different site patterns.
+## The states are a c g t 
+## 
+## 
+## Slot "labels":
+## [1] "2340_50156.ab1 " "2340_50149.ab1 " "2340_50674.ab1 " "2370_45312.ab1 "
+## [5] "2340_50406.ab1 " "2370_45424.ab1 " "2370_45311.ab1 " "2370_45521.ab1 "
+## 
+## Slot "n.ind":
+## [1] 8
+## 
+## Slot "n.seq":
+## [1] 32
+## 
+## Slot "ind.info":
+## NULL
+## 
+## Slot "gene.info":
+## NULL
+```
+
+```r
+## build trees
 pp <- pmlPart(bf ~ edge + nni, z, control = pml.control(trace = 0))
 ```
 
@@ -616,6 +693,7 @@ pp
 ```
 
 ```r
+## convert trees for plotting
 trees <- pmlPart2multiPhylo(pp)
 ```
 
@@ -624,11 +702,13 @@ plot(trees, 4)
 ```
 ![plot of chunk plotPmlPart](vignettes/figs/plotPmlPart-1.png) 
 
+
 Exporting data
 ---------------
 The following functions enable the export from *apex* to other packages:
-* **multidna2genind:** concatenates genes and export to genind
+* **multidna2genind:** concatenates genes and export SNPs into a `genind` object; alternatively, Multi-Locus Sequence Type (MLST) can be used to treat genes as separate locus and unique sequences as alleles.
 * **multiphyDat2genind:** does the same for multiphyDat object
+
 This is illustrated below:
 
 ```r
@@ -695,7 +775,7 @@ x
 ```
 
 ```r
-## export to genind
+## extract SNPs and export to genind
 obj1 <- multidna2genind(x)
 obj1
 ```
@@ -737,4 +817,12 @@ identical(obj1, obj2)
 ```
 ## [1] TRUE
 ```
+
+The MLST option is particularly useful for a quick diagnostic of diversity amongst individuals.
+```r
+obj3 <- multidna2genind(x, mlst=TRUE)
+obj3
+## alleles of the first locus (=sequences)
+obj3@all.names[[1]]
+``` 
 
