@@ -20,6 +20,7 @@ setMethod ("show", "multidna", function(object){
     x <- object
     n.genes <- ifelse(is.null(x@dna), 0, length(x@dna))
     seqword <- ifelse(x@n.seq>1, "sequences", "sequence")
+    seqmissword <- ifelse(x@n.seq.miss>1, "sequences", "sequence")
     geneword <- ifelse(n.genes>1, "genes", "gene")
     indword <-  ifelse(x@n.ind>1, "individuals", "individual")
 
@@ -29,6 +30,7 @@ setMethod ("show", "multidna", function(object){
 
     cat("\n@n.ind:", x@n.ind, indword)
     cat("\n@n.seq:", x@n.seq, seqword, "in total")
+    cat("\n@n.seq:", x@n.seq.miss, "gap-only (missing)", seqmissword)
     cat("\n@labels:", head(x@labels))
     if(length(x@labels>6)) cat("...")
 
