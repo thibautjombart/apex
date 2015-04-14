@@ -59,9 +59,10 @@ getClassDef("multidna")
 * **@dna**: list of `DNAbin` matrices, each corresponding to a given gene/locus, with matching rows (individuals)
 * **@labels**: labels of the individuals (rows of the matrices in `@dna`)
 * **@n.ind**: the number of individuals
-* **@n.seq**: the total number of sequences in the dataset
-* **@ind.info**: an optional dataset storing individual metadata 
-* **@gene.info**: an optional dataset storing gene metadata 
+* **@n.seq**: the total number of sequences in the dataset, including gaps-only sequences
+* **@n.seq.miss**: the total number of gaps-only (i.e., missing) sequences in the dataset
+* **@ind.info**: an optional dataset storing individual metadata
+* **@gene.info**: an optional dataset storing gene metadata
 
 Any of these slots can be accessed using `@` (see example below).
 

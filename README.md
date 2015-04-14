@@ -55,16 +55,17 @@ getClassDef("multidna")
 ##                                                                           
 ## Name:               dna           labels            n.ind            n.seq
 ## Class:       listOrNULL        character          integer          integer
-##                                         
-## Name:          ind.info        gene.info
-## Class: data.frameOrNULL data.frameOrNULL
+##                                                          
+## Name:        n.seq.miss         ind.info        gene.info
+## Class:          integer data.frameOrNULL data.frameOrNULL
 ```
 * **@dna**: list of `DNAbin` matrices, each corresponding to a given gene/locus, with matching rows (individuals)
 * **@labels**: labels of the individuals (rows of the matrices in `@dna`)
 * **@n.ind**: the number of individuals
-* **@n.seq**: the total number of sequences in the dataset
-* **@ind.info**: an optional dataset storing individual metadata 
-* **@gene.info**: an optional dataset storing gene metadata 
+* **@n.seq**: the total number of sequences in the dataset, including gaps-only sequences
+* **@n.seq.miss**: the total number of gaps-only (i.e., missing) sequences in the dataset
+* **@ind.info**: an optional dataset storing individual metadata
+* **@gene.info**: an optional dataset storing gene metadata
 
 Any of these slots can be accessed using `@` (see example below).
 
@@ -232,10 +233,10 @@ x
 
 ```
 ## === multidna ===
-## [ 22 DNA sequences in 2 genes ]
+## [ 30 DNA sequences in 2 genes ]
 ## 
 ## @n.ind: 15 individuals
-## @n.seq: 22 sequences in total
+## @n.seq: 30 sequences in total
 ## @labels: No305 No304 No306 No0906S No0908S No0909S...
 ## 
 ## @dna:
@@ -303,10 +304,10 @@ x
 
 ```
 ## === multidna ===
-## [ 24 DNA sequences in 4 genes ]
+## [ 32 DNA sequences in 4 genes ]
 ## 
 ## @n.ind: 8 individuals
-## @n.seq: 24 sequences in total
+## @n.seq: 32 sequences in total
 ## @labels: 2340_50156.ab1  2340_50149.ab1  2340_50674.ab1  2370_45312.ab1  2340_50406.ab1  2370_45424.ab1 ...
 ## 
 ## @dna:
@@ -449,10 +450,10 @@ x
 
 ```
 ## === multidna ===
-## [ 24 DNA sequences in 4 genes ]
+## [ 32 DNA sequences in 4 genes ]
 ## 
 ## @n.ind: 8 individuals
-## @n.seq: 24 sequences in total
+## @n.seq: 32 sequences in total
 ## @labels: 2340_50156.ab1  2340_50149.ab1  2340_50674.ab1  2370_45312.ab1  2340_50406.ab1  2370_45424.ab1 ...
 ## 
 ## @dna:
@@ -723,10 +724,10 @@ x
 
 ```
 ## === multidna ===
-## [ 24 DNA sequences in 4 genes ]
+## [ 32 DNA sequences in 4 genes ]
 ## 
 ## @n.ind: 8 individuals
-## @n.seq: 24 sequences in total
+## @n.seq: 32 sequences in total
 ## @labels: 2340_50156.ab1  2340_50149.ab1  2340_50674.ab1  2370_45312.ab1  2340_50406.ab1  2370_45424.ab1 ...
 ## 
 ## @dna:
