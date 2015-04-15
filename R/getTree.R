@@ -13,6 +13,7 @@
 #' @param pairwise.deletion a logical passed to \code{\link[ape]{dist.dna}} indicating if pairwise deletions should be used; the alternative is to remove all sites for which at least one missing value is present.
 #' @param method a function building a tree from a matrix of pairwise genetic distances.
 #' @param ladderize a logical indicating if the tree should be ladderized; defaults to TRUE.
+#' @param negative.branch.length a logical indicating if negative branch lengths should be allowed (e.g. in the case of Neighbor-Joining reconstruction), or not, in which case they are set to 0 (FALSE, default).
 #' @param ... further arguments passed to the tree reconstruction method defined by 'method'.
 #'
 #'
@@ -43,7 +44,7 @@
 #'
 getTree <- function(x, pool=FALSE, genes=TRUE, model = "N",
                     pairwise.deletion = TRUE, method=nj,
-                    ladderize=TRUE, ...){
+                    ladderize=TRUE, negative.branch.length=FALSE, ...){
     ## subset data
     x <- x[,genes]
 
@@ -51,6 +52,7 @@ getTree <- function(x, pool=FALSE, genes=TRUE, model = "N",
     f1 <- function(e){
         res <- method(dist.dna(e, model=model, pairwise.deletion=pairwise.deletion), ...)
         if(ladderize) res <- ladderize(res)
+        if(!negative.branch.length) res$edge.length[res$edge.length<0] <- 0
         return(res)
     }
 

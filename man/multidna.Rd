@@ -19,7 +19,9 @@ The rows of the separate matrices all correspond to the same individuals, ordere
 
 \item{\code{n.ind}}{the number of individuals}
 
-\item{\code{n.seq}}{the total number of sequences (pooling all genes)}
+\item{\code{n.seq}}{the total number of sequences (pooling all genes), including gap sequences}
+
+\item{\code{n.seq.miss}}{the total number of gap-only sequences}
 
 \item{\code{ind.info}}{a data.frame containing information on the individuals, where individuals are in rows; empty slot should be NULL}
 

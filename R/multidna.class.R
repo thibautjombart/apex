@@ -25,7 +25,8 @@ setClassUnion("data.frameOrNULL", c("data.frame", "NULL"))
 #' @slot dna a list of DNAbin matrices; empty slot should be NULL
 #' @slot labels a vector of labels of individuals
 #' @slot n.ind the number of individuals
-#' @slot n.seq the total number of sequences (pooling all genes)
+#' @slot n.seq the total number of sequences (pooling all genes), including gap sequences
+#' @slot n.seq.miss the total number of gap-only sequences
 #' @slot ind.info a data.frame containing information on the individuals, where individuals are in rows; empty slot should be NULL
 #' @slot gene.info a data.frame containing information on the genes, where genes are in rows; empty slot should be NULL
 #'
@@ -55,5 +56,7 @@ setClassUnion("data.frameOrNULL", c("data.frame", "NULL"))
 #' image(x@@dna[[1]])
 #' image(x@@dna[[2]])
 #'
-setClass("multidna", representation(dna="listOrNULL", labels="character", n.ind="integer", n.seq="integer", ind.info="data.frameOrNULL", gene.info="data.frameOrNULL"),
-         prototype(dna=NULL, labels=character(0), n.ind=0L, n.seq=0L, ind.info=NULL, gene.info=NULL))
+setClass("multidna", representation(dna="listOrNULL",
+                                    labels="character", n.ind="integer", n.seq="integer", n.seq.miss="integer",
+                                    ind.info="data.frameOrNULL", gene.info="data.frameOrNULL"),
+         prototype(dna=NULL, labels=character(0), n.ind=0L, n.seq=0L, n.seq.miss=0L, ind.info=NULL, gene.info=NULL))

@@ -89,5 +89,6 @@ setMethod("[", signature(x="multidna", i="ANY", j="ANY", drop="ANY"), function(x
     ## adjust counters
     x@n.ind <- length(x@labels)
     x@n.seq <- sum(sapply(x@dna, nrow))
+    x@n.seq.miss <- .nMissingSequences(x@dna)
     return(x)
 }) # end [] for SNPbin

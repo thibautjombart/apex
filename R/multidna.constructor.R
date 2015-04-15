@@ -144,7 +144,8 @@ setMethod("initialize", "multidna", function(.Object, dna=NULL, ind.info=NULL, g
     x@dna <- dna
     x@labels <- all.labels
     x@n.ind <- N.IND
-    x@n.seq <- N.SEQ
+    x@n.seq <- as.integer(N.IND * N.GENES)
+    x@n.seq.miss <- .nMissingSequences(x@dna)
     x@ind.info <- ind.info
     x@gene.info <- gene.info
 
