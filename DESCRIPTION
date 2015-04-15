@@ -1,6 +1,6 @@
 Package: apex
 Title: Phylogenetic Methods for Multiple Gene Data
-Version: 1.0.0
+Version: 1.0.1
 Authors@R: c(TJ=person("Thibaut", "Jombart", , "t.jombart@imperial.ac.uk", role = c("aut", "cre")), 
 	   ZK=person("Zhian Namir", "Kamvar", email = "kamvarz@science.oregonstate.edu", role = c("aut")),
 	   KS=person("Klaus", "Schliep", email="klaus.schliep@umb.edu", role = c("aut")),
