@@ -6,4 +6,3 @@ sudo: required
 
 env:
   - WARNINGS_ARE_ERRORS=false
-  - NOTES_ARE_ERRORS=false
