@@ -4,7 +4,7 @@ author: "Thibaut Jombart"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteEngine{knitr::knitr}
+  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteIndexEntry{apex: Phylogenetic Methods for Multiple Gene Data.}
   \usepackage[utf8]{inputenc}
 ---
