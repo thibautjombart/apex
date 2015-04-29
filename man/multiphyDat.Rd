@@ -6,8 +6,8 @@
 \alias{multiphyDat-class}
 \title{multiphyDat: class for multiple gene data}
 \description{
-This formal (S4) class is used to store multiple DNA alignments.
-Sequences are stored as a (possibly named) list, with each element of the list being a separate DNA alignment stored as a DNAbin matrix.
+This formal (S4) class is identical to \linkS4class{multidna}, except that DNA sequences are stored using \code{phyDat} objects from the \code{phangorn} package.
+Sequences are stored as a (possibly named) list, with each element of the list being a separate DNA alignment stored as a \code{phyDat} object.
 The rows of the separate matrices all correspond to the same individuals, ordered identically.
 }
 \section{Slots}{
@@ -19,7 +19,9 @@ The rows of the separate matrices all correspond to the same individuals, ordere
 
 \item{\code{n.ind}}{the number of individuals}
 
-\item{\code{n.seq}}{the total number of sequences (pooling all genes)}
+\item{\code{n.seq}}{the total number of sequences (pooling all genes), including gap sequences}
+
+\item{\code{n.seq.miss}}{the total number of gap-only sequences}
 
 \item{\code{ind.info}}{a data.frame containing information on the individuals, where individuals are in rows; empty slot should be NULL}
 
