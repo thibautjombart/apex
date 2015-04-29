@@ -1,7 +1,10 @@
 #'
 #' Convert multidna into genind
 #'
-#' The functions \code{multidna2genind} and \code{multiphyDat2genind} concatenates separate DNA alignments, and then extracts SNPs of the resulting alignment into a \linkS4class{genind} object. The functions \code{multidna2multiphyDat} and \code{multiphyDat2multidna} convert between the different formats.
+#' The functions \code{multidna2genind} and \code{multiphyDat2genind} concatenates separate DNA alignments, and then extracts SNPs of the resulting alignment into a \linkS4class{genind} object.
+#'
+#' @docType methods
+#' @rdname multidna2genind
 #'
 #' @param x a \linkS4class{multidna} or \linkS4class{multiphyDat} object.
 #' @param genes an optional vector indicating the genes to retain for the concatenation; any way to subset the list in x@@dna is acceptable; by default, all genes are used.
@@ -11,10 +14,9 @@
 #' @author Thibaut Jombart \email{t.jombart@@imperial.ac.uk}, Zhian N. Kamvar, Klaus Schliep
 #'
 #' @rdname multidna2genind
+#'
 #' @aliases multidna2genind
 #' @aliases multiphyDat2genind
-#' @aliases multidna2multiphyDat
-#' @aliases multiphyDat2multidna
 #'
 #' @seealso
 #' \itemize{
@@ -69,17 +71,67 @@ multidna2genind <- function(x, genes=TRUE, mlst=FALSE, gapIsNA=FALSE){
 }
 
 
-#'
 #' @rdname multidna2genind
 #' @export
+#'
+multiphyDat2genind <- function(x, genes=TRUE, mlst=FALSE, gapIsNA=FALSE){
+    return(multidna2genind(multiphyDat2multidna(x), genes=genes, mlst=mlst, gapIsNA=gapIsNA))
+}
+
+
+
+
+
+#'
+#' Conversions between multidna and multiphyDat
+#'
+#' The functions \code{multidna2multiphyDat} and \code{multiphyDat2multidna} are used to convert data between \linkS4class{multidna} and  \linkS4class{multiphyDat} classes.
+#'
+#' @docType methods
+#'
+#' @param x a \linkS4class{multidna} or \linkS4class{multiphyDat} object.
+#'
+#' @author Thibaut Jombart \email{t.jombart@@imperial.ac.uk}, Zhian N. Kamvar, Klaus Schliep
+#'
+#' @rdname multidna2multiphyDat
+#'
+#' @aliases multidna2multiphyDat
+#' @aliases multiphyDat2multidna
+#'
+#' @seealso
+#' \itemize{
+#' \item concatenate
+#' \item \code{\link{DNAbin2genind}} to convert single DNAbin objects.
+#' }
+#'
+#' @export
+#'
+#' @examples
+#'
+#' ## simple conversion with nicely ordered output
+#' data(woodmouse)
+#' genes <- list(gene1=woodmouse[,1:500], gene2=woodmouse[,501:965])
+#' x <- new("multidna", genes)
+#' x
+#'
+#' ## conversion multidna -> multiphyDat
+#' y <- multidna2multiphyDat(x)
+#' y
+#'
+#' ## check round trip
+#' identical(x, multiphyDat2multidna(y))
+#'
+#' @rdname multidna2multiphyDat
+#'
+#' @export
+#'
 multidna2multiphyDat <- function(x){
     tmp <- lapply(x@dna, phyDat)
     new("multiphyDat",tmp)
 }
 
 
-#'
-#' @rdname multidna2genind
+#' @rdname multidna2multiphyDat
 #' @export
 multiphyDat2multidna <- function(x){
     tmp <- lapply(x@dna, as.character)
@@ -87,14 +139,13 @@ multiphyDat2multidna <- function(x){
 }
 
 
-#'
-#' @rdname multidna2genind
-#' @export
-multiphyDat2genind <- function(x, genes=TRUE, mlst=FALSE, gapIsNA=FALSE){
-    return(multidna2genind(multiphyDat2multidna(x), genes=genes, mlst=mlst, gapIsNA=gapIsNA))
-}
 
 
+
+
+##
+## internal functions
+##
 find_gap_sequence <- function(x){
   wheregaps <- lapply(x, function(i) which(grepl("^\\-+?$", i)))
   return(wheregaps)
