@@ -36,7 +36,7 @@ setMethod ("show", "multidna", function(object){
 
     cat("\n")
     if(n.genes>0) {
-        cat("\n@dna:\n")
+        cat("\n@dna: (list of DNAbin matrices)\n")
         print(object@dna)
     }
 
@@ -97,7 +97,7 @@ setMethod ("show", "multiphyDat", function(object){
 
     cat("\n")
     if(n.genes>0) {
-        cat("\n@dna:\n")
+        cat("\n@dna: (list of phyDat objects)\n")
         print(object@dna)
     }
 
