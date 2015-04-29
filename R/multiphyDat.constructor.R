@@ -80,7 +80,7 @@ setMethod("initialize", "multiphyDat", function(.Object, dna=NULL, ind.info=NULL
     }
 
     ## convert matrices of characters into phyDat ##
-    N.GENES <- length(dna)  
+    N.GENES <- length(dna)
     for(i in 1:N.GENES){
         if(is.character(dna[[i]])) dna[[i]] <- phyDat(dna[[i]])
     }
@@ -129,7 +129,8 @@ setMethod("initialize", "multiphyDat", function(.Object, dna=NULL, ind.info=NULL
     x@dna <- dna
     x@labels <- all.labels
     x@n.ind <- N.IND
-    x@n.seq <- N.SEQ
+    x@n.seq <- as.integer(N.IND * N.GENES)
+    x@n.seq.miss <- .nMissingSequences(lapply(x@dna, as.DNAbin))
     x@ind.info <- ind.info
     x@gene.info <- gene.info
 
