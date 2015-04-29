@@ -34,6 +34,11 @@ Then, to load the package, use:
 library("apex")
 ```
 
+```
+## Loading required package: ape
+## Loading required package: phangorn
+```
+
 
 New object classes
 ------------------
@@ -298,10 +303,10 @@ files # this will change on your computer
 ```
 
 ```
-## [1] "/home/thibaut/dev/apex/inst/patr_poat43.fasta"
-## [2] "/home/thibaut/dev/apex/inst/patr_poat47.fasta"
-## [3] "/home/thibaut/dev/apex/inst/patr_poat48.fasta"
-## [4] "/home/thibaut/dev/apex/inst/patr_poat49.fasta"
+## [1] "/usr/local/lib/R/site-library/apex/patr_poat43.fasta"
+## [2] "/usr/local/lib/R/site-library/apex/patr_poat47.fasta"
+## [3] "/usr/local/lib/R/site-library/apex/patr_poat48.fasta"
+## [4] "/usr/local/lib/R/site-library/apex/patr_poat49.fasta"
 ```
 
 ```r
@@ -392,10 +397,10 @@ z
 
 ```
 ## === multiphyDat ===
-## [ 24 DNA sequences in 4 genes ]
+## [ 32 DNA sequences in 4 genes ]
 ## 
 ## @n.ind: 8 individuals
-## @n.seq: 24 sequences in total
+## @n.seq: 32 sequences in total
 ## @n.seq.miss: 0 gap-only (missing) sequence
 ## @labels: 2340_50156.ab1  2340_50149.ab1  2340_50674.ab1  2370_45312.ab1  2340_50406.ab1  2370_45424.ab1 ...
 ## 
@@ -435,10 +440,10 @@ files
 ```
 
 ```
-## [1] "/home/thibaut/dev/apex/inst/patr_poat43.fasta"
-## [2] "/home/thibaut/dev/apex/inst/patr_poat47.fasta"
-## [3] "/home/thibaut/dev/apex/inst/patr_poat48.fasta"
-## [4] "/home/thibaut/dev/apex/inst/patr_poat49.fasta"
+## [1] "/usr/local/lib/R/site-library/apex/patr_poat43.fasta"
+## [2] "/usr/local/lib/R/site-library/apex/patr_poat47.fasta"
+## [3] "/usr/local/lib/R/site-library/apex/patr_poat48.fasta"
+## [4] "/usr/local/lib/R/site-library/apex/patr_poat49.fasta"
 ```
 
 ```r
@@ -609,7 +614,7 @@ z
 ## 
 ## @n.ind: 8 individuals
 ## @n.seq: 32 sequences in total
-## @n.seq.miss: 0 gap-only (missing) sequence
+## @n.seq.miss: 8 gap-only (missing) sequences
 ## @labels: 2340_50156.ab1  2340_50149.ab1  2340_50674.ab1  2370_45312.ab1  2340_50406.ab1  2370_45424.ab1 ...
 ## 
 ## @dna:
