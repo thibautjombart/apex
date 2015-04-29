@@ -4,6 +4,8 @@
 
 
 
+
+
 *apex*: Phylogenetic Methods for Multiple Gene Data
 =================================================
 *apex* implements new classes and methods for analysing DNA sequences from multiple genes.
@@ -59,6 +61,8 @@ getClassDef("multidna")
 ##                                                          
 ## Name:        n.seq.miss         ind.info        gene.info
 ## Class:          integer data.frameOrNULL data.frameOrNULL
+## 
+## Known Subclasses: "multiphyDat"
 ```
 * **@dna**: list of `DNAbin` matrices, each corresponding to a given gene/locus, with matching rows (individuals)
 * **@labels**: labels of the individuals (rows of the matrices in `@dna`)
@@ -294,10 +298,10 @@ files # this will change on your computer
 ```
 
 ```
-## [1] "/usr/local/lib/R/site-library/apex/patr_poat43.fasta"
-## [2] "/usr/local/lib/R/site-library/apex/patr_poat47.fasta"
-## [3] "/usr/local/lib/R/site-library/apex/patr_poat48.fasta"
-## [4] "/usr/local/lib/R/site-library/apex/patr_poat49.fasta"
+## [1] "/home/thibaut/dev/apex/inst/patr_poat43.fasta"
+## [2] "/home/thibaut/dev/apex/inst/patr_poat47.fasta"
+## [3] "/home/thibaut/dev/apex/inst/patr_poat48.fasta"
+## [4] "/home/thibaut/dev/apex/inst/patr_poat49.fasta"
 ```
 
 ```r
@@ -387,8 +391,15 @@ z
 ```
 
 ```
-## An object of class "multiphyDat"
-## Slot "dna":
+## === multiphyDat ===
+## [ 24 DNA sequences in 4 genes ]
+## 
+## @n.ind: 8 individuals
+## @n.seq: 24 sequences in total
+## @n.seq.miss: 0 gap-only (missing) sequence
+## @labels: 2340_50156.ab1  2340_50149.ab1  2340_50674.ab1  2370_45312.ab1  2340_50406.ab1  2370_45424.ab1 ...
+## 
+## @dna:
 ## $patr_poat43
 ## 5 sequences with 764 character and 8 different site patterns.
 ## The states are a c g t 
@@ -403,24 +414,7 @@ z
 ## 
 ## $patr_poat49
 ## 5 sequences with 556 character and 8 different site patterns.
-## The states are a c g t 
-## 
-## 
-## Slot "labels":
-## [1] "2340_50156.ab1 " "2340_50149.ab1 " "2340_50674.ab1 " "2370_45312.ab1 "
-## [5] "2340_50406.ab1 " "2370_45424.ab1 " "2370_45311.ab1 " "2370_45521.ab1 "
-## 
-## Slot "n.ind":
-## [1] 8
-## 
-## Slot "n.seq":
-## [1] 24
-## 
-## Slot "ind.info":
-## NULL
-## 
-## Slot "gene.info":
-## NULL
+## The states are a c g t
 ```
 
 
@@ -441,10 +435,10 @@ files
 ```
 
 ```
-## [1] "/usr/local/lib/R/site-library/apex/patr_poat43.fasta"
-## [2] "/usr/local/lib/R/site-library/apex/patr_poat47.fasta"
-## [3] "/usr/local/lib/R/site-library/apex/patr_poat48.fasta"
-## [4] "/usr/local/lib/R/site-library/apex/patr_poat49.fasta"
+## [1] "/home/thibaut/dev/apex/inst/patr_poat43.fasta"
+## [2] "/home/thibaut/dev/apex/inst/patr_poat47.fasta"
+## [3] "/home/thibaut/dev/apex/inst/patr_poat48.fasta"
+## [4] "/home/thibaut/dev/apex/inst/patr_poat49.fasta"
 ```
 
 ```r
@@ -610,8 +604,15 @@ z
 ```
 
 ```
-## An object of class "multiphyDat"
-## Slot "dna":
+## === multiphyDat ===
+## [ 32 DNA sequences in 4 genes ]
+## 
+## @n.ind: 8 individuals
+## @n.seq: 32 sequences in total
+## @n.seq.miss: 0 gap-only (missing) sequence
+## @labels: 2340_50156.ab1  2340_50149.ab1  2340_50674.ab1  2370_45312.ab1  2340_50406.ab1  2370_45424.ab1 ...
+## 
+## @dna:
 ## $patr_poat43
 ## 8 sequences with 764 character and 8 different site patterns.
 ## The states are a c g t 
@@ -626,24 +627,7 @@ z
 ## 
 ## $patr_poat49
 ## 8 sequences with 556 character and 8 different site patterns.
-## The states are a c g t 
-## 
-## 
-## Slot "labels":
-## [1] "2340_50156.ab1 " "2340_50149.ab1 " "2340_50674.ab1 " "2370_45312.ab1 "
-## [5] "2340_50406.ab1 " "2370_45424.ab1 " "2370_45311.ab1 " "2370_45521.ab1 "
-## 
-## Slot "n.ind":
-## [1] 8
-## 
-## Slot "n.seq":
-## [1] 32
-## 
-## Slot "ind.info":
-## NULL
-## 
-## Slot "gene.info":
-## NULL
+## The states are a c g t
 ```
 
 ```r
