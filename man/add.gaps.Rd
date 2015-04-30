@@ -3,9 +3,12 @@
 \docType{methods}
 \name{add.gaps}
 \alias{add.gaps}
+\alias{add.gaps,multidna-method}
 \title{Add gap-only sequences for missing data}
 \usage{
 add.gaps(x, ...)
+
+\S4method{add.gaps}{multidna}(x, ...)
 }
 \arguments{
 \item{x}{a \linkS4class{multidna} or \linkS4class{multiphyDat} object.}
@@ -14,6 +17,6 @@ add.gaps(x, ...)
 }
 \description{
 In \linkS4class{multidna} and \linkS4class{multiphyDat}, some individuals may not be sequenced for all genes.
-The generic function \code{add.gap} has method for both objects; it identifies the missing sequences, and adds gap-only sequences to the alignments wherever needed.
+The generic function \code{add.gaps} has method for both objects; it identifies the missing sequences, and adds gap-only sequences to the alignments wherever needed.
 }
 

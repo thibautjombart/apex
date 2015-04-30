@@ -2,7 +2,7 @@
 #' Add gap-only sequences for missing data
 #'
 #' In \linkS4class{multidna} and \linkS4class{multiphyDat}, some individuals may not be sequenced for all genes.
-#' The generic function \code{add.gap} has method for both objects; it identifies the missing sequences, and adds gap-only sequences to the alignments wherever needed.
+#' The generic function \code{add.gaps} has method for both objects; it identifies the missing sequences, and adds gap-only sequences to the alignments wherever needed.
 #'
 #'
 #' @docType methods
@@ -24,7 +24,7 @@ setGeneric("add.gaps", function(x, ...) standardGeneric("add.gaps"))
 
 
 
-#' @rdname add.gap
+#' @rdname add.gaps
 #'
 #' @export
 #'
