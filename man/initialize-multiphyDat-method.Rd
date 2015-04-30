@@ -8,7 +8,7 @@
 \title{multiphyDat constructor}
 \usage{
 \S4method{initialize}{multiphyDat}(.Object, dna = NULL, ind.info = NULL,
-  gene.info = NULL, quiet = FALSE, ...)
+  gene.info = NULL, add.gaps = TRUE, quiet = FALSE, ...)
 }
 \arguments{
 \item{.Object}{the object skeleton, automatically generated when calling \code{new}.}
@@ -18,6 +18,8 @@
 \item{ind.info}{an optional data.frame containing information on the individuals, where individuals are in rows.}
 
 \item{gene.info}{an optional data.frame containing information on the genes, where genes are in rows.}
+
+\item{add.gaps}{a logical indicating if gap-only sequences should be used where sequences are missing; defaults to TRUE.}
 
 \item{quiet}{a logical indicating if messages should be shown; defaults to FALSE.}
 

@@ -8,7 +8,7 @@
 \title{multidna constructor}
 \usage{
 \S4method{initialize}{multidna}(.Object, dna = NULL, ind.info = NULL,
-  gene.info = NULL, quiet = FALSE, add.gaps = TRUE, ...)
+  gene.info = NULL, add.gaps = TRUE, quiet = FALSE, ...)
 }
 \arguments{
 \item{.Object}{the object skeleton, automatically generated when calling \code{new}.}
@@ -19,9 +19,9 @@
 
 \item{gene.info}{an optional data.frame containing information on the genes, where genes are in rows.}
 
-\item{quiet}{a logical indicating if messages should be shown; defaults to FALSE.}
-
 \item{add.gaps}{a logical indicating if gap-only sequences should be used where sequences are missing; defaults to TRUE.}
+
+\item{quiet}{a logical indicating if messages should be shown; defaults to FALSE.}
 
 \item{...}{further arguments to be passed to other methods}
 }
