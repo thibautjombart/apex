@@ -19,7 +19,8 @@ Collate: doc.R
  	 multidna.constructor.R
 	 multiphyDat.constructor.R
 	 accessors.R
-	 handling.R
+	 subset.R
+	 concatenate.R
 	 plot.R
 	 readfiles.R
 	 datasets.R
