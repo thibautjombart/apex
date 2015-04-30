@@ -19,7 +19,7 @@
 #' @aliases concatenate,multidna-method
 #' @aliases concatenate,multiphyDat-method
 #'
-#' @param x a \linkS4class{multidna} object.
+#' @param x a \linkS4class{multidna} or a \linkS4class{multiphyDat} object.
 #' @param ... further arguments passed to other methods (currently not used).
 #'
 #' @author Thibaut Jombart \email{t.jombart@@imperial.ac.uk}

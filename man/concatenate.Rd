@@ -14,7 +14,7 @@ concatenate(x, ...)
 \S4method{concatenate}{multiphyDat}(x, genes = TRUE, ...)
 }
 \arguments{
-\item{x}{a \linkS4class{multidna} object.}
+\item{x}{a \linkS4class{multidna} or a \linkS4class{multiphyDat} object.}
 
 \item{...}{further arguments passed to other methods (currently not used).}
 
