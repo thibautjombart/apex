@@ -43,13 +43,21 @@ setMethod("[", signature(x="multidna", i="ANY", j="ANY", drop="ANY"), function(x
     if (missing(j)) j <- TRUE
 
     ## subset data
-    for(k in 1:length(x@dna)) x@dna[[k]] <- x@dna[[k]][i,,drop=FALSE]
+    if(is.character(i)) i <- as.integer(na.omit(match(i, x@labels)))
+
     x@labels <- x@labels[i]
     x@dna <- x@dna[j]
+    for(k in 1:length(x@dna)){
+        toKeep <- x@labels[x@labels %in% rownames(x@dna[[k]])]
+        x@dna[[k]] <- x@dna[[k]][toKeep,,drop=FALSE]
+    }
+
+    ## get rid of empty genes
+    x@dna <- x@dna[sapply(x@dna, nrow)>0]
 
     ## adjust counters
     x@n.ind <- length(x@labels)
     x@n.seq <- sum(sapply(x@dna, nrow))
     x@n.seq.miss <- .nMissingSequences(x@dna)
     return(x)
-}) # end [] for SNPbin
+}) # end [] for multidna

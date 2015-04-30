@@ -7,7 +7,8 @@
 
 ## compute the number of missing sequences for each gene in a list of DNAbin matrices 'x'
 .nMissingSequences <- function(x){
-    ##if(!inherits(x, "multidna")) stop("x is not a multidna object")
+    ## only keep non-empty matrices
+    x <- x[sapply(x, nrow)>0]
     out <- sapply(x, function(e) sum(apply(e==as.DNAbin("-"),1,all)))
     return(sum(out,na.rm=TRUE))
 }
