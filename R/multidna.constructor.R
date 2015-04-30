@@ -17,8 +17,8 @@
 #' @param dna a list of DNAbin matrices (1 per gene); rows should be labelled and indicate individuals, but different individuals and different orders can be used in different matrices.
 #' @param ind.info an optional data.frame containing information on the individuals, where individuals are in rows.
 #' @param gene.info an optional data.frame containing information on the genes, where genes are in rows.
-#' @param quiet a logical indicating if messages should be shown; defaults to FALSE.
 #' @param add.gaps a logical indicating if gap-only sequences should be used where sequences are missing; defaults to TRUE.
+#' @param quiet a logical indicating if messages should be shown; defaults to FALSE.
 #' @param ... further arguments to be passed to other methods
 #'
 #' @seealso
@@ -47,7 +47,7 @@
 #' image(x@@dna[[1]])
 #' image(x@@dna[[2]])
 #'
-setMethod("initialize", "multidna", function(.Object, dna=NULL, ind.info=NULL, gene.info=NULL, quiet=FALSE, add.gaps=TRUE, ...) {
+setMethod("initialize", "multidna", function(.Object, dna=NULL, ind.info=NULL, gene.info=NULL, add.gaps=TRUE, quiet=FALSE, ...) {
 
     ## RETRIEVE PROTOTYPED OBJECT ##
     x <- .Object

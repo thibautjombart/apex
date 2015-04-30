@@ -18,6 +18,7 @@
 #' @param dna a list of phyDat matrices (1 per gene); rows should be labelled and indicate individuals, but different individuals and different orders can be used in different matrices.
 #' @param ind.info an optional data.frame containing information on the individuals, where individuals are in rows.
 #' @param gene.info an optional data.frame containing information on the genes, where genes are in rows.
+#' @param add.gaps a logical indicating if gap-only sequences should be used where sequences are missing; defaults to TRUE.
 #' @param quiet a logical indicating if messages should be shown; defaults to FALSE.
 #' @param ... further arguments to be passed to other methods
 #'
@@ -45,7 +46,7 @@
 #' x <- new("multiphyDat", genes)
 #' x
 #'
-setMethod("initialize", "multiphyDat", function(.Object, dna=NULL, ind.info=NULL, gene.info=NULL, quiet=FALSE, ...) {
+setMethod("initialize", "multiphyDat", function(.Object, dna=NULL, ind.info=NULL, gene.info=NULL, add.gaps=TRUE, quiet=FALSE, ...) {
 
     ## RETRIEVE PROTOTYPED OBJECT ##
     x <- .Object
@@ -89,26 +90,9 @@ setMethod("initialize", "multiphyDat", function(.Object, dna=NULL, ind.info=NULL
     if(is.null(names(dna))) names(dna) <- paste("gene", 1:N.GENES, sep=".")
 
 
-    ## AUXILIARY FUNCTIONS ##
-
-    ## HANDLE LABELS ##
-    ## handle missing labels ##
-#    missing.labels <- any(sapply(dna, function(e) is.null(labels(e))))
-#    if(missing.labels){
-#        if(!quiet) message("[multiphyDat constructor] missing/incomplete labels provided - using generic labels.\n")
-        ## error if varying numbers of rows
-#        if(length(unique(sapply(a, nrow)))>1) stop("[multiphyDat constructor] no labels provided and varying number of sequences across genes - cannot assume individuals are identical.")
-#        labels <- paste("individual", 1:nrow(dna[[1]]), sep=".")
-#        for(i in 1:N.GENES) rownames(dna[[i]]) <- labels
-#    }
-
     ## get list of all labels ##
     all.labels <- unique(unlist(lapply(dna, names)))
     N.IND <- length(all.labels)
-
-
-    ## COMPLETE/SORT MATRICES OF DNA ##
-#    dna <- lapply(dna, form.dna.matrix, all.labels)
 
 
     ## PROCESS META INFO ##
