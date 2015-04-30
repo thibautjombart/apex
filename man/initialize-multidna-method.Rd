@@ -8,7 +8,7 @@
 \title{multidna constructor}
 \usage{
 \S4method{initialize}{multidna}(.Object, dna = NULL, ind.info = NULL,
-  gene.info = NULL, quiet = FALSE, ...)
+  gene.info = NULL, quiet = FALSE, add.gaps = TRUE, ...)
 }
 \arguments{
 \item{.Object}{the object skeleton, automatically generated when calling \code{new}.}
@@ -21,11 +21,13 @@
 
 \item{quiet}{a logical indicating if messages should be shown; defaults to FALSE.}
 
+\item{add.gaps}{a logical indicating if gap-only sequences should be used where sequences are missing; defaults to TRUE.}
+
 \item{...}{further arguments to be passed to other methods}
 }
 \description{
 New \linkS4class{multidna} objects can be created using \code{new("multidna", ...)} where "..." are arguments documented below.
-The main input is a list of DNAbin matrices. The constructor ensures that all matrices will be reordered in the same way, and genes with missing individuals will be filled by sequences of gaps ("-").
+The main input is a list of DNAbin matrices. The constructor ensures that all matrices will be reordered in the same way, and as an option (setting \code{add.gaps=TRUE}, gap-only sequences ("...-----...") will be added wherever sequences are missing.
 }
 \examples{
 ## empty object

@@ -5,7 +5,7 @@
 #' multidna constructor
 #'
 #' New \linkS4class{multidna} objects can be created using \code{new("multidna", ...)} where "..." are arguments documented below.
-#' The main input is a list of DNAbin matrices. The constructor ensures that all matrices will be reordered in the same way, and genes with missing individuals will be filled by sequences of gaps ("-").
+#' The main input is a list of DNAbin matrices. The constructor ensures that all matrices will be reordered in the same way, and as an option (setting \code{add.gaps=TRUE}, gap-only sequences ("...-----...") will be added wherever sequences are missing.
 #'
 #' @author Thibaut Jombart \email{t.jombart@@imperial.ac.uk}
 #'
@@ -18,6 +18,7 @@
 #' @param ind.info an optional data.frame containing information on the individuals, where individuals are in rows.
 #' @param gene.info an optional data.frame containing information on the genes, where genes are in rows.
 #' @param quiet a logical indicating if messages should be shown; defaults to FALSE.
+#' @param add.gaps a logical indicating if gap-only sequences should be used where sequences are missing; defaults to TRUE.
 #' @param ... further arguments to be passed to other methods
 #'
 #' @seealso
@@ -46,7 +47,7 @@
 #' image(x@@dna[[1]])
 #' image(x@@dna[[2]])
 #'
-setMethod("initialize", "multidna", function(.Object, dna=NULL, ind.info=NULL, gene.info=NULL, quiet=FALSE, ...) {
+setMethod("initialize", "multidna", function(.Object, dna=NULL, ind.info=NULL, gene.info=NULL, quiet=FALSE, add.gaps=TRUE, ...) {
 
     ## RETRIEVE PROTOTYPED OBJECT ##
     x <- .Object
@@ -89,23 +90,6 @@ setMethod("initialize", "multidna", function(.Object, dna=NULL, ind.info=NULL, g
     if(is.null(names(dna))) names(dna) <- paste("gene", 1:N.GENES, sep=".")
 
 
-    ## AUXILIARY FUNCTIONS ##
-    ## function to reorder matrix and add missing sequences ##
-    form.dna.matrix <- function(mat.dna, labels){
-        ## make matrix of missing sequences if needed
-        lab.missing <- labels[!(labels %in% rownames(mat.dna))]
-        n.missing <- length(lab.missing)
-        if(n.missing>0){
-            mat.NA <- as.DNAbin(matrix("-", ncol=ncol(mat.dna), nrow=n.missing))
-            rownames(mat.NA) <- lab.missing
-            mat.dna <- rbind(mat.dna, mat.NA)
-        }
-
-        ## return ordered sequences
-        return(mat.dna[labels,])
-    }
-
-
     ## HANDLE LABELS ##
     ## handle missing labels ##
     missing.labels <- any(sapply(dna, function(e) is.null(labels(e))))
@@ -122,8 +106,12 @@ setMethod("initialize", "multidna", function(.Object, dna=NULL, ind.info=NULL, g
     N.IND <- length(all.labels)
 
 
-    ## COMPLETE/SORT MATRICES OF DNA ##
-    dna <- lapply(dna, form.dna.matrix, all.labels)
+    ## SORT MATRICES OF DNA ##
+    sort.mat <- function(mat){
+        if(is.null(rownames(mat))) return(mat)
+        return(mat[sort(rownames(mat)),,drop=FALSE])
+    }
+    dna <- lapply(dna, sort.mat)
 
 
     ## PROCESS META INFO ##
@@ -144,10 +132,13 @@ setMethod("initialize", "multidna", function(.Object, dna=NULL, ind.info=NULL, g
     x@dna <- dna
     x@labels <- all.labels
     x@n.ind <- N.IND
-    x@n.seq <- as.integer(N.IND * N.GENES)
-    x@n.seq.miss <- .nMissingSequences(x@dna)
+    x@n.seq <- as.integer(sum(sapply(x@dna, nrow)))
     x@ind.info <- ind.info
     x@gene.info <- gene.info
+
+    ## ADD GAPS-ONLY SEQUENCES IF NEEDED ##
+    if(add.gaps) x <- add.gaps(x)
+    x@n.seq.miss <- .nMissingSequences(x@dna)
 
     return(x)
 }) # end multidna constructor

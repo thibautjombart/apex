@@ -50,6 +50,10 @@ setMethod("add.gaps", "multidna", function(x, ...){
     ## APPLY THIS FUNCTION TO ALL MATRICES ##
     x@dna <- lapply(x@dna, form.dna.matrix, x@labels)
 
+    ## update number of sequences ##
+    x@n.seq <- as.integer(sum(sapply(x@dna, nrow)))
+    x@n.seq.miss <- .nMissingSequences(x@dna)
+
     ## RETURN OBJECT ##
     return(x)
 }) # end multidna method
