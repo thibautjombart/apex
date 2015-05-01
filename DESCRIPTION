@@ -15,6 +15,7 @@ Collate: doc.R
 	 multidna.class.R
 	 multiphyDat.class.R
 	 add.gaps.R
+	 rm.gaps.R
 	 show.R
  	 multidna.constructor.R
 	 multiphyDat.constructor.R
