@@ -10,7 +10,8 @@
 #' @aliases read.multiphyDat
 #'
 #'
-#' @param files a vector of characters indicating the paths to the files to read from
+#' @param files a vector of characters indicating the paths to the files to read from.
+#' @param add.gaps a logical indicating if gap-only sequences should be added wherever sequences are missing; defaults to TRUE.
 #' @param ... further arguments to be passed to the functions \code{\link[ape]{read.dna}} and \code{\link[ape]{read.FASTA}}.
 #'
 #' @author Thibaut Jombart \email{t.jombart@@imperial.ac.uk}
@@ -38,11 +39,11 @@
 #' y <- read.multiphyDat(files, format="fasta")
 #' y
 #'
-read.multidna <- function(files, ...){
+read.multidna <- function(files, add.gaps=TRUE, ...){
     gene.names <- gsub(".fasta","",sapply(strsplit(files, "/"), tail, 1))
     dna <- lapply(files, read.dna, ...)
     names(dna) <- gene.names
-    out <- new("multidna", dna=dna)
+    out <- new("multidna", dna=dna, add.gaps=add.gaps)
     return(out)
 }
 
@@ -50,11 +51,11 @@ read.multidna <- function(files, ...){
 #'
 #' @rdname readfiles
 #' @export
-read.multiFASTA <- function(files){
+read.multiFASTA <- function(files, add.gaps=TRUE){
     gene.names <- gsub(".fasta","",sapply(strsplit(files, "/"), tail, 1))
     dna <- lapply(files, read.FASTA)
     names(dna) <- gene.names
-    out <- new("multidna", dna=dna)
+    out <- new("multidna", dna=dna, add.gaps=add.gaps)
     return(out)
 }
 
@@ -62,10 +63,10 @@ read.multiFASTA <- function(files){
 #'
 #' @rdname readfiles
 #' @export
-read.multiphyDat <- function(files, ...){
+read.multiphyDat <- function(files, add.gaps=TRUE, ...){
   gene.names <- gsub(".fasta","",sapply(strsplit(files, "/"), tail, 1))
   dna <- lapply(files, read.phyDat, ...)
   names(dna) <- gene.names
-  out <- new("multiphyDat", dna=dna)
+  out <- new("multiphyDat", dna=dna, add.gaps=add.gaps)
   return(out)
 }

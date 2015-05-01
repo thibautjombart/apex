@@ -6,14 +6,16 @@
 \alias{read.multiphyDat}
 \title{Read multiple DNA alignments}
 \usage{
-read.multidna(files, ...)
+read.multidna(files, add.gaps = TRUE, ...)
 
-read.multiFASTA(files)
+read.multiFASTA(files, add.gaps = TRUE)
 
-read.multiphyDat(files, ...)
+read.multiphyDat(files, add.gaps = TRUE, ...)
 }
 \arguments{
-\item{files}{a vector of characters indicating the paths to the files to read from}
+\item{files}{a vector of characters indicating the paths to the files to read from.}
+
+\item{add.gaps}{a logical indicating if gap-only sequences should be added wherever sequences are missing; defaults to TRUE.}
 
 \item{...}{further arguments to be passed to the functions \code{\link[ape]{read.dna}} and \code{\link[ape]{read.FASTA}}.}
 }
