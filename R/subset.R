@@ -84,9 +84,10 @@ setMethod("[", signature(x="multiphyDat", i="ANY", j="ANY", drop="ANY"), functio
     x@labels <- x@labels[i]
     x@dna <- x@dna[j]
     for(k in 1:length(x@dna)){
-        toKeep <- x@labels[x@labels %in% rownames(x@dna[[k]])]
+        toKeep <- x@labels[x@labels %in% labels(x@dna[[k]])]
+        toKeep <- match(toKeep, labels(x@dna[[k]]))
         x@dna[[k]] <- subset(x@dna[[k]], toKeep)
-    }
+      }
 
     ## get rid of empty genes
     x@dna <- x@dna[sapply(x@dna, length)>0]
