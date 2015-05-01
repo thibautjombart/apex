@@ -1,2 +1,7 @@
 *~
 inst/doc
+.RData
+.Rhistory
+apex.Rcheck/
+vignettes/apex.md
+
