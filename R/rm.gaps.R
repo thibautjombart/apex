@@ -72,7 +72,7 @@ setMethod("rm.gaps", "multiphyDat", function(x, ...){
         dna <- as.character(dna)
 
         ## find sequences to remove
-        toRemove <- apply(mat.dna=="-",1,all)
+        toRemove <- apply(dna=="-",1,all)
 
         ## return relevant sequences
         return(as.phyDat(dna[!toRemove,,drop=FALSE]))
