@@ -66,7 +66,34 @@ setMethod("add.gaps", "multidna", function(x, ...){
 #' @export
 #'
 setMethod("add.gaps", "multiphyDat", function(x, ...){
-    ## this should use the native multiphyDat object
-    x <- add.gaps(multiphyDat2multidna(x))
-    return(multidna2multiphyDat)
+    ## ESCAPE IF NO DNA SEQUENCES ##
+    if(is.null(x@dna)) return(x)
+
+    ## FUNCTION TO REORDER MATRIX AND ADD MISSING SEQUENCES ##
+    form.dna.phyDat <- function(dna, labels){
+        ## convert dna to matrix of characters
+        dna <- as.character(dna)
+
+        ## make matrix of missing sequences if needed
+        lab.missing <- labels[!(labels %in% labels(dna))]
+        n.missing <- length(lab.missing)
+        if(n.missing>0){
+            mat.NA <- matrix("-", ncol=ncol(dna), nrow=n.missing)
+            rownames(mat.NA) <- lab.missing
+            dna <- rbind(dna, mat.NA)
+        }
+
+        ## return ordered sequences
+        return(as.phyDat(dna[labels,]))
+    }
+
+    ## APPLY THIS FUNCTION TO ALL MATRICES ##
+    x@dna <- lapply(x@dna, form.dna.phyDat, x@labels)
+
+    ## update number of sequences ##
+    x@n.seq <- as.integer(sum(sapply(x@dna, length)))
+    x@n.seq.miss <- .nMissingSequences(x@dna)
+
+    ## RETURN OBJECT ##
+    return(x)
 })
