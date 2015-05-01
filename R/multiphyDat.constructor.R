@@ -109,14 +109,17 @@ setMethod("initialize", "multiphyDat", function(.Object, dna=NULL, ind.info=NULL
     }
 
 
-    ## FORM FINAL OUTPUT ##
+     ## FORM FINAL OUTPUT ##
     x@dna <- dna
     x@labels <- all.labels
     x@n.ind <- N.IND
-    x@n.seq <- as.integer(N.IND * N.GENES)
-    x@n.seq.miss <- .nMissingSequences(lapply(x@dna, as.DNAbin))
+    x@n.seq <- as.integer(sum(sapply(x@dna, length)))
     x@ind.info <- ind.info
     x@gene.info <- gene.info
+
+    ## ADD GAPS-ONLY SEQUENCES IF NEEDED ##
+    if(add.gaps) x <- add.gaps(x)
+    x@n.seq.miss <- .nMissingSequences(x@dna)
 
     return(x)
 }) # end multiphyDat constructor
