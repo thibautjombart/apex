@@ -4,11 +4,15 @@
 #################
 #' Subset multidna objects
 #'
-#' Individuals in a \linkS4class{multidna} object can be subsetted like the rows of a matrix, with the form x[i,].
+#' Individuals in a \linkS4class{multidna} or \linkS4class{multiphyDat} object can be subsetted like the rows of a matrix, with the form x[i,].
 #' Genes can be subsetted like the columns of a matrix, i.e. with the form x[,j].
+#'
+#' @rdname subset.multidna
 #'
 #' @aliases [,multidna-method
 #' @aliases [.multidna
+#' @aliases [,multiphyDat-method
+#' @aliases [.multiphyDat
 #'
 #' @param x the \linkS4class{multidna} object to subset.
 #' @param i a vector of logical, integers or characters to subset data by individuals; characters will be matched against individual labels.
@@ -61,3 +65,37 @@ setMethod("[", signature(x="multidna", i="ANY", j="ANY", drop="ANY"), function(x
     x@n.seq.miss <- .nMissingSequences(x@dna)
     return(x)
 }) # end [] for multidna
+
+
+
+
+#'
+#' @rdname subset.multidna
+#'
+#' @export
+#'
+setMethod("[", signature(x="multiphyDat", i="ANY", j="ANY", drop="ANY"), function(x, i, j, ...) {
+    if (missing(i)) i <- TRUE
+    if (missing(j)) j <- TRUE
+
+    ## subset data
+    if(is.character(i)) i <- as.integer(na.omit(match(i, x@labels)))
+
+    x@labels <- x@labels[i]
+    x@dna <- x@dna[j]
+    for(k in 1:length(x@dna)){
+        toKeep <- x@labels[x@labels %in% rownames(x@dna[[k]])]
+        x@dna[[k]] <- subset(x@dna[[k]], toKeep)
+    }
+
+    ## get rid of empty genes
+    x@dna <- x@dna[sapply(x@dna, length)>0]
+
+    ## adjust counters
+    x@n.ind <- length(x@labels)
+    x@n.seq <- sum(sapply(x@dna, length))
+    x@n.seq.miss <- .nMissingSequences(x@dna)
+    return(x)
+}) # end [] for multidna
+
+

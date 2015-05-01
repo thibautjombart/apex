@@ -44,6 +44,7 @@ setGeneric("concatenate", function(x, ...) standardGeneric("concatenate"))
 #'
 #' @param genes an optional vector indicating the genes to retain for the concatenation; any way to subset the list in x@@dna is acceptable; by default, all genes are used.
 setMethod("concatenate", "multidna", function(x, genes=TRUE, ...){
+    x <- add.gaps(x)
     out <- do.call(cbind.DNAbin, x@dna[genes])
     return(out[x@labels,,drop=FALSE])
 })
@@ -53,6 +54,7 @@ setMethod("concatenate", "multidna", function(x, genes=TRUE, ...){
 #' @export
 #'
 setMethod("concatenate", "multiphyDat", function(x, genes=TRUE, ...){
+    x <- add.gaps(x)
     out <- do.call(cbind.phyDat, x@dna[genes])
     return(out)
 })
