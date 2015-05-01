@@ -57,3 +57,16 @@ setMethod("add.gaps", "multidna", function(x, ...){
     ## RETURN OBJECT ##
     return(x)
 }) # end multidna method
+
+
+
+
+#' @rdname add.gaps
+#'
+#' @export
+#'
+setMethod("add.gaps", "multiphyDat", function(x, ...){
+    ## this should use the native multiphyDat object
+    x <- add.gaps(multiphyDat2multidna(x))
+    return(multidna2multiphyDat)
+})

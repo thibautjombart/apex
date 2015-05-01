@@ -4,11 +4,14 @@
 \name{add.gaps}
 \alias{add.gaps}
 \alias{add.gaps,multidna-method}
+\alias{add.gaps,multiphyDat-method}
 \title{Add gap-only sequences for missing data}
 \usage{
 add.gaps(x, ...)
 
 \S4method{add.gaps}{multidna}(x, ...)
+
+\S4method{add.gaps}{multiphyDat}(x, ...)
 }
 \arguments{
 \item{x}{a \linkS4class{multidna} or \linkS4class{multiphyDat} object.}
