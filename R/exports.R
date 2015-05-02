@@ -142,6 +142,62 @@ multiphyDat2multidna <- function(x){
 
 
 
+#'
+#' Convert from multidna into alignment (seqinr)
+#'
+#' The functions \code{multidna2alignment} and \code{multiphyDat2alignment} concatenates separate sequences and return an alignment object of the seqinr package.
+#'
+#' @docType methods
+#'
+#' @param x a \linkS4class{multidna} or \linkS4class{multiphyDat} object.
+#' @param genes an optional vector indicating the genes to retain for the concatenation; any way to subset the list in x@@dna is acceptable; by default, all genes are used.
+#'
+#' @author Thibaut Jombart \email{t.jombart@@imperial.ac.uk}, Zhian N. Kamvar, Klaus Schliep
+#'
+#' @rdname multidna2alignment
+#'
+#' @aliases multidna2alignment
+#' @aliases multiphyDat2alignment
+#'
+#' @seealso
+#' \itemize{
+#' \item concatenate
+#' \item \code{\link{as.alignment}} to convert single DNAbin objects.
+#' }
+#'
+#' @export
+#'
+#' @return a alignment object
+#'
+#' @examples
+#'
+#' ## simple conversion with nicely ordered output
+#' data(woodmouse)
+#' genes <- list(gene1=woodmouse[,1:500], gene2=woodmouse[,501:965])
+#' x <- new("multidna", genes)
+#' x
+#' y <- multidna2alignment(x)
+#' y
+#' x2 <- multidna2multiphyDat(x)
+#' z <- multiphyDat2alignment(x2)
+#'
+#' @export
+#'
+multidna2alignment <- function(x, genes=TRUE){
+  return(as.alignment(concatenate(x, genes)))
+}
+
+
+#' @rdname multidna2alignment
+#' @export
+#'
+multiphyDat2alignment <- function(x, genes=TRUE){
+  return(phyDat2alignment(concatenate(x, genes)))  
+}
+
+
+
+
 
 ##
 ## internal functions
