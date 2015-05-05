@@ -6,6 +6,12 @@ setClassUnion("listOrNULL", c("list", "NULL"))
 
 setClassUnion("data.frameOrNULL", c("data.frame", "NULL"))
 
+setClass("multiinfo",
+         representation(labels="character", n.ind="integer", n.seq="integer", n.seq.miss="integer",
+                        ind.info="data.frameOrNULL", gene.info="data.frameOrNULL", "VIRTUAL"),
+         prototype(labels=character(0), n.ind=0L, n.seq=0L, n.seq.miss=0L, ind.info=NULL, gene.info=NULL)
+         )
+
 #'
 #' multidna: class for multiple gene data
 #'
@@ -56,7 +62,5 @@ setClassUnion("data.frameOrNULL", c("data.frame", "NULL"))
 #' image(x@@dna[[1]])
 #' image(x@@dna[[2]])
 #'
-setClass("multidna", representation(dna="listOrNULL",
-                                    labels="character", n.ind="integer", n.seq="integer", n.seq.miss="integer",
-                                    ind.info="data.frameOrNULL", gene.info="data.frameOrNULL"),
-         prototype(dna=NULL, labels=character(0), n.ind=0L, n.seq=0L, n.seq.miss=0L, ind.info=NULL, gene.info=NULL))
+setClass("multidna", representation(dna="listOrNULL"), prototype(dna=NULL), contains="multiinfo")
+
