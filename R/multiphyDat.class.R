@@ -19,7 +19,8 @@
 #' @aliases listOrNULL
 #' @aliases data.frameOrNULL
 #'
-#' @slot dna a list of phyDat objects; empty slot should be NULL
+#' @slot seq a list of phyDat objects; empty slot should be NULL
+#' @slot type a character string indicating the type of the sequences stored: "DNA" for DNA sequences, "AA" for amino-acids.
 #' @slot labels a vector of labels of individuals
 #' @slot n.ind the number of individuals
 #' @slot n.seq the total number of sequences (pooling all genes), including gap sequences

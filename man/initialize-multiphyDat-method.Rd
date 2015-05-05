@@ -14,6 +14,10 @@
 \arguments{
 \item{.Object}{the object skeleton, automatically generated when calling \code{new}.}
 
+\item{seq}{a list of phyDat matrices (1 per gene); rows should be labelled and indicate individuals, but different individuals and different orders can be used in different matrices.}
+
+\item{type}{a character string indicating the type of the sequences stored: "DNA" for DNA sequences, "AA" for amino-acids.}
+
 \item{ind.info}{an optional data.frame containing information on the individuals, where individuals are in rows.}
 
 \item{gene.info}{an optional data.frame containing information on the genes, where genes are in rows.}
@@ -23,8 +27,6 @@
 \item{quiet}{a logical indicating if messages should be shown; defaults to FALSE.}
 
 \item{...}{further arguments to be passed to other methods}
-
-\item{dna}{a list of phyDat matrices (1 per gene); rows should be labelled and indicate individuals, but different individuals and different orders can be used in different matrices.}
 }
 \description{
 New \linkS4class{multiphyDat} objects can be created using \code{new("multiphyDat", ...)} where "..." are arguments documented below.

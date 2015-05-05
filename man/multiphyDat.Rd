@@ -13,7 +13,9 @@ The rows of the separate matrices all correspond to the same individuals, ordere
 \section{Slots}{
 
 \describe{
-\item{\code{dna}}{a list of phyDat objects; empty slot should be NULL}
+\item{\code{seq}}{a list of phyDat objects; empty slot should be NULL}
+
+\item{\code{type}}{a character string indicating the type of the sequences stored: "DNA" for DNA sequences, "AA" for amino-acids.}
 
 \item{\code{labels}}{a vector of labels of individuals}
 

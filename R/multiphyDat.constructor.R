@@ -15,7 +15,8 @@
 #' @aliases initialize,multiphyDat-methods new.multiphyDat
 #'
 #' @param .Object the object skeleton, automatically generated when calling \code{new}.
-#' @param dna a list of phyDat matrices (1 per gene); rows should be labelled and indicate individuals, but different individuals and different orders can be used in different matrices.
+#' @param seq a list of phyDat matrices (1 per gene); rows should be labelled and indicate individuals, but different individuals and different orders can be used in different matrices.
+#' @param type a character string indicating the type of the sequences stored: "DNA" for DNA sequences, "AA" for amino-acids.
 #' @param ind.info an optional data.frame containing information on the individuals, where individuals are in rows.
 #' @param gene.info an optional data.frame containing information on the genes, where genes are in rows.
 #' @param add.gaps a logical indicating if gap-only sequences should be used where sequences are missing; defaults to TRUE.
