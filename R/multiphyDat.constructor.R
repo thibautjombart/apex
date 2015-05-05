@@ -46,34 +46,34 @@
 #' x <- new("multiphyDat", genes)
 #' x
 #'
-setMethod("initialize", "multiphyDat", function(.Object, dna=NULL, ind.info=NULL, gene.info=NULL, add.gaps=TRUE, quiet=FALSE, ...) {
+setMethod("initialize", "multiphyDat", function(.Object, seq=NULL, type=character(0), ind.info=NULL, gene.info=NULL, add.gaps=TRUE, quiet=FALSE, ...) {
 
     ## RETRIEVE PROTOTYPED OBJECT ##
     x <- .Object
 
 
     ## ESCAPE IF NO DATA ##
-    if(is.null(dna)) return(x)
+    if(is.null(seq)) return(x)
 
 
-    ## HANDLE DNA ##
+    ## HANDLE SEQ ##
     ## cases where an multiphyDat is provided ##
-    if(inherits(dna, "multiphyDat")){
-        ind.info <- dna@ind.info
-        gene.info <- dna@gene.info
-        dna <- dna@seq
-        dna@seq <- NULL
+    if(inherits(seq, "multiphyDat")){
+        ind.info <- seq@ind.info
+        gene.info <- seq@gene.info
+        seq <- seq@seq
+        seq@seq <- NULL
         invisible(gc())
     }
 
     ## cases where no info provided ##
-    if(is.null(dna)) return(x)
-    if(is.matrix(dna)) dna <- list(dna)
+    if(is.null(seq)) return(x)
+    if(is.matrix(seq)) seq <- list(seq)
 
-    ## coerce items in DNA to matrices ##
-    # dna <- lapply(dna, as.matrix)
+    ## coerce items in SEQ to matrices ##
+    # seq <- lapply(seq, as.matrix)
     fun <- function(x)ifelse(is.matrix(x),nrow(x),length(x))
-    N.SEQ <- sum(sapply(dna, fun))
+    N.SEQ <- sum(sapply(seq, fun))
     if(N.SEQ==0){
         x@seq <- NULL
         x@ind.info <- x@gene.info <- NULL
@@ -81,17 +81,17 @@ setMethod("initialize", "multiphyDat", function(.Object, dna=NULL, ind.info=NULL
     }
 
     ## convert matrices of characters into phyDat ##
-    N.GENES <- length(dna)
+    N.GENES <- length(seq)
     for(i in 1:N.GENES){
-        if(is.character(dna[[i]])) dna[[i]] <- phyDat(dna[[i]])
+        if(is.character(seq[[i]])) seq[[i]] <- phyDat(seq[[i]])
     }
 
     ## replace with generic names if needed ##
-    if(is.null(names(dna))) names(dna) <- paste("gene", 1:N.GENES, sep=".")
+    if(is.null(names(seq))) names(seq) <- paste("gene", 1:N.GENES, sep=".")
 
 
     ## get list of all labels ##
-    all.labels <- unique(unlist(lapply(dna, names)))
+    all.labels <- unique(unlist(lapply(seq, names)))
     N.IND <- length(all.labels)
 
 
@@ -110,7 +110,8 @@ setMethod("initialize", "multiphyDat", function(.Object, dna=NULL, ind.info=NULL
 
 
      ## FORM FINAL OUTPUT ##
-    x@seq <- dna
+    x@seq <- seq
+    x@type <- as.character(type)
     x@labels <- all.labels
     x@n.ind <- N.IND
     x@n.seq <- as.integer(sum(sapply(x@seq, length)))

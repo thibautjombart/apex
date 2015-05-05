@@ -127,7 +127,7 @@ multiphyDat2genind <- function(x, genes=TRUE, mlst=FALSE, gapIsNA=FALSE){
 #'
 multidna2multiphyDat <- function(x){
     tmp <- lapply(x@dna, phyDat)
-    new("multiphyDat",tmp)
+    new("multiphyDat",tmp, type="DNA")
 }
 
 

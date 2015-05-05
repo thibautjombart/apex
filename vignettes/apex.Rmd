@@ -209,7 +209,7 @@ plot(tree, type="unrooted")
 ### Likelihood-based trees
 It is also possible to use functions from `phangorn` to estimate with maximum likelihood trees.
 Here is an example using the `multiphyDat` object `z` created in the previous section:
-```{r pmlPart}
+```{r pmlPart, eval=FALSE}
 ## input object
 z
 ## build trees
@@ -221,7 +221,7 @@ trees <- pmlPart2multiPhylo(pp)
 ```{r hidePlotMultiPhylo2, echo=TRUE,eval=FALSE}
 plot(trees, 4)
 ```
-```{r plotPmlPart, echo=FALSE,eval=TRUE}
+```{r plotPmlPart, echo=FALSE,eval=FALSE}
 par(mfrow=c(2,2)); for(i in 1:length(trees))plot(trees[[i]])
 ```
 
@@ -245,8 +245,6 @@ x
 obj1 <- multidna2genind(x)
 obj1
 
-obj2 <- multiphyDat2genind(x)
-identical(obj1, obj2)
 ```
 
 The MLST option can be useful for a quick diagnostic of diversity amongst individuals.

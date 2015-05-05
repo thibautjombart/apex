@@ -7,13 +7,12 @@
 \alias{new.multiphyDat}
 \title{multiphyDat constructor}
 \usage{
-\S4method{initialize}{multiphyDat}(.Object, dna = NULL, ind.info = NULL,
-  gene.info = NULL, add.gaps = TRUE, quiet = FALSE, ...)
+\S4method{initialize}{multiphyDat}(.Object, seq = NULL, type = character(0),
+  ind.info = NULL, gene.info = NULL, add.gaps = TRUE, quiet = FALSE,
+  ...)
 }
 \arguments{
 \item{.Object}{the object skeleton, automatically generated when calling \code{new}.}
-
-\item{dna}{a list of phyDat matrices (1 per gene); rows should be labelled and indicate individuals, but different individuals and different orders can be used in different matrices.}
 
 \item{ind.info}{an optional data.frame containing information on the individuals, where individuals are in rows.}
 
@@ -24,6 +23,8 @@
 \item{quiet}{a logical indicating if messages should be shown; defaults to FALSE.}
 
 \item{...}{further arguments to be passed to other methods}
+
+\item{dna}{a list of phyDat matrices (1 per gene); rows should be labelled and indicate individuals, but different individuals and different orders can be used in different matrices.}
 }
 \description{
 New \linkS4class{multiphyDat} objects can be created using \code{new("multiphyDat", ...)} where "..." are arguments documented below.
