@@ -82,20 +82,20 @@ setMethod("[", signature(x="multiphyDat", i="ANY", j="ANY", drop="ANY"), functio
     if(is.character(i)) i <- as.integer(na.omit(match(i, x@labels)))
 
     x@labels <- x@labels[i]
-    x@dna <- x@dna[j]
-    for(k in 1:length(x@dna)){
-        toKeep <- x@labels[x@labels %in% labels(x@dna[[k]])]
-        toKeep <- match(toKeep, labels(x@dna[[k]]))
-        x@dna[[k]] <- subset(x@dna[[k]], toKeep)
+    x@seq <- x@seq[j]
+    for(k in 1:length(x@seq)){
+        toKeep <- x@labels[x@labels %in% labels(x@seq[[k]])]
+        toKeep <- match(toKeep, labels(x@seq[[k]]))
+        x@seq[[k]] <- subset(x@seq[[k]], toKeep)
       }
 
     ## get rid of empty genes
-    x@dna <- x@dna[sapply(x@dna, length)>0]
+    x@seq <- x@seq[sapply(x@seq, length)>0]
 
     ## adjust counters
     x@n.ind <- length(x@labels)
-    x@n.seq <- sum(sapply(x@dna, length))
-    x@n.seq.miss <- .nMissingSequences(x@dna)
+    x@n.seq <- sum(sapply(x@seq, length))
+    x@n.seq.miss <- .nMissingSequences(x@seq)
     return(x)
 }) # end [] for multidna
 

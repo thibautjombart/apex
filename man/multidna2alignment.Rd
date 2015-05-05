@@ -13,7 +13,7 @@ multiphyDat2alignment(x, genes = TRUE)
 \arguments{
 \item{x}{a \linkS4class{multidna} or \linkS4class{multiphyDat} object.}
 
-\item{genes}{an optional vector indicating the genes to retain for the concatenation; any way to subset the list in x@dna is acceptable; by default, all genes are used.}
+\item{genes}{an optional vector indicating the genes to retain for the concatenation; any way to subset the list in x@dna or x@seq is acceptable; by default, all genes are used.}
 }
 \value{
 a alignment object

@@ -13,7 +13,7 @@ multiphyDat2genind(x, genes = TRUE, mlst = FALSE, gapIsNA = FALSE)
 \arguments{
 \item{x}{a \linkS4class{multidna} or \linkS4class{multiphyDat} object.}
 
-\item{genes}{an optional vector indicating the genes to retain for the concatenation; any way to subset the list in x@dna is acceptable; by default, all genes are used.}
+\item{genes}{an optional vector indicating the genes to retain for the concatenation; any way to subset the list in x@dna or x@seq is acceptable; by default, all genes are used.}
 
 \item{mlst}{if \code{TRUE}, each gene will result in a single locus in the genind object. (Default to \code{FALSE})}
 

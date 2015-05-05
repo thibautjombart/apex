@@ -61,8 +61,8 @@ setMethod("initialize", "multiphyDat", function(.Object, dna=NULL, ind.info=NULL
     if(inherits(dna, "multiphyDat")){
         ind.info <- dna@ind.info
         gene.info <- dna@gene.info
-        dna <- dna@dna
-        dna@dna <- NULL
+        dna <- dna@seq
+        dna@seq <- NULL
         invisible(gc())
     }
 
@@ -75,7 +75,7 @@ setMethod("initialize", "multiphyDat", function(.Object, dna=NULL, ind.info=NULL
     fun <- function(x)ifelse(is.matrix(x),nrow(x),length(x))
     N.SEQ <- sum(sapply(dna, fun))
     if(N.SEQ==0){
-        x@dna <- NULL
+        x@seq <- NULL
         x@ind.info <- x@gene.info <- NULL
         return(x)
     }
@@ -110,16 +110,16 @@ setMethod("initialize", "multiphyDat", function(.Object, dna=NULL, ind.info=NULL
 
 
      ## FORM FINAL OUTPUT ##
-    x@dna <- dna
+    x@seq <- dna
     x@labels <- all.labels
     x@n.ind <- N.IND
-    x@n.seq <- as.integer(sum(sapply(x@dna, length)))
+    x@n.seq <- as.integer(sum(sapply(x@seq, length)))
     x@ind.info <- ind.info
     x@gene.info <- gene.info
 
     ## ADD GAPS-ONLY SEQUENCES IF NEEDED ##
     if(add.gaps) x <- add.gaps(x)
-    x@n.seq.miss <- .nMissingSequences(x@dna)
+    x@n.seq.miss <- .nMissingSequences(x@seq)
 
     return(x)
 }) # end multiphyDat constructor

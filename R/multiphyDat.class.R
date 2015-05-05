@@ -51,4 +51,6 @@
 #'     gene2=subset(Laurasiatherian,8:47))
 #' x <- new("multiphyDat", genes)
 #' x
-setClass("multiphyDat", contains="multidna")
+#'
+setClass("multiphyDat", representation(seq="listOrNULL", type="character"),
+         prototype(seq=NULL, type=character(0)), contains="multiinfo")

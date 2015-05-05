@@ -7,7 +7,7 @@
 #' @rdname multidna2genind
 #'
 #' @param x a \linkS4class{multidna} or \linkS4class{multiphyDat} object.
-#' @param genes an optional vector indicating the genes to retain for the concatenation; any way to subset the list in x@@dna is acceptable; by default, all genes are used.
+#' @param genes an optional vector indicating the genes to retain for the concatenation; any way to subset the list in x@@dna or x@@seq is acceptable; by default, all genes are used.
 #' @param mlst if \code{TRUE}, each gene will result in a single locus in the genind object. (Default to \code{FALSE})
 #' @param gapIsNA if \code{TRUE} and \code{mlst = TRUE}, sequences that consist entirely of gaps will be considered as NAs. (Default to \code{FALSE})
 #'
@@ -134,7 +134,8 @@ multidna2multiphyDat <- function(x){
 #' @rdname multidna2multiphyDat
 #' @export
 multiphyDat2multidna <- function(x){
-    tmp <- lapply(x@dna, as.character)
+    if(!tolower(x@type) %in% c("dna","rna")) stop("Conversion to multidna only possible with DNA sequences ('@type' should be 'DNA')")
+    tmp <- lapply(x@seq, as.character)
     new("multidna",tmp)
 }
 
@@ -150,7 +151,7 @@ multiphyDat2multidna <- function(x){
 #' @docType methods
 #'
 #' @param x a \linkS4class{multidna} or \linkS4class{multiphyDat} object.
-#' @param genes an optional vector indicating the genes to retain for the concatenation; any way to subset the list in x@@dna is acceptable; by default, all genes are used.
+#' @param genes an optional vector indicating the genes to retain for the concatenation; any way to subset the list in x@@dna or x@@seq is acceptable; by default, all genes are used.
 #'
 #' @author Thibaut Jombart \email{t.jombart@@imperial.ac.uk}, Zhian N. Kamvar, Klaus Schliep
 #'

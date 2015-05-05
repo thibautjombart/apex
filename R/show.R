@@ -79,7 +79,7 @@ setMethod ("show", "multidna", function(object){
 setMethod ("show", "multiphyDat", function(object){
     ## INFO FOR PRINTING ##
     x <- object
-    n.genes <- ifelse(is.null(x@dna), 0, length(x@dna))
+    n.genes <- ifelse(is.null(x@seq), 0, length(x@seq))
     seqword <- ifelse(x@n.seq>1, "sequences", "sequence")
     seqmissword <- ifelse(x@n.seq.miss>1, "sequences", "sequence")
     geneword <- ifelse(n.genes>1, "genes", "gene")
@@ -97,8 +97,8 @@ setMethod ("show", "multiphyDat", function(object){
 
     cat("\n")
     if(n.genes>0) {
-        cat("\n@dna: (list of phyDat objects)\n")
-        print(object@dna)
+        cat("\n@seq: (list of phyDat objects)\n")
+        print(object@seq)
     }
 
     if(!is.null(x@ind.info)) {

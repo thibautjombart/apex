@@ -67,7 +67,7 @@ setMethod("add.gaps", "multidna", function(x, ...){
 #'
 setMethod("add.gaps", "multiphyDat", function(x, ...){
     ## ESCAPE IF NO DNA SEQUENCES ##
-    if(is.null(x@dna)) return(x)
+    if(is.null(x@seq)) return(x)
 
     ## FUNCTION TO REORDER MATRIX AND ADD MISSING SEQUENCES ##
     form.dna.phyDat <- function(dna, labels){
@@ -88,11 +88,11 @@ setMethod("add.gaps", "multiphyDat", function(x, ...){
     }
 
     ## APPLY THIS FUNCTION TO ALL MATRICES ##
-    x@dna <- lapply(x@dna, form.dna.phyDat, x@labels)
+    x@seq <- lapply(x@seq, form.dna.phyDat, x@labels)
 
     ## update number of sequences ##
-    x@n.seq <- as.integer(sum(sapply(x@dna, length)))
-    x@n.seq.miss <- .nMissingSequences(x@dna)
+    x@n.seq <- as.integer(sum(sapply(x@seq, length)))
+    x@n.seq.miss <- .nMissingSequences(x@seq)
 
     ## RETURN OBJECT ##
     return(x)
