@@ -1,138 +1,154 @@
-
-
-
-
-
-
-
-
 ## ####################
 ## ####  ACCESSORS ####
 ## ####################
+#' @name accessors
+#' @title multidna Accessors
+#' @description Accessors for slots in \linkS4class{multidna} objects.
+#'
+#' @param x a \linkS4class{multidna} object.
+#' @param loci a character, numeric, or logical vector identifying which
+#'   loci to return.
+#' @param ids a character, numeric, or logical vector identifying which
+#'   sequences to return within a locus.
+#' @param gap.only logical. Return information only for sequences containing
+#'   all gaps?
+#' @param simplify logical. If \code{FALSE}, always return a list of
+#'   DNAbin sequences. If \code{TRUE} and only one locus has been requested,
+#'   return a single DNAbin object.
+#' @param exclude.gap.only logical. Remove sequences containing all gaps?
+#'
+#' @details
+#' \describe{
+#'   \item{getNumLoci}{Returns the number of loci.}
+#'   \item{locusNames}{Returns or sets the names of each locus.}
+#'   \item{getNumSequences}{Returns the number of sequences in each locus.}
+#'   \item{getSequenceNames}{Returns the names of individual sequences at each
+#'     locus.}
+#'   \item{getSequences}{Returns sequences of specified loci and individuals.}
+#' }
+#'
+#setClass("multidna")
 
 ## ################
-## ## get.nlocus ##
+## ## getNumLoci ##
 ## ################
-## setMethod("get.nlocus","multidna", function(x, ...){
-##     if(is.null(x@dna)) return(0)
-##     return(length(x@dna))
-## })
-
+#' @rdname accessors
+#' @export
+setGeneric("getNumLoci", function(x, ...) standardGeneric("getNumLoci"))
+#' @rdname accessors
+#' @aliases getNumLoci,mutlidna
+#' @export
+setMethod("getNumLoci", "multidna", function(x, ...) {
+  if(is.null(x@dna)) return(0)
+  return(length(x@dna))
+})
 
 
 ## ################
-## ## get.locus ##
+## ## locusNames ##
 ## ################
-## setMethod("get.locus","multidna", function(x, ...){
-##     if(is.null(x@dna)) return(NULL)
-##     return(names(x@dna))
-## })
-
-
-
-## ###################
-## ## get.sequences ##
-## ###################
-## ##  (get sequence IDs)
-## setMethod("get.sequences","multidna", function(x, ...){
-##     if(is.null(x)) return(NULL)
-##     return(unlist(lapply(x@dna, rownames)))
-## })
-
-
-
-## ####################
-## ## get.nsequences ##
-## ####################
-## setMethod("get.nsequences","multidna", function(x, what=c("total","bylocus"), ...){
-##     what <- match.arg(what)
-##     nLoc <- get.nlocus(x)
-##     if(nLoc==0) return(0)
-
-##     temp <- sapply(x@dna, nrow)
-##     if(what=="bylocus") return(temp)
-##     return(sum(temp))
-## })
-
+#' @rdname accessors
+#' @export
+setGeneric("locusNames", function(x, ...) standardGeneric("locusNames"))
+#' @rdname accessors
+#' @aliases locusNames,multidna
+#' @export
+setMethod("locusNames", "multidna", function(x, ...) names(x@dna))
+#' @rdname accessors
+#' @export
+setGeneric("locusNames<-", function(x, value) standardGeneric("locusNames<-"))
+#' @rdname accessors
+#' @aliases locusNames<-,multidna
+#' @export
+setMethod("locusNames<-", "multidna", function(x, value) {
+  names(x@dna) <- value
+  validObject(x)
+  x
+})
 
 
 ## #####################
-## ## get.individuals ##
+## ## getNumSequences ##
 ## #####################
-## setMethod("get.individuals","multidna", function(x, ...){
-##     if(is.null(x)) return(NULL)
-##     return(unique(x@meta$individualID))
-## })
+#' @rdname accessors
+#' @export
+setGeneric("getNumSequences", function(x, ...) standardGeneric("getNumSequences"))
+#' @rdname accessors
+#' @aliases getNumSequences,multidna
+#' @export
+setMethod("getNumSequences", "multidna",
+          function(x, gap.only = FALSE, loci = NULL, ...) {
+  # check that object isn't empty
+  if(is.null(x@dna)) {
+    warning("'x' is empty. NULL returned.", call. = FALSE)
+    return(NULL)
+  }
+  loci <- .checkLocusNames(x, loci)
 
+  sapply(loci, function(this.locus) {
+    dna <- x@dna[[this.locus]]
+    if(gap.only) sum(.isGapOnly(dna)) else nrow(as.matrix(dna))
+  })
+})
 
 
 ## ######################
-## ## get.nindividuals ##
+## ## getSequenceNames ##
 ## ######################
-## setMethod("get.nindividuals","multidna", function(x, ...){
-##     if(is.null(x)) return(0)
-##     return(length(get.individuals(x)))
-## })
+#' @rdname accessors
+#' @export
+setGeneric("getSequenceNames", function(x, ...) standardGeneric("getSequenceNames"))
+#' @rdname accessors
+#' @aliases getSequenceNames,multidna
+#' @export
+setMethod("getSequenceNames", "multidna",
+          function(x, gap.only = FALSE, loci = NULL, ...) {
+  # check that object isn't empty
+  if(is.null(x@dna)) {
+    warning("'x' is empty. NULL returned.", call. = FALSE)
+    return(NULL)
+  }
+  loci <- .checkLocusNames(x, loci)
+
+  sapply(loci, function(this.locus) {
+    dna <- x@dna[[this.locus]]
+    if(gap.only) labels(dna)[.isGapOnly(dna)] else labels(dna)
+  }, simplify = FALSE)
+})
 
 
+## ##################
+## ## getSequences ##
+## ##################
+#' @rdname accessors
+#' @export
+setGeneric("getSequences", function(x, ...) standardGeneric("getSequences"))
+#' @rdname accessors
+#' @aliases getSequences,multidna
+#' @export
+setMethod("getSequences", "multidna",
+          function(x, loci = NULL, ids = NULL, simplify = TRUE,
+                   exclude.gap.only = TRUE, ...) {
+  # check that object isn't empty
+  if(is.null(x@dna)) {
+    warning("'x' is empty. NULL returned.", call. = FALSE)
+    return(NULL)
+  }
 
-## ###############
-## ## get.dates ##
-## ###############
-## setMethod("get.dates","multidna", function(x, ...){
-##     if(is.null(x)) return(NULL)
-##     return(unique(x@meta$date))
-## })
+  # loop through loci
+  loci <- .checkLocusNames(x, loci)
+  new.dna <- sapply(loci, function(this.locus) {
+    # extract this DNAbin object
+    dna <- as.list(x@dna[[this.locus]])
+    if(exclude.gap.only) dna <- dna[!.isGapOnly(dna)]
+    # return sequences for IDs which are present
+    locus.ids <- .checkIDs(dna, ids)
+    if(is.null(locus.ids)) NULL else dna[locus.ids]
+  }, simplify = FALSE)
+  new.dna <- new.dna[!sapply(new.dna, is.null)]
 
-
-
-## ################
-## ## get.ndates ##
-## ################
-## setMethod("get.ndates","multidna", function(x, ...){
-##     if(is.null(x)) return(0)
-##     return(length(get.dates(x)))
-## })
-
-
-
-## #############
-## ## get.dna ##
-## #############
-## ## returns a matrix of dna sequences for a given locus
-## setMethod("get.dna","multidna", function(x, locus=NULL, id=NULL, ...){
-##     ## return NULL if no info ##
-##     nLoc <- get.nlocus(x)
-##     if(nLoc==0) return(NULL)
-
-##     ## RETURN SLOT CONTENT AS IS IF NOTHING ELSE ASKED ##
-##     if(is.null(locus) && is.null(id)) return(x@dna)
-
-##     ## INFO REQUESTED PER LOCUS ##
-##     if(is.null(id)){
-##         ## return only locus if nLoc==1 and no info on locus ##
-##         if(nLoc==1 && is.null(locus)) return(x@dna[[1]])
-
-##         ## otherwise use locus info ##
-##         if(nLoc>1 && is.null(locus)) stop("locus must be specified (data contain more than one locus)")
-##         return(x@dna[locus])
-##     }
-
-##     ## INFO REQUESTED PER SEQUENCE ID ##
-##     ## if logicals or integers, find corresponding names
-##     if(is.logical(id) | is.numeric(id) | is.integer(id)){
-##         id <- get.sequences(x)[id]
-##     }
-##     id <- as.character(id)
-##     if(!all(id[!is.na(id)] %in% get.sequences(x))) {
-##         temp <- paste(id[!is.na(id) & !id %in% get.sequences(x)], collapse=", ")
-##         warning(paste("The following sequence IDs are not in the dataset:", temp))
-##         id <- id[!is.na(id) & id %in% get.sequences(x)]
-##     }
-##     out <- lapply(x@dna, function(e) e[id[id %in% rownames(e)],,drop=FALSE])
-##     out <- out[sapply(out, nrow)>0]
-##     return(out)
-## })
+  if(length(new.dna) == 1 & simplify) new.dna[[1]] else new.dna
+})
 
 
 
