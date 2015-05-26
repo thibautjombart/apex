@@ -36,22 +36,23 @@ locusNames(x) <- value
 
 getNumSequences(x, ...)
 
-\S4method{getNumSequences}{multidna}(x, gap.only = FALSE, loci = NULL, ...)
+\S4method{getNumSequences}{multidna}(x, exclude.gap.only = TRUE,
+  loci = NULL, ...)
 
 getSequenceNames(x, ...)
 
-\S4method{getSequenceNames}{multidna}(x, gap.only = FALSE, loci = NULL, ...)
+\S4method{getSequenceNames}{multidna}(x, exclude.gap.only = TRUE,
+  loci = NULL, ...)
 
 getSequences(x, ...)
 
-\S4method{getSequences}{multidna}(x, loci = NULL, ids = NULL,
-  simplify = TRUE, exclude.gap.only = TRUE, ...)
+\S4method{getSequences}{multidna}(x, ids = NULL, loci = NULL,
+  simplify = TRUE, exclude.gap.only = FALSE, ...)
 }
 \arguments{
 \item{x}{a \linkS4class{multidna} object.}
 
-\item{gap.only}{logical. Return information only for sequences containing
-all gaps?}
+\item{exclude.gap.only}{logical. Remove sequences containing all gaps?}
 
 \item{loci}{a character, numeric, or logical vector identifying which
 loci to return.}
@@ -60,10 +61,8 @@ loci to return.}
 sequences to return within a locus.}
 
 \item{simplify}{logical. If \code{FALSE}, always return a list of
-DNAbin sequences. If \code{TRUE} and only one locus has been requested,
-return a single DNAbin object.}
-
-\item{exclude.gap.only}{logical. Remove sequences containing all gaps?}
+  DNAbin sequences. If \code{TRUE} and only one locus has been requested,
+  return a single DNAbin object.}
 }
 \description{
 Accessors for slots in \linkS4class{multidna} objects.

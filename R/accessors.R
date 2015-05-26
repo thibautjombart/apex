@@ -10,12 +10,10 @@
 #'   loci to return.
 #' @param ids a character, numeric, or logical vector identifying which
 #'   sequences to return within a locus.
-#' @param gap.only logical. Return information only for sequences containing
-#'   all gaps?
+#' @param exclude.gap.only logical. Remove sequences containing all gaps?
 #' @param simplify logical. If \code{FALSE}, always return a list of
 #'   DNAbin sequences. If \code{TRUE} and only one locus has been requested,
 #'   return a single DNAbin object.
-#' @param exclude.gap.only logical. Remove sequences containing all gaps?
 #'
 #' @details
 #' \describe{
@@ -77,7 +75,7 @@ setGeneric("getNumSequences", function(x, ...) standardGeneric("getNumSequences"
 #' @aliases getNumSequences,multidna
 #' @export
 setMethod("getNumSequences", "multidna",
-          function(x, gap.only = FALSE, loci = NULL, ...) {
+          function(x, exclude.gap.only = TRUE, loci = NULL, ...) {
   # check that object isn't empty
   if(is.null(x@dna)) {
     warning("'x' is empty. NULL returned.", call. = FALSE)
@@ -87,7 +85,7 @@ setMethod("getNumSequences", "multidna",
 
   sapply(loci, function(this.locus) {
     dna <- x@dna[[this.locus]]
-    if(gap.only) sum(.isGapOnly(dna)) else nrow(as.matrix(dna))
+    if(exclude.gap.only) sum(!.isGapOnly(dna)) else nrow(as.matrix(dna))
   })
 })
 
@@ -102,7 +100,7 @@ setGeneric("getSequenceNames", function(x, ...) standardGeneric("getSequenceName
 #' @aliases getSequenceNames,multidna
 #' @export
 setMethod("getSequenceNames", "multidna",
-          function(x, gap.only = FALSE, loci = NULL, ...) {
+          function(x, exclude.gap.only = TRUE, loci = NULL, ...) {
   # check that object isn't empty
   if(is.null(x@dna)) {
     warning("'x' is empty. NULL returned.", call. = FALSE)
@@ -112,7 +110,7 @@ setMethod("getSequenceNames", "multidna",
 
   sapply(loci, function(this.locus) {
     dna <- x@dna[[this.locus]]
-    if(gap.only) labels(dna)[.isGapOnly(dna)] else labels(dna)
+    if(exclude.gap.only) labels(dna)[!.isGapOnly(dna)] else labels(dna)
   }, simplify = FALSE)
 })
 
@@ -127,8 +125,8 @@ setGeneric("getSequences", function(x, ...) standardGeneric("getSequences"))
 #' @aliases getSequences,multidna
 #' @export
 setMethod("getSequences", "multidna",
-          function(x, loci = NULL, ids = NULL, simplify = TRUE,
-                   exclude.gap.only = TRUE, ...) {
+          function(x, ids = NULL, loci = NULL, simplify = TRUE,
+                   exclude.gap.only = FALSE, ...) {
   # check that object isn't empty
   if(is.null(x@dna)) {
     warning("'x' is empty. NULL returned.", call. = FALSE)
