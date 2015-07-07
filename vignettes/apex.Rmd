@@ -235,6 +235,7 @@ The following functions enable the export from *apex* to other packages:
 This is illustrated below:
 ```{r export}
 ## find source files in apex
+library(adegenet)
 files <- dir(system.file(package="apex"),patter="patr", full=TRUE)
 
 ## import data
@@ -252,6 +253,7 @@ While it is best suited to clonal organisms, we illustrate this procedure using 
 ```{r mlst}
 obj3 <- multidna2genind(x, mlst=TRUE)
 obj3
+
 ## alleles of the first locus (=sequences)
-obj3@all.names[[1]]
+alleles(obj3)[[1]]
 ```

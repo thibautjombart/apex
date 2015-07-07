@@ -612,6 +612,20 @@ This is illustrated below:
 
 ```r
 ## find source files in apex
+library(adegenet)
+```
+
+```
+## Loading required package: ade4
+## 
+##    /// adegenet 2.0.0 is loaded ////////////
+## 
+##    > overview: '?adegenet'
+##    > tutorials/doc/questions: 'adegenetWeb()' 
+##    > bug reports/feature resquests: adegenetIssues()
+```
+
+```r
 files <- dir(system.file(package="apex"),patter="patr", full=TRUE)
 
 ## import data
@@ -726,7 +740,7 @@ obj3
 
 ```r
 ## alleles of the first locus (=sequences)
-obj3@all.names[[1]]
+alleles(obj3)[[1]]
 ```
 
 ```
