@@ -96,7 +96,7 @@ setMethod("initialize", "multidna", function(.Object, dna=NULL, ind.info=NULL, g
     if(missing.labels){
         if(!quiet) message("[multidna constructor] missing/incomplete labels provided - using generic labels.\n")
         ## error if varying numbers of rows
-        if(length(unique(sapply(a, nrow)))>1) stop("[multidna constructor] no labels provided and varying number of sequences across genes - cannot assume individuals are identical.")
+        if(length(unique(sapply(dna, nrow)))>1) stop("[multidna constructor] no labels provided and varying number of sequences across genes - cannot assume individuals are identical.")
         labels <- paste("individual", 1:nrow(dna[[1]]), sep=".")
         for(i in 1:N.GENES) rownames(dna[[i]]) <- labels
     }

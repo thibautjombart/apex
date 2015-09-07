@@ -1,6 +1,6 @@
 ^\.travis\.yml$
 README.Rmd
-~.tar.gz$
+.*.tar.gz$
 cran-comments.Rmd
 cran-comments.md
 ^.*\.Rproj$

@@ -16,6 +16,8 @@
 #'   DNAbin sequences. If \code{TRUE} and only one locus has been requested,
 #'   return a single DNAbin object.
 #' @param exclude.gap.only logical. Remove sequences containing all gaps?
+#' @param value a replacement value for the slot.
+#' @param ... further arguments passed on to other functions.
 #'
 #' @details
 #' \describe{
@@ -36,7 +38,9 @@
 #' @export
 setGeneric("getNumLoci", function(x, ...) standardGeneric("getNumLoci"))
 #' @rdname accessors
-#' @aliases getNumLoci,mutlidna
+#'
+#' @aliases getNumLoci
+#' @aliases getNumLoci,multidna
 #' @export
 setMethod("getNumLoci", "multidna", function(x, ...) {
   if(is.null(x@dna)) return(0)
