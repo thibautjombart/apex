@@ -237,7 +237,7 @@ trees
 plot(trees, 4, type="unrooted")
 ```
 ```{r plotMultiPhylo, echo=FALSE,eval=TRUE}
-par(mfrow=c(2,2)); for(i in 1:length(trees))plot(trees[[i]])
+par(mfrow=c(2,2)); for(i in 1:length(trees))plot(trees[[i]], type="unr")
 ```
 
 As an alternative, all genes can be pooled into a single alignment to obtain a single tree using:
