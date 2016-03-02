@@ -6,12 +6,10 @@
 \alias{getLocusNames}
 \alias{getLocusNames,multidna}
 \alias{getLocusNames,multidna-method}
-\alias{getLocusNames<-}
-\alias{getLocusNames<-,multidna}
-\alias{getLocusNames<-,multidna-method}
+\alias{getNumInd}
 \alias{getNumInd,multidna-method}
-\alias{getNumInd,mutlidna}
 \alias{getNumLoci}
+\alias{getNumLoci,multidna}
 \alias{getNumLoci,multidna-method}
 \alias{getNumSequences}
 \alias{getNumSequences,multidna}
@@ -22,6 +20,9 @@
 \alias{getSequences}
 \alias{getSequences,multidna}
 \alias{getSequences,multidna-method}
+\alias{setLocusNames<-}
+\alias{setLocusNames<-,multidna}
+\alias{setLocusNames<-,multidna-method}
 \title{multidna Accessors}
 \usage{
 getNumInd(x, ...)
@@ -36,9 +37,9 @@ getLocusNames(x, ...)
 
 \S4method{getLocusNames}{multidna}(x, ...)
 
-getLocusNames(x) <- value
+setLocusNames(x) <- value
 
-\S4method{getLocusNames}{multidna}(x) <- value
+\S4method{setLocusNames}{multidna}(x) <- value
 
 getNumSequences(x, ...)
 
@@ -82,7 +83,8 @@ Accessors for slots in \linkS4class{multidna} objects.
 \describe{
   \item{getNumInd}{Returns the number of individuals.}
   \item{getNumLoci}{Returns the number of loci.}
-  \item{getLocusNames}{Returns or sets the names of each locus.}
+  \item{getLocusNames}{Returns the names of each locus.}
+  \item{setLocusNames}{Sets the names of each locus.}
   \item{getNumSequences}{Returns the number of sequences in each locus.}
   \item{getSequenceNames}{Returns the names of individual sequences at each
     locus.}
