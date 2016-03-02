@@ -34,18 +34,6 @@ Then, to load the package, use:
 library("apex")
 ```
 
-```
-## Loading required package: ape
-```
-
-```
-## Loading required package: phangorn
-```
-
-```
-## Loading required package: rmarkdown
-```
-
 
 New object classes
 ------------------
@@ -86,10 +74,11 @@ getClassDef("multidna")
 
 Any of these slots can be accessed using `@` (see example below).
 
-New `multidna` objects can be created via two ways:
+New `multidna` objects can be created via different ways:
 
 1. using the constructor `new("multidna", ...)`
 2. reading data from files (see section on 'importing data' below)
+3. converting a `multiphyDat` object using `multidna2multiphyDat`
 
 We illustrate the use of the constructor below (see `?new.multidna`) for more information.
 We use *ape*'s dataset *woodmouse*, which we artificially split in two 'genes', keeping the first 500 nucleotides for the first gene, and using the rest as second gene. Note that the individuals need not match across different genes: matching is handled by the constructor.
@@ -324,10 +313,11 @@ getClassDef("multiphyDat")
 
 Any of these slots can be accessed using `@` (see example below).
 
-As for `multidna`, `multiphyDat` objects can be created via two ways:
+As for `multidna`, `multiphyDat` objects can be created via different ways:
 
 1. using the constructor `new("multiphyDat", ...)`
 2. reading data from files (see section on 'importing data' below)
+3. converting a `multidna` object using `multiphyDat2multidna`
 
 As before, we illustrate the use of the constructor below (see `?new.multiphyDat`) for more information.
 
@@ -529,7 +519,7 @@ z
 Handling data
 --------------
 Several functions facilitate data handling:
-* **concatenate:** concatenate several genes into a single DNAbin or phyDat matrix
+* **concatenate:** concatenate several genes into a single `DNAbin` or `phyDat` matrix
 * **x[i,j]:** subset x by individuals (i) and/or genes (j)
 * **multidna2multiphyDat:** converts from `multidna` to `multiphyDat`
 * **multiphyDat2multidna:** converts from `multiphyDat` to `multidna`
@@ -733,22 +723,6 @@ This is illustrated below:
 ```r
 ## find source files in apex
 library(adegenet)
-```
-
-```
-## Loading required package: ade4
-```
-
-```
-## 
-##    /// adegenet 2.0.1 is loaded ////////////
-## 
-##    > overview: '?adegenet'
-##    > tutorials/doc/questions: 'adegenetWeb()' 
-##    > bug reports/feature requests: adegenetIssues()
-```
-
-```r
 files <- dir(system.file(package="apex"),patter="patr", full=TRUE)
 
 ## import data
