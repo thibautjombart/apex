@@ -34,18 +34,6 @@ Then, to load the package, use:
 library("apex")
 ```
 
-```
-## Loading required package: ape
-```
-
-```
-## Loading required package: phangorn
-```
-
-```
-## Loading required package: rmarkdown
-```
-
 
 New object classes
 ------------------
@@ -84,7 +72,7 @@ getClassDef("multidna")
 * **@ind.info**: an optional dataset storing individual metadata
 * **@gene.info**: an optional dataset storing gene metadata
 
-Any of these slots can be accessed using `@` (see example below).
+Any of these slots can be accessed using `@`, however accessor functions are available for most and are preferred (see examples below).
 
 New `multidna` objects can be created via different ways:
 
@@ -169,17 +157,7 @@ x
 
 ```r
 ## access the various slots
-x@labels
-```
-
-```
-##  [1] "No305"   "No304"   "No306"   "No0906S" "No0908S" "No0909S" "No0910S"
-##  [8] "No0912S" "No0913S" "No1103S" "No1007S" "No1114S" "No1202S" "No1206S"
-## [15] "No1208S"
-```
-
-```r
-x@n.ind
+getNumInd(x) # The number of individuals
 ```
 
 ```
@@ -187,15 +165,15 @@ x@n.ind
 ```
 
 ```r
-class(x@dna) # this is a list
+getNumLoci(x) # The number of loci
 ```
 
 ```
-## [1] "list"
+## [1] 2
 ```
 
 ```r
-names(x@dna) # names of the genes
+getLocusNames(x) # The names of the loci
 ```
 
 ```
@@ -203,11 +181,28 @@ names(x@dna) # names of the genes
 ```
 
 ```r
-x@dna[[1]] # first gene
+getSequenceNames(x) # A list of the names of the sequences at each locus
 ```
 
 ```
-## 15 DNA sequences in binary format stored in a matrix.
+## $gene1
+##  [1] "No305"   "No304"   "No306"   "No0906S" "No0908S" "No0909S" "No0910S"
+##  [8] "No0912S" "No0913S" "No1103S" "No1007S" "No1114S" "No1202S" "No1206S"
+## [15] "No1208S"
+## 
+## $gene2
+##  [1] "No305"   "No304"   "No306"   "No0906S" "No0908S" "No0909S" "No0910S"
+##  [8] "No0912S" "No0913S" "No1103S" "No1007S" "No1114S" "No1202S" "No1206S"
+## [15] "No1208S"
+```
+
+```r
+getSequences(x) # A list of all loci
+```
+
+```
+## $gene1
+## 15 DNA sequences in binary format stored in a list.
 ## 
 ## All sequences of same length: 500 
 ## 
@@ -215,15 +210,10 @@ x@dna[[1]] # first gene
 ## 
 ## Base composition:
 ##     a     c     g     t 
-## 0.326 0.230 0.147 0.297
-```
-
-```r
-x@dna[[2]] # second gene
-```
-
-```
-## 15 DNA sequences in binary format stored in a matrix.
+## 0.326 0.230 0.147 0.297 
+## 
+## $gene2
+## 15 DNA sequences in binary format stored in a list.
 ## 
 ## All sequences of same length: 465 
 ## 
@@ -235,11 +225,44 @@ x@dna[[2]] # second gene
 ```
 
 ```r
+getSequences(x, loci = 2, simplify = FALSE) # Just the second locus (a single element list)
+```
+
+```
+## $gene2
+## 15 DNA sequences in binary format stored in a list.
+## 
+## All sequences of same length: 465 
+## 
+## Labels: No305 No304 No306 No0906S No0908S No0909S ...
+## 
+## Base composition:
+##     a     c     g     t 
+## 0.286 0.295 0.103 0.316
+```
+
+```r
+getSequences(x, loci = "gene1") # Just the first locus as a DNAbin object
+```
+
+```
+## 15 DNA sequences in binary format stored in a list.
+## 
+## All sequences of same length: 500 
+## 
+## Labels: No305 No304 No306 No0906S No0908S No0909S ...
+## 
+## Base composition:
+##     a     c     g     t 
+## 0.326 0.230 0.147 0.297
+```
+
+```r
 ## compare the input dataset and the new multidna
 par(mfrow=c(3,1), mar=c(6,6,2,1))
 image(woodmouse)
-image(x@dna[[1]])
-image(x@dna[[2]])
+image(as.matrix(getSequences(x, 1)))
+image(as.matrix(getSequences(x, 2)))
 ```
 
 ![plot of chunk multidnaclass](vignettes/figs/multidnaclass-1.png)
@@ -407,10 +430,10 @@ files # this will change on your computer
 ```
 
 ```
-## [1] "/usr/local/lib/R/site-library/apex/patr_poat43.fasta"
-## [2] "/usr/local/lib/R/site-library/apex/patr_poat47.fasta"
-## [3] "/usr/local/lib/R/site-library/apex/patr_poat48.fasta"
-## [4] "/usr/local/lib/R/site-library/apex/patr_poat49.fasta"
+## [1] "/Users/eric.archer/Library/R/3.2/library/apex/patr_poat43.fasta"
+## [2] "/Users/eric.archer/Library/R/3.2/library/apex/patr_poat47.fasta"
+## [3] "/Users/eric.archer/Library/R/3.2/library/apex/patr_poat48.fasta"
+## [4] "/Users/eric.archer/Library/R/3.2/library/apex/patr_poat49.fasta"
 ```
 
 ```r
@@ -545,10 +568,10 @@ files
 ```
 
 ```
-## [1] "/usr/local/lib/R/site-library/apex/patr_poat43.fasta"
-## [2] "/usr/local/lib/R/site-library/apex/patr_poat47.fasta"
-## [3] "/usr/local/lib/R/site-library/apex/patr_poat48.fasta"
-## [4] "/usr/local/lib/R/site-library/apex/patr_poat49.fasta"
+## [1] "/Users/eric.archer/Library/R/3.2/library/apex/patr_poat43.fasta"
+## [2] "/Users/eric.archer/Library/R/3.2/library/apex/patr_poat47.fasta"
+## [3] "/Users/eric.archer/Library/R/3.2/library/apex/patr_poat48.fasta"
+## [4] "/Users/eric.archer/Library/R/3.2/library/apex/patr_poat49.fasta"
 ```
 
 ```r
@@ -747,7 +770,7 @@ library(adegenet)
 ## 
 ##    > overview: '?adegenet'
 ##    > tutorials/doc/questions: 'adegenetWeb()' 
-##    > bug reports/feature requests: adegenetIssues()
+##    > bug reports/feature resquests: adegenetIssues()
 ```
 
 ```r
