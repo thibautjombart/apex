@@ -19,7 +19,7 @@
 #' \describe{
 #'   \item{getNumLoci}{Returns the number of loci.}
 #'   \item{getNumInd}{Returns the number of individuals.}
-#'   \item{locusNames}{Returns or sets the names of each locus.}
+#'   \item{getLocusNames}{Returns or sets the names of each locus.}
 #'   \item{getNumSequences}{Returns the number of sequences in each locus.}
 #'   \item{getSequenceNames}{Returns the names of individual sequences at each
 #'     locus.}
@@ -43,9 +43,9 @@ setMethod("getNumLoci", "multidna", function(x, ...) {
 })
 
 
-## ################
+## ###############
 ## ## getNumInd ##
-## ################
+## ###############
 #' @rdname accessors
 #' @export
 setGeneric("getNumInd", function(x, ...) standardGeneric("getNumInd"))
@@ -57,23 +57,24 @@ setMethod("getNumInd", "multidna", function(x, ...) {
   return(x@n.ind)
 })
 
-## ################
-## ## locusNames ##
-## ################
+
+## ###################
+## ## getLocusNames ##
+## ###################
 #' @rdname accessors
 #' @export
-setGeneric("locusNames", function(x, ...) standardGeneric("locusNames"))
+setGeneric("getLocusNames", function(x, ...) standardGeneric("getLocusNames"))
 #' @rdname accessors
-#' @aliases locusNames,multidna
+#' @aliases getLocusNames,multidna
 #' @export
-setMethod("locusNames", "multidna", function(x, ...) names(x@dna))
+setMethod("getLocusNames", "multidna", function(x, ...) names(x@dna))
 #' @rdname accessors
 #' @export
-setGeneric("locusNames<-", function(x, value) standardGeneric("locusNames<-"))
+setGeneric("getLocusNames<-", function(x, value) standardGeneric("getLocusNames<-"))
 #' @rdname accessors
-#' @aliases locusNames<-,multidna
+#' @aliases getLocusNames<-,multidna
 #' @export
-setMethod("locusNames<-", "multidna", function(x, value) {
+setMethod("getLocusNames<-", "multidna", function(x, value) {
   names(x@dna) <- value
   validObject(x)
   x

@@ -64,7 +64,7 @@ getClassDef("multidna")
 * **@ind.info**: an optional dataset storing individual metadata
 * **@gene.info**: an optional dataset storing gene metadata
 
-Any of these slots can be accessed using `@` (see example below).
+Any of these slots can be accessed using `@`, however accessor functions are available for most and are preferred (see examples below).
 
 New `multidna` objects can be created via two ways:
 
@@ -86,11 +86,11 @@ x <- new("multidna", genes)
 x
 
 ## access the various slots
-getNumLoci(x) # The number of loci
 getNumInd(x) # The number of individuals
+getNumLoci(x) # The number of loci
+getLocusNames(x) # The names of the loci
 getSequenceNames(x) # A list of the names of the sequences at each locus
 
-locusNames(x) # The names of the loci
 getSequences(x) # A list of all loci
 getSequences(x, loci = 2, simplify = FALSE) # Just the second locus (a single element list)
 getSequences(x, loci = 1) # Just the first locus as a DNAbin object
@@ -98,8 +98,8 @@ getSequences(x, loci = 1) # Just the first locus as a DNAbin object
 ## compare the input dataset and the new multidna
 par(mfrow=c(3,1), mar=c(6,6,2,1))
 image(woodmouse)
-image(x@dna[[1]])
-image(x@dna[[2]])
+image(getSequences(x, 1))
+image(getSequences(x, 2))
 
 ## same but with missing sequences and wrong order
 genes <- list(gene1=woodmouse[,1:500], gene2=woodmouse[c(5:1,14:15),501:965])
