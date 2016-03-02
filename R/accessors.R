@@ -3,9 +3,9 @@
 ## ####################
 #' @name accessors
 #' @title multidna Accessors
-#' @description Accessors for slots in \linkS4class{multidna} objects.
+#' @description Accessors for slots in \linkS4class{multidna} and \linkS4class{multiphyDat} objects.
 #'
-#' @param x a \linkS4class{multidna} object.
+#' @param x a \linkS4class{multidna} or \linkS4class{multiphyDat} object.
 #' @param loci a character, numeric, or logical vector identifying which
 #'   loci to return.
 #' @param ids a character, numeric, or logical vector identifying which
@@ -48,6 +48,13 @@ setMethod("getNumInd", "multidna", function(x, ...) {
   if(is.null(x@dna)) return(0)
   return(x@n.ind)
 })
+#' @rdname accessors
+#' @aliases getNumInd,multiphyDat
+#' @export
+setMethod("getNumInd", "multiphyDat", function(x, ...) {
+    if(is.null(x@seq)) return(0)
+    return(x@n.ind)
+})
 
 
 ## ################
@@ -63,6 +70,13 @@ setMethod("getNumLoci", "multidna", function(x, ...) {
   if(is.null(x@dna)) return(0)
   return(length(x@dna))
 })
+#' @rdname accessors
+#' @aliases getNumLoci,multiphyDat
+#' @export
+setMethod("getNumLoci", "multiphyDat", function(x, ...) {
+    if(is.null(x@seq)) return(0)
+    return(length(x@seq))
+})
 
 
 ## ###################
@@ -76,7 +90,9 @@ setGeneric("getLocusNames", function(x, ...) standardGeneric("getLocusNames"))
 #' @export
 setMethod("getLocusNames", "multidna", function(x, ...) names(x@dna))
 #' @rdname accessors
+#' @aliases getLocusNames,multiphyDat
 #' @export
+setMethod("getLocusNames", "multiphyDat", function(x, ...) names(x@seq))
 
 
 ## ###################
@@ -92,6 +108,14 @@ setMethod("setLocusNames<-", "multidna", function(x, value) {
   names(x@dna) <- value
   validObject(x)
   x
+})
+#' @rdname accessors
+#' @aliases setLocusNames<-,multiphyDat
+#' @export
+setMethod("setLocusNames<-", "multiphyDat", function(x, value) {
+    names(x@seq) <- value
+    validObject(x)
+    x
 })
 
 
@@ -123,6 +147,28 @@ setMethod("getNumSequences", "multidna",
     if(gap.only) sum(.isGapOnly(dna)) else nrow(as.matrix(dna))
   })
 })
+#' @rdname accessors
+#' @aliases getNumSequences,multiphyDat
+#' @export
+setMethod("getNumSequences", "multiphyDat",
+          function(x, gap.only = FALSE, loci = NULL, ...) {
+              # check that object isn't empty
+              if(is.null(x@seq)) {
+                  warning("'x' is empty. NULL returned.", call. = FALSE)
+                  return(NULL)
+              }
+              
+              if(is.character(loci) | is.null(loci)) {
+                  loci <- .checkLocusNames(x, loci)
+              } else if(is.numeric(loci) | is.logical(loci)) {
+                  loci <- getLocusNames(x)[loci]
+              } else stop("'loci' must be a character, numeric, or logical")
+              
+              sapply(loci, function(this.locus) {
+                  dna <- x@seq[[this.locus]]
+                  if(gap.only) sum(.isGapOnlyPhyDat(dna)) else length(dna)
+              })
+          })
 
 
 ## ######################
@@ -153,6 +199,28 @@ setMethod("getSequenceNames", "multidna",
     if(gap.only) labels(dna)[.isGapOnly(dna)] else labels(dna)
   }, simplify = FALSE)
 })
+#' @rdname accessors
+#' @aliases getSequenceNames,multiphyDat
+#' @export
+setMethod("getSequenceNames", "multiphyDat",
+          function(x, gap.only = FALSE, loci = NULL, ...) {
+              # check that object isn't empty
+              if(is.null(x@seq)) {
+                  warning("'x' is empty. NULL returned.", call. = FALSE)
+                  return(NULL)
+              }
+              
+              if(is.character(loci) | is.null(loci)) {
+                  loci <- .checkLocusNames(x, loci)
+              } else if(is.numeric(loci) | is.logical(loci)) {
+                  loci <- getLocusNames(x)[loci]
+              } else stop("'loci' must be a character, numeric, or logical")
+              
+              sapply(loci, function(this.locus) {
+                  dna <- x@seq[[this.locus]]
+                  if(gap.only) labels(dna)[.isGapOnlyPhyDat(dna)] else labels(dna)
+              }, simplify = FALSE)
+          })
 
 
 ## ##################
@@ -192,3 +260,32 @@ setMethod("getSequences", "multidna",
 
   if(length(new.dna) == 1 & simplify) new.dna[[1]] else new.dna
 })
+#' @rdname accessors
+#' @aliases getSequences,multiphyDat
+#' @export
+setMethod("getSequences", "multiphyDat",
+          function(x, loci = NULL, ids = NULL, simplify = TRUE,
+                   exclude.gap.only = TRUE, ...) {
+              # check that object isn't empty
+              if(is.null(x@seq)) {
+                  warning("'x' is empty. NULL returned.", call. = FALSE)
+                  return(NULL)
+              }
+              
+              if(is.character(loci) | is.null(loci)) {
+                  loci <- .checkLocusNames(x, loci)
+              } else if(is.numeric(loci) | is.logical(loci)) {
+                  loci <- getLocusNames(x)[loci]
+              } else stop("'loci' must be a character, numeric, or logical")
+              # loop through loci
+              new.dna <- sapply(loci, function(this.locus) {
+                  # extract this DNAbin object
+                  dna <- as.list(x@seq[[this.locus]])
+                  if(exclude.gap.only) dna <- subset(dna,!.isGapOnlyPhyDat(dna))
+                  # return sequences for IDs which are present
+                  locus.ids <- .checkIDs(dna, ids)
+                  if(is.null(locus.ids)) NULL else subset(dna,locus.ids)
+              }, simplify = FALSE)
+              new.dna <- new.dna[!sapply(new.dna, is.null)]
+              if(length(new.dna) == 1 & simplify) new.dna[[1]] else new.dna
+          })
