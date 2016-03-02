@@ -60,3 +60,9 @@
 .isGapOnly <- function(dna) {
   sapply(as.character(as.list(dna)), function(this.seq) all(this.seq == "-"))
 }
+# the same for phyDat objects
+.isGapOnlyPhyDat <- function(dna, gap="-") {
+    allLevels <- attr(dna, "allLevels")
+    ind <- match(gap, allLevels)
+    sapply(dna, function(this.seq) all(this.seq == ind))
+}
