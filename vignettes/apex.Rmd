@@ -51,7 +51,7 @@ Conversion between these classes can be done using `multidna2multiPhydat` and `m
 
 ###  multidna
 This formal (S4) class can be seen as a multi-gene extension of *ape*'s `DNAbin` class.
-Data is stored as a list of DNAbin objects, with additional slots for extra information.
+Data is stored as a list of `DNAbin` objects, with additional slots for extra information.
 The class definition can be obtained by:
 ```{r multidnaDef}
 getClassDef("multidna")
@@ -106,6 +106,32 @@ x
 par(mar=c(6,6,2,1))
 plot(x)
 ```
+
+
+###  multiphyDat
+Like `multidna` and *ape*'s `DNAbin`, the formal (S4) class `multiphyDat` is a multi-gene extension of *phangorn*'s `phyDat` class.
+Data is stored as a list of `phyDat` objects, with additional slots for extra information.
+The class definition can be obtained by:
+```{r multiphyDatDef}
+getClassDef("multiphyDat")
+```
+* **@seq**: list of `phyDat` objects, each corresponding to a given gene/locus, with matching rows (individuals); unlike `multidna` which is retrained to DNA sequences, this class can store any characters, including amino-acid sequences 
+* **@type**: a character string indicating the type of sequences stored
+* **@labels**: labels of the individuals (rows of the matrices in `@dna`)
+* **@n.ind**: the number of individuals
+* **@n.seq**: the total number of sequences in the dataset, including gaps-only sequences
+* **@n.seq.miss**: the total number of gaps-only (i.e., missing) sequences in the dataset
+* **@ind.info**: an optional dataset storing individual metadata
+* **@gene.info**: an optional dataset storing gene metadata
+
+Any of these slots can be accessed using `@` (see example below).
+
+As for `multidna`, `multiphyDat` objects can be created via two ways:
+
+1. using the constructor `new("multiphyDat", ...)`
+2. reading data from files (see section on 'importing data' below)
+
+
 
 
 
