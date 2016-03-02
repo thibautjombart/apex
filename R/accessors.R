@@ -18,6 +18,7 @@
 #' @details
 #' \describe{
 #'   \item{getNumLoci}{Returns the number of loci.}
+#'   \item{getNumInd}{Returns the number of individuals.}
 #'   \item{locusNames}{Returns or sets the names of each locus.}
 #'   \item{getNumSequences}{Returns the number of sequences in each locus.}
 #'   \item{getSequenceNames}{Returns the names of individual sequences at each
@@ -41,6 +42,20 @@ setMethod("getNumLoci", "multidna", function(x, ...) {
   return(length(x@dna))
 })
 
+
+## ################
+## ## getNumInd ##
+## ################
+#' @rdname accessors
+#' @export
+setGeneric("getNumInd", function(x, ...) standardGeneric("getNumInd"))
+#' @rdname accessors
+#' @aliases getNumInd,mutlidna
+#' @export
+setMethod("getNumInd", "multidna", function(x, ...) {
+  if(is.null(x@dna)) return(0)
+  return(x@n.ind)
+})
 
 ## ################
 ## ## locusNames ##
@@ -147,10 +162,3 @@ setMethod("getSequences", "multidna",
 
   if(length(new.dna) == 1 & simplify) new.dna[[1]] else new.dna
 })
-
-
-
-
-
-
-

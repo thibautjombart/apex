@@ -86,12 +86,14 @@ x <- new("multidna", genes)
 x
 
 ## access the various slots
-x@labels
-x@n.ind
-class(x@dna) # this is a list
-names(x@dna) # names of the genes
-x@dna[[1]] # first gene
-x@dna[[2]] # second gene
+getNumLoci(x) # The number of loci
+getNumInd(x) # The number of individuals
+getSequenceNames(x) # A list of the names of the sequences at each locus
+
+locusNames(x) # The names of the loci
+getSequences(x) # A list of all loci
+getSequences(x, loci = 2, simplify = FALSE) # Just the second locus (a single element list)
+getSequences(x, loci = 1) # Just the first locus as a DNAbin object
 
 ## compare the input dataset and the new multidna
 par(mfrow=c(3,1), mar=c(6,6,2,1))
