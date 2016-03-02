@@ -19,17 +19,17 @@
 .checkLocusNames <- function(x, loci = NULL) {
   # check that locus names can be found
   if(!is.null(loci)) {
-    missing <- setdiff(loci, locusNames(x))
+    missing <- setdiff(loci, getLocusNames(x))
     if(length(missing) > 0) {
       missing <- paste(missing, collapse = ", ")
       warning(paste("The following loci could not be found:", missing), call. = FALSE)
     }
-    loci <- intersect(loci, locusNames(x))
+    loci <- intersect(loci, getLocusNames(x))
   } else if(is.logical(loci) | is.numeric(loci)) {
-    loci <- locusNames(x)[loci]
+    loci <- getLocusNames(x)[loci]
   }
   # set to all locus names if none specified
-  if(is.null(loci)) loci <- locusNames(x)
+  if(is.null(loci)) loci <- getLocusNames(x)
   # return NULL if no locus names match
   if(length(loci) == 0) return(NULL)
   loci

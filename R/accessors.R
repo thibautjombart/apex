@@ -21,8 +21,9 @@
 #'
 #' @details
 #' \describe{
+#'   \item{getNumInd}{Returns the number of individuals.}
 #'   \item{getNumLoci}{Returns the number of loci.}
-#'   \item{locusNames}{Returns or sets the names of each locus.}
+#'   \item{getLocusNames}{Returns or sets the names of each locus.}
 #'   \item{getNumSequences}{Returns the number of sequences in each locus.}
 #'   \item{getSequenceNames}{Returns the names of individual sequences at each
 #'     locus.}
@@ -30,6 +31,22 @@
 #' }
 #'
 #setClass("multidna")
+
+
+## ###############
+## ## getNumInd ##
+## ###############
+#' @rdname accessors
+#' @export
+setGeneric("getNumInd", function(x, ...) standardGeneric("getNumInd"))
+#' @rdname accessors
+#' @aliases getNumInd,mutlidna
+#' @export
+setMethod("getNumInd", "multidna", function(x, ...) {
+  if(is.null(x@dna)) return(0)
+  return(x@n.ind)
+})
+
 
 ## ################
 ## ## getNumLoci ##
@@ -48,23 +65,23 @@ setMethod("getNumLoci", "multidna", function(x, ...) {
 })
 
 
-## ################
-## ## locusNames ##
-## ################
+## ###################
+## ## getLocusNames ##
+## ###################
 #' @rdname accessors
 #' @export
-setGeneric("locusNames", function(x, ...) standardGeneric("locusNames"))
+setGeneric("getLocusNames", function(x, ...) standardGeneric("getLocusNames"))
 #' @rdname accessors
-#' @aliases locusNames,multidna
+#' @aliases getLocusNames,multidna
 #' @export
-setMethod("locusNames", "multidna", function(x, ...) names(x@dna))
+setMethod("getLocusNames", "multidna", function(x, ...) names(x@dna))
 #' @rdname accessors
 #' @export
-setGeneric("locusNames<-", function(x, value) standardGeneric("locusNames<-"))
+setGeneric("getLocusNames<-", function(x, value) standardGeneric("getLocusNames<-"))
 #' @rdname accessors
-#' @aliases locusNames<-,multidna
+#' @aliases getLocusNames<-,multidna
 #' @export
-setMethod("locusNames<-", "multidna", function(x, value) {
+setMethod("getLocusNames<-", "multidna", function(x, value) {
   names(x@dna) <- value
   validObject(x)
   x
@@ -87,7 +104,12 @@ setMethod("getNumSequences", "multidna",
     warning("'x' is empty. NULL returned.", call. = FALSE)
     return(NULL)
   }
-  loci <- .checkLocusNames(x, loci)
+
+  if(is.character(loci) | is.null(loci)) {
+    loci <- .checkLocusNames(x, loci)
+  } else if(is.numeric(loci) | is.logical(loci)) {
+    loci <- getLocusNames(x)[loci]
+  } else stop("'loci' must be a character, numeric, or logical")
 
   sapply(loci, function(this.locus) {
     dna <- x@dna[[this.locus]]
@@ -112,7 +134,12 @@ setMethod("getSequenceNames", "multidna",
     warning("'x' is empty. NULL returned.", call. = FALSE)
     return(NULL)
   }
-  loci <- .checkLocusNames(x, loci)
+
+  if(is.character(loci) | is.null(loci)) {
+    loci <- .checkLocusNames(x, loci)
+  } else if(is.numeric(loci) | is.logical(loci)) {
+    loci <- getLocusNames(x)[loci]
+  } else stop("'loci' must be a character, numeric, or logical")
 
   sapply(loci, function(this.locus) {
     dna <- x@dna[[this.locus]]
@@ -139,8 +166,13 @@ setMethod("getSequences", "multidna",
     return(NULL)
   }
 
+  if(is.character(loci) | is.null(loci)) {
+    loci <- .checkLocusNames(x, loci)
+  } else if(is.numeric(loci) | is.logical(loci)) {
+    loci <- getLocusNames(x)[loci]
+  } else stop("'loci' must be a character, numeric, or logical")
+
   # loop through loci
-  loci <- .checkLocusNames(x, loci)
   new.dna <- sapply(loci, function(this.locus) {
     # extract this DNAbin object
     dna <- as.list(x@dna[[this.locus]])
@@ -153,10 +185,3 @@ setMethod("getSequences", "multidna",
 
   if(length(new.dna) == 1 & simplify) new.dna[[1]] else new.dna
 })
-
-
-
-
-
-
-
