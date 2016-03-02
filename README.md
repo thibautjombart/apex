@@ -229,7 +229,7 @@ image(x@dna[[1]])
 image(x@dna[[2]])
 ```
 
-![plot of chunk class](vignettes/figs/class-1.png)
+![plot of chunk multidnaclass](vignettes/figs/multidnaclass-1.png)
 
 ```r
 ## same but with missing sequences and wrong order
@@ -276,7 +276,7 @@ par(mar=c(6,6,2,1))
 plot(x)
 ```
 
-![plot of chunk class](vignettes/figs/class-2.png)
+![plot of chunk multidnaclass](vignettes/figs/multidnaclass-2.png)
 
 
 ###  multiphyDat
@@ -317,7 +317,64 @@ As for `multidna`, `multiphyDat` objects can be created via two ways:
 1. using the constructor `new("multiphyDat", ...)`
 2. reading data from files (see section on 'importing data' below)
 
+As before, we illustrate the use of the constructor below (see `?new.multiphyDat`) for more information.
 
+```r
+data(Laurasiatherian)
+
+## empty object
+new("multiphyDat")
+```
+
+```
+## === multiphyDat ===
+## [ 0 DNA sequence in 0 gene ]
+## 
+## @type: 
+## @n.ind: 0 individual
+## @n.seq: 0 sequence in total
+## @n.seq.miss: 0 gap-only (missing) sequence
+## @labels:
+```
+
+```r
+## simple conversion with nicely ordered output
+## Not run:
+
+genes <- list(gene1=subset(Laurasiatherian,,1:1600, FALSE),
+gene2=subset(Laurasiatherian,,1601:3179, FALSE))
+x <- new("multiphyDat", genes)
+```
+
+```
+## Warning: partial match of 'weight' to 'weights'
+
+## Warning: partial match of 'weight' to 'weights'
+```
+
+```r
+x
+```
+
+```
+## === multiphyDat ===
+## [ 94 DNA sequences in 2 genes ]
+## 
+## @type: 
+## @n.ind: 47 individuals
+## @n.seq: 94 sequences in total
+## @n.seq.miss: 0 gap-only (missing) sequence
+## @labels: Platypus Wallaroo Possum Bandicoot Opposum Armadillo...
+## 
+## @seq: (list of phyDat objects)
+## $gene1
+## 47 sequences with 1600 character and 827 different site patterns.
+## The states are a c g t 
+## 
+## $gene2
+## 47 sequences with 1579 character and 844 different site patterns.
+## The states are a c g t
+```
 
 
 
@@ -339,10 +396,10 @@ files # this will change on your computer
 ```
 
 ```
-## [1] "/home/thibaut/dev/apex/inst/patr_poat43.fasta"
-## [2] "/home/thibaut/dev/apex/inst/patr_poat47.fasta"
-## [3] "/home/thibaut/dev/apex/inst/patr_poat48.fasta"
-## [4] "/home/thibaut/dev/apex/inst/patr_poat49.fasta"
+## [1] "/usr/local/lib/R/site-library/apex/patr_poat43.fasta"
+## [2] "/usr/local/lib/R/site-library/apex/patr_poat47.fasta"
+## [3] "/usr/local/lib/R/site-library/apex/patr_poat48.fasta"
+## [4] "/usr/local/lib/R/site-library/apex/patr_poat49.fasta"
 ```
 
 ```r
@@ -498,10 +555,10 @@ files
 ```
 
 ```
-## [1] "/home/thibaut/dev/apex/inst/patr_poat43.fasta"
-## [2] "/home/thibaut/dev/apex/inst/patr_poat47.fasta"
-## [3] "/home/thibaut/dev/apex/inst/patr_poat48.fasta"
-## [4] "/home/thibaut/dev/apex/inst/patr_poat49.fasta"
+## [1] "/usr/local/lib/R/site-library/apex/patr_poat43.fasta"
+## [2] "/usr/local/lib/R/site-library/apex/patr_poat47.fasta"
+## [3] "/usr/local/lib/R/site-library/apex/patr_poat48.fasta"
+## [4] "/usr/local/lib/R/site-library/apex/patr_poat49.fasta"
 ```
 
 ```r
@@ -818,44 +875,6 @@ tree <- pratchet(u, trace=0)
 ## Warning: partial match of 'tip' to 'tip.label'
 
 ## Warning: partial match of 'tip' to 'tip.label'
-```
-
-```
-## Warning: partial match of 'weight' to 'weights'
-```
-
-```
-## Warning: partial match of 'tip' to 'tip.label'
-```
-
-```
-## Warning: partial match of 'weight' to 'weights'
-```
-
-```
-## Warning: partial match of 'tip' to 'tip.label'
-```
-
-```
-## Warning: partial match of 'weight' to 'weights'
-```
-
-```
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
 
 ## Warning: partial match of 'tip' to 'tip.label'
 
@@ -979,56 +998,6 @@ tree <- pratchet(u, trace=0)
 ```
 
 ```
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-```
-
-```
-## Warning: partial match of 'weight' to 'weights'
-```
-
-```
-## Warning: partial match of 'tip' to 'tip.label'
-```
-
-```
-## Warning: partial match of 'weight' to 'weights'
-```
-
-```
-## Warning: partial match of 'tip' to 'tip.label'
-```
-
-```
-## Warning: partial match of 'weight' to 'weights'
-```
-
-```
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
 ## Warning: partial match of 'tip' to 'tip.label'
 
 ## Warning: partial match of 'tip' to 'tip.label'
@@ -1227,6 +1196,14 @@ tree <- pratchet(u, trace=0)
 ```
 
 ```
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
 ## Warning: partial match of 'tip' to 'tip.label'
 
 ## Warning: partial match of 'tip' to 'tip.label'
@@ -1374,10 +1351,6 @@ tree <- pratchet(u, trace=0)
 ## Warning: partial match of 'tip' to 'tip.label'
 
 ## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
 ```
 
 ```
@@ -1401,170 +1374,6 @@ tree <- pratchet(u, trace=0)
 ```
 
 ```
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-```
-
-```
-## Warning: partial match of 'weight' to 'weights'
-```
-
-```
-## Warning: partial match of 'tip' to 'tip.label'
-```
-
-```
-## Warning: partial match of 'weight' to 'weights'
-```
-
-```
-## Warning: partial match of 'tip' to 'tip.label'
-```
-
-```
-## Warning: partial match of 'weight' to 'weights'
-```
-
-```
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-```
-
-```
-## Warning: partial match of 'weight' to 'weights'
-```
-
-```
-## Warning: partial match of 'tip' to 'tip.label'
-```
-
-```
-## Warning: partial match of 'weight' to 'weights'
-```
-
-```
-## Warning: partial match of 'tip' to 'tip.label'
-```
-
-```
-## Warning: partial match of 'weight' to 'weights'
-```
-
-```
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
-## Warning: partial match of 'tip' to 'tip.label'
-
 ## Warning: partial match of 'tip' to 'tip.label'
 
 ## Warning: partial match of 'tip' to 'tip.label'
@@ -1674,6 +1483,108 @@ tree <- pratchet(u, trace=0)
 ## Warning: partial match of 'tip' to 'tip.label'
 
 ## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+```
+
+```
+## Warning: partial match of 'weight' to 'weights'
+```
+
+```
+## Warning: partial match of 'tip' to 'tip.label'
+```
+
+```
+## Warning: partial match of 'weight' to 'weights'
+```
+
+```
+## Warning: partial match of 'tip' to 'tip.label'
+```
+
+```
+## Warning: partial match of 'weight' to 'weights'
+```
+
+```
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
 ```
 
 ```
@@ -1705,6 +1616,176 @@ tree <- pratchet(u, trace=0)
 
 ## Warning: partial match of 'tip' to 'tip.label'
 
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+```
+
+```
+## Warning: partial match of 'weight' to 'weights'
+```
+
+```
+## Warning: partial match of 'tip' to 'tip.label'
+```
+
+```
+## Warning: partial match of 'weight' to 'weights'
+```
+
+```
+## Warning: partial match of 'tip' to 'tip.label'
+```
+
+```
+## Warning: partial match of 'weight' to 'weights'
+```
+
+```
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+```
+
+```
+## Warning: partial match of 'weight' to 'weights'
+```
+
+```
+## Warning: partial match of 'tip' to 'tip.label'
+```
+
+```
+## Warning: partial match of 'weight' to 'weights'
+```
+
+```
+## Warning: partial match of 'tip' to 'tip.label'
+```
+
+```
+## Warning: partial match of 'weight' to 'weights'
+```
+
+```
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+
+## Warning: partial match of 'tip' to 'tip.label'
+```
+
+```
+## Warning: partial match of 'weight' to 'weights'
+```
+
+```
+## Warning: partial match of 'tip' to 'tip.label'
+```
+
+```
+## Warning: partial match of 'weight' to 'weights'
+```
+
+```
+## Warning: partial match of 'tip' to 'tip.label'
+```
+
+```
+## Warning: partial match of 'weight' to 'weights'
+```
+
+```
 ## Warning: partial match of 'tip' to 'tip.label'
 
 ## Warning: partial match of 'tip' to 'tip.label'

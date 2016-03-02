@@ -74,7 +74,7 @@ New `multidna` objects can be created via two ways:
 We illustrate the use of the constructor below (see `?new.multidna`) for more information.
 We use *ape*'s dataset *woodmouse*, which we artificially split in two 'genes', keeping the first 500 nucleotides for the first gene, and using the rest as second gene. Note that the individuals need not match across different genes: matching is handled by the constructor.
 
-```{r class}
+```{r multidnaclass}
 ## empty object
 new("multidna")
 
@@ -131,7 +131,21 @@ As for `multidna`, `multiphyDat` objects can be created via two ways:
 1. using the constructor `new("multiphyDat", ...)`
 2. reading data from files (see section on 'importing data' below)
 
+As before, we illustrate the use of the constructor below (see `?new.multiphyDat`) for more information.
+```{r multiphyDatclass}
+data(Laurasiatherian)
 
+## empty object
+new("multiphyDat")
+
+## simple conversion with nicely ordered output
+## Not run:
+
+genes <- list(gene1=subset(Laurasiatherian,,1:1600, FALSE),
+gene2=subset(Laurasiatherian,,1601:3179, FALSE))
+x <- new("multiphyDat", genes)
+x
+```
 
 
 
