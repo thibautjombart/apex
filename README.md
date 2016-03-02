@@ -34,6 +34,18 @@ Then, to load the package, use:
 library("apex")
 ```
 
+```
+## Loading required package: ape
+```
+
+```
+## Loading required package: phangorn
+```
+
+```
+## Loading required package: rmarkdown
+```
+
 
 New object classes
 ------------------
@@ -723,6 +735,22 @@ This is illustrated below:
 ```r
 ## find source files in apex
 library(adegenet)
+```
+
+```
+## Loading required package: ade4
+```
+
+```
+## 
+##    /// adegenet 2.0.1 is loaded ////////////
+## 
+##    > overview: '?adegenet'
+##    > tutorials/doc/questions: 'adegenetWeb()' 
+##    > bug reports/feature requests: adegenetIssues()
+```
+
+```r
 files <- dir(system.file(package="apex"),patter="patr", full=TRUE)
 
 ## import data
