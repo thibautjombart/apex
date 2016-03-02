@@ -118,7 +118,7 @@ trees
 #  plot(trees, 4, type="unrooted")
 
 ## ----plotMultiPhylo, echo=FALSE,eval=TRUE--------------------------------
-par(mfrow=c(2,2)); for(i in 1:length(trees))plot(trees[[i]])
+par(mfrow=c(2,2)); for(i in 1:length(trees))plot(trees[[i]], type="unr")
 
 ## ----plotPhyloSingle, echo=FALSE,eval=TRUE-------------------------------
 ## make one single tree based on concatenated genes
