@@ -65,17 +65,19 @@ setLocusNames(x) <- value
 
 getNumSequences(x, ...)
 
-\S4method{getNumSequences}{multidna}(x, gap.only = FALSE, loci = NULL, ...)
+\S4method{getNumSequences}{multidna}(x, exclude.gap.only = TRUE,
+  loci = NULL, ...)
 
-\S4method{getNumSequences}{multiphyDat}(x, gap.only = FALSE, loci = NULL,
-  ...)
+\S4method{getNumSequences}{multiphyDat}(x, exclude.gap.only = TRUE,
+  loci = NULL, ...)
 
 getSequenceNames(x, ...)
 
-\S4method{getSequenceNames}{multidna}(x, gap.only = FALSE, loci = NULL, ...)
+\S4method{getSequenceNames}{multidna}(x, exclude.gap.only = FALSE,
+  loci = NULL, ...)
 
-\S4method{getSequenceNames}{multiphyDat}(x, gap.only = FALSE, loci = NULL,
-  ...)
+\S4method{getSequenceNames}{multiphyDat}(x, exclude.gap.only = TRUE,
+  loci = NULL, ...)
 
 getSequences(x, ...)
 
@@ -92,8 +94,7 @@ getSequences(x, ...)
 
 \item{value}{a replacement value for the slot.}
 
-\item{gap.only}{logical. Return information only for sequences containing
-all gaps?}
+\item{exclude.gap.only}{logical. Remove or ignore sequences containing all gaps?}
 
 \item{loci}{a character, numeric, or logical vector identifying which
 loci to return.}
@@ -104,8 +105,6 @@ sequences to return within a locus.}
 \item{simplify}{logical. If \code{FALSE}, always return a list of
 DNAbin sequences. If \code{TRUE} and only one locus has been requested,
 return a single DNAbin object.}
-
-\item{exclude.gap.only}{logical. Remove sequences containing all gaps?}
 }
 \description{
 Accessors for slots in \linkS4class{multidna} and \linkS4class{multiphyDat} objects.
