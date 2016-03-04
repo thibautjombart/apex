@@ -1,7 +1,3 @@
-
-#################
-## '[' operator
-#################
 #' Subset multidna objects
 #'
 #' Individuals in a \linkS4class{multidna} or \linkS4class{multiphyDat} object can be subsetted like the rows of a matrix, with the form x[i,].
