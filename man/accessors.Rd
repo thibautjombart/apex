@@ -3,52 +3,90 @@
 \docType{methods}
 \name{accessors}
 \alias{accessors}
+\alias{getLocusNames}
+\alias{getLocusNames,multidna}
+\alias{getLocusNames,multidna-method}
+\alias{getLocusNames,multiphyDat}
+\alias{getLocusNames,multiphyDat-method}
+\alias{getNumInd}
+\alias{getNumInd,multidna-method}
+\alias{getNumInd,multiphyDat}
+\alias{getNumInd,multiphyDat-method}
 \alias{getNumLoci}
+\alias{getNumLoci,multidna}
 \alias{getNumLoci,multidna-method}
+\alias{getNumLoci,multiphyDat}
+\alias{getNumLoci,multiphyDat-method}
 \alias{getNumSequences}
 \alias{getNumSequences,multidna}
 \alias{getNumSequences,multidna-method}
+\alias{getNumSequences,multiphyDat}
+\alias{getNumSequences,multiphyDat-method}
 \alias{getSequenceNames}
 \alias{getSequenceNames,multidna}
 \alias{getSequenceNames,multidna-method}
+\alias{getSequenceNames,multiphyDat}
+\alias{getSequenceNames,multiphyDat-method}
 \alias{getSequences}
 \alias{getSequences,multidna}
 \alias{getSequences,multidna-method}
-\alias{locusNames}
-\alias{locusNames,multidna}
-\alias{locusNames,multidna-method}
-\alias{locusNames<-}
-\alias{locusNames<-,multidna}
-\alias{locusNames<-,multidna-method}
+\alias{getSequences,multiphyDat}
+\alias{getSequences,multiphyDat-method}
+\alias{setLocusNames<-}
+\alias{setLocusNames<-,multidna}
+\alias{setLocusNames<-,multidna-method}
+\alias{setLocusNames<-,multiphyDat}
+\alias{setLocusNames<-,multiphyDat-method}
 \title{multidna Accessors}
 \usage{
+getNumInd(x, ...)
+
+\S4method{getNumInd}{multidna}(x, ...)
+
+\S4method{getNumInd}{multiphyDat}(x, ...)
+
 getNumLoci(x, ...)
 
 \S4method{getNumLoci}{multidna}(x, ...)
 
-locusNames(x, ...)
+\S4method{getNumLoci}{multiphyDat}(x, ...)
 
-\S4method{locusNames}{multidna}(x, ...)
+getLocusNames(x, ...)
 
-locusNames(x) <- value
+\S4method{getLocusNames}{multidna}(x, ...)
 
-\S4method{locusNames}{multidna}(x) <- value
+\S4method{getLocusNames}{multiphyDat}(x, ...)
+
+setLocusNames(x) <- value
+
+\S4method{setLocusNames}{multidna}(x) <- value
+
+\S4method{setLocusNames}{multiphyDat}(x) <- value
 
 getNumSequences(x, ...)
 
 \S4method{getNumSequences}{multidna}(x, gap.only = FALSE, loci = NULL, ...)
 
+\S4method{getNumSequences}{multiphyDat}(x, gap.only = FALSE, loci = NULL,
+  ...)
+
 getSequenceNames(x, ...)
 
 \S4method{getSequenceNames}{multidna}(x, gap.only = FALSE, loci = NULL, ...)
+
+\S4method{getSequenceNames}{multiphyDat}(x, gap.only = FALSE, loci = NULL,
+  ...)
 
 getSequences(x, ...)
 
 \S4method{getSequences}{multidna}(x, loci = NULL, ids = NULL,
   simplify = TRUE, exclude.gap.only = TRUE, ...)
+
+\S4method{getSequences}{multiphyDat}(x, loci = NULL, ids = NULL,
+  simplify = TRUE, exclude.gap.only = TRUE, ...)
 }
 \arguments{
-\item{x}{a \linkS4class{multidna} object.}
+\item{x}{a \linkS4class{multidna} or \linkS4class{multiphyDat} object.}
 
 \item{...}{further arguments passed on to other functions.}
 
@@ -70,12 +108,14 @@ return a single DNAbin object.}
 \item{exclude.gap.only}{logical. Remove sequences containing all gaps?}
 }
 \description{
-Accessors for slots in \linkS4class{multidna} objects.
+Accessors for slots in \linkS4class{multidna} and \linkS4class{multiphyDat} objects.
 }
 \details{
 \describe{
+  \item{getNumInd}{Returns the number of individuals.}
   \item{getNumLoci}{Returns the number of loci.}
-  \item{locusNames}{Returns or sets the names of each locus.}
+  \item{getLocusNames}{Returns the names of each locus.}
+  \item{setLocusNames}{Sets the names of each locus.}
   \item{getNumSequences}{Returns the number of sequences in each locus.}
   \item{getSequenceNames}{Returns the names of individual sequences at each
     locus.}

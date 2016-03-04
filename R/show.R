@@ -88,7 +88,7 @@ setMethod ("show", "multiphyDat", function(object){
     ## PRINT OBJECT ##
     cat(paste("=== multiphyDat ===\n",sep=""))
     cat(paste("[",x@n.seq,"DNA", seqword, "in", n.genes, geneword,"]\n"))
-
+    cat("\n@type:", x@type)
     cat("\n@n.ind:", x@n.ind, indword)
     cat("\n@n.seq:", x@n.seq, seqword, "in total")
     cat("\n@n.seq.miss:", x@n.seq.miss, "gap-only (missing)", seqmissword)

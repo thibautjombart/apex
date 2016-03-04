@@ -34,11 +34,6 @@ Then, to load the package, use:
 library("apex")
 ```
 
-```
-## Loading required package: ape
-## Loading required package: phangorn
-```
-
 
 New object classes
 ------------------
@@ -49,7 +44,7 @@ Conversion between these classes can be done using `multidna2multiPhydat` and `m
 
 ###  multidna
 This formal (S4) class can be seen as a multi-gene extension of *ape*'s `DNAbin` class.
-Data is stored as a list of DNAbin objects, with additional slots for extra information.
+Data is stored as a list of `DNAbin` objects, with additional slots for extra information.
 The class definition can be obtained by:
 
 ```r
@@ -77,12 +72,13 @@ getClassDef("multidna")
 * **@ind.info**: an optional dataset storing individual metadata
 * **@gene.info**: an optional dataset storing gene metadata
 
-Any of these slots can be accessed using `@` (see example below).
+Any of these slots can be accessed using `@`, however accessor functions are available for most and are preferred (see examples below).
 
-New `multidna` objects can be created via two ways:
+New `multidna` objects can be created via different ways:
 
 1. using the constructor `new("multidna", ...)`
 2. reading data from files (see section on 'importing data' below)
+3. converting a `multiphyDat` object using `multidna2multiphyDat`
 
 We illustrate the use of the constructor below (see `?new.multidna`) for more information.
 We use *ape*'s dataset *woodmouse*, which we artificially split in two 'genes', keeping the first 500 nucleotides for the first gene, and using the rest as second gene. Note that the individuals need not match across different genes: matching is handled by the constructor.
@@ -161,17 +157,7 @@ x
 
 ```r
 ## access the various slots
-x@labels
-```
-
-```
-##  [1] "No305"   "No304"   "No306"   "No0906S" "No0908S" "No0909S" "No0910S"
-##  [8] "No0912S" "No0913S" "No1103S" "No1007S" "No1114S" "No1202S" "No1206S"
-## [15] "No1208S"
-```
-
-```r
-x@n.ind
+getNumInd(x) # The number of individuals
 ```
 
 ```
@@ -179,15 +165,15 @@ x@n.ind
 ```
 
 ```r
-class(x@dna) # this is a list
+getNumLoci(x) # The number of loci
 ```
 
 ```
-## [1] "list"
+## [1] 2
 ```
 
 ```r
-names(x@dna) # names of the genes
+getLocusNames(x) # The names of the loci
 ```
 
 ```
@@ -195,11 +181,28 @@ names(x@dna) # names of the genes
 ```
 
 ```r
-x@dna[[1]] # first gene
+getSequenceNames(x) # A list of the names of the sequences at each locus
 ```
 
 ```
-## 15 DNA sequences in binary format stored in a matrix.
+## $gene1
+##  [1] "No305"   "No304"   "No306"   "No0906S" "No0908S" "No0909S" "No0910S"
+##  [8] "No0912S" "No0913S" "No1103S" "No1007S" "No1114S" "No1202S" "No1206S"
+## [15] "No1208S"
+## 
+## $gene2
+##  [1] "No305"   "No304"   "No306"   "No0906S" "No0908S" "No0909S" "No0910S"
+##  [8] "No0912S" "No0913S" "No1103S" "No1007S" "No1114S" "No1202S" "No1206S"
+## [15] "No1208S"
+```
+
+```r
+getSequences(x) # A list of all loci
+```
+
+```
+## $gene1
+## 15 DNA sequences in binary format stored in a list.
 ## 
 ## All sequences of same length: 500 
 ## 
@@ -207,15 +210,10 @@ x@dna[[1]] # first gene
 ## 
 ## Base composition:
 ##     a     c     g     t 
-## 0.326 0.230 0.147 0.297
-```
-
-```r
-x@dna[[2]] # second gene
-```
-
-```
-## 15 DNA sequences in binary format stored in a matrix.
+## 0.326 0.230 0.147 0.297 
+## 
+## $gene2
+## 15 DNA sequences in binary format stored in a list.
 ## 
 ## All sequences of same length: 465 
 ## 
@@ -227,14 +225,47 @@ x@dna[[2]] # second gene
 ```
 
 ```r
+getSequences(x, loci = 2, simplify = FALSE) # Just the second locus (a single element list)
+```
+
+```
+## $gene2
+## 15 DNA sequences in binary format stored in a list.
+## 
+## All sequences of same length: 465 
+## 
+## Labels: No305 No304 No306 No0906S No0908S No0909S ...
+## 
+## Base composition:
+##     a     c     g     t 
+## 0.286 0.295 0.103 0.316
+```
+
+```r
+getSequences(x, loci = "gene1") # Just the first locus as a DNAbin object
+```
+
+```
+## 15 DNA sequences in binary format stored in a list.
+## 
+## All sequences of same length: 500 
+## 
+## Labels: No305 No304 No306 No0906S No0908S No0909S ...
+## 
+## Base composition:
+##     a     c     g     t 
+## 0.326 0.230 0.147 0.297
+```
+
+```r
 ## compare the input dataset and the new multidna
 par(mfrow=c(3,1), mar=c(6,6,2,1))
 image(woodmouse)
-image(x@dna[[1]])
-image(x@dna[[2]])
+image(as.matrix(getSequences(x, 1)))
+image(as.matrix(getSequences(x, 2)))
 ```
 
-![plot of chunk class](vignettes/figs/class-1.png) 
+![plot of chunk multidnaclass](vignettes/figs/multidnaclass-1.png)
 
 ```r
 ## same but with missing sequences and wrong order
@@ -281,7 +312,103 @@ par(mar=c(6,6,2,1))
 plot(x)
 ```
 
-![plot of chunk class](vignettes/figs/class-2.png) 
+![plot of chunk multidnaclass](vignettes/figs/multidnaclass-2.png)
+
+
+###  multiphyDat
+Like `multidna` and *ape*'s `DNAbin`, the formal (S4) class `multiphyDat` is a multi-gene extension of *phangorn*'s `phyDat` class.
+Data is stored as a list of `phyDat` objects, with additional slots for extra information.
+The class definition can be obtained by:
+
+```r
+getClassDef("multiphyDat")
+```
+
+```
+## Class "multiphyDat" [package "apex"]
+## 
+## Slots:
+##                                                                           
+## Name:               seq             type           labels            n.ind
+## Class:       listOrNULL        character        character          integer
+##                                                                           
+## Name:             n.seq       n.seq.miss         ind.info        gene.info
+## Class:          integer          integer data.frameOrNULL data.frameOrNULL
+## 
+## Extends: "multiinfo"
+```
+* **@seq**: list of `phyDat` objects, each corresponding to a given gene/locus, with matching rows (individuals); unlike `multidna` which is retrained to DNA sequences, this class can store any characters, including amino-acid sequences 
+* **@type**: a character string indicating the type of sequences stored
+* **@labels**: labels of the individuals (rows of the matrices in `@dna`)
+* **@n.ind**: the number of individuals
+* **@n.seq**: the total number of sequences in the dataset, including gaps-only sequences
+* **@n.seq.miss**: the total number of gaps-only (i.e., missing) sequences in the dataset
+* **@ind.info**: an optional dataset storing individual metadata
+* **@gene.info**: an optional dataset storing gene metadata
+
+Any of these slots can be accessed using `@` (see example below).
+
+As for `multidna`, `multiphyDat` objects can be created via different ways:
+
+1. using the constructor `new("multiphyDat", ...)`
+2. reading data from files (see section on 'importing data' below)
+3. converting a `multidna` object using `multiphyDat2multidna`
+
+As before, we illustrate the use of the constructor below (see `?new.multiphyDat`) for more information.
+
+```r
+data(Laurasiatherian)
+Laurasiatherian
+```
+
+```
+## 47 sequences with 3179 character and 1605 different site patterns.
+## The states are a c g t
+```
+
+```r
+## empty object
+new("multiphyDat")
+```
+
+```
+## === multiphyDat ===
+## [ 0 DNA sequence in 0 gene ]
+## 
+## @type: 
+## @n.ind: 0 individual
+## @n.seq: 0 sequence in total
+## @n.seq.miss: 0 gap-only (missing) sequence
+## @labels:
+```
+
+```r
+## simple conversion after artificially splitting data into 2 genes
+genes <- list(gene1=subset(Laurasiatherian,,1:1600, FALSE),
+      	 gene2=subset(Laurasiatherian,,1601:3179, FALSE))
+x <- new("multiphyDat", genes, type="DNA")
+x
+```
+
+```
+## === multiphyDat ===
+## [ 94 DNA sequences in 2 genes ]
+## 
+## @type: DNA
+## @n.ind: 47 individuals
+## @n.seq: 94 sequences in total
+## @n.seq.miss: 0 gap-only (missing) sequence
+## @labels: Platypus Wallaroo Possum Bandicoot Opposum Armadillo...
+## 
+## @seq: (list of phyDat objects)
+## $gene1
+## 47 sequences with 1600 character and 827 different site patterns.
+## The states are a c g t 
+## 
+## $gene2
+## 47 sequences with 1579 character and 844 different site patterns.
+## The states are a c g t
+```
 
 
 
@@ -303,10 +430,10 @@ files # this will change on your computer
 ```
 
 ```
-## [1] "/usr/local/lib/R/site-library/apex/patr_poat43.fasta"
-## [2] "/usr/local/lib/R/site-library/apex/patr_poat47.fasta"
-## [3] "/usr/local/lib/R/site-library/apex/patr_poat48.fasta"
-## [4] "/usr/local/lib/R/site-library/apex/patr_poat49.fasta"
+## [1] "/Users/eric.archer/Library/R/3.2/library/apex/patr_poat43.fasta"
+## [2] "/Users/eric.archer/Library/R/3.2/library/apex/patr_poat47.fasta"
+## [3] "/Users/eric.archer/Library/R/3.2/library/apex/patr_poat48.fasta"
+## [4] "/Users/eric.archer/Library/R/3.2/library/apex/patr_poat49.fasta"
 ```
 
 ```r
@@ -383,7 +510,7 @@ par(mar=c(6,11,2,1))
 plot(x)
 ```
 
-![plot of chunk readfiles](vignettes/figs/readfiles-1.png) 
+![plot of chunk readfiles](vignettes/figs/readfiles-1.png)
 
 ### *phangorn* wrappers
 In addition to the above functions for importing data:
@@ -397,19 +524,37 @@ z
 
 ```
 ## === multiphyDat ===
-## [ 0 DNA sequence in 0 gene ]
+## [ 32 DNA sequences in 4 genes ]
 ## 
-## @n.ind: 0 individual
-## @n.seq: 0 sequence in total
-## @n.seq.miss: 0 gap-only (missing) sequence
-## @labels:
+## @type: 
+## @n.ind: 8 individuals
+## @n.seq: 32 sequences in total
+## @n.seq.miss: 8 gap-only (missing) sequences
+## @labels: 2340_50156.ab1  2340_50149.ab1  2340_50674.ab1  2370_45312.ab1  2340_50406.ab1  2370_45424.ab1 ...
+## 
+## @seq: (list of phyDat objects)
+## $patr_poat43
+## 8 sequences with 764 character and 8 different site patterns.
+## The states are a c g t 
+## 
+## $patr_poat47
+## 8 sequences with 626 character and 29 different site patterns.
+## The states are a c g t 
+## 
+## $patr_poat48
+## 8 sequences with 560 character and 24 different site patterns.
+## The states are a c g t 
+## 
+## $patr_poat49
+## 8 sequences with 556 character and 8 different site patterns.
+## The states are a c g t
 ```
 
 
 Handling data
 --------------
 Several functions facilitate data handling:
-* **concatenate:** concatenate several genes into a single DNAbin or phyDat matrix
+* **concatenate:** concatenate several genes into a single `DNAbin` or `phyDat` matrix
 * **x[i,j]:** subset x by individuals (i) and/or genes (j)
 * **multidna2multiphyDat:** converts from `multidna` to `multiphyDat`
 * **multiphyDat2multidna:** converts from `multiphyDat` to `multidna`
@@ -423,10 +568,10 @@ files
 ```
 
 ```
-## [1] "/usr/local/lib/R/site-library/apex/patr_poat43.fasta"
-## [2] "/usr/local/lib/R/site-library/apex/patr_poat47.fasta"
-## [3] "/usr/local/lib/R/site-library/apex/patr_poat48.fasta"
-## [4] "/usr/local/lib/R/site-library/apex/patr_poat49.fasta"
+## [1] "/Users/eric.archer/Library/R/3.2/library/apex/patr_poat43.fasta"
+## [2] "/Users/eric.archer/Library/R/3.2/library/apex/patr_poat47.fasta"
+## [3] "/Users/eric.archer/Library/R/3.2/library/apex/patr_poat48.fasta"
+## [4] "/Users/eric.archer/Library/R/3.2/library/apex/patr_poat49.fasta"
 ```
 
 ```r
@@ -495,14 +640,14 @@ par(mar=c(6,11,2,1))
 plot(x)
 ```
 
-![plot of chunk handling](vignettes/figs/handling-1.png) 
+![plot of chunk handling](vignettes/figs/handling-1.png)
 
 ```r
 ## subset
 plot(x[1:3,2:4])
 ```
 
-![plot of chunk handling](vignettes/figs/handling-2.png) 
+![plot of chunk handling](vignettes/figs/handling-2.png)
 
 ```r
 ## concatenate
@@ -527,7 +672,7 @@ par(mar=c(5,8,2,1))
 image(y)
 ```
 
-![plot of chunk concat](vignettes/figs/concat-1.png) 
+![plot of chunk concat](vignettes/figs/concat-1.png)
 
 ```r
 ## concatenate multiphyDat object
@@ -546,7 +691,7 @@ tree <- pratchet(u, trace=0)
 plot(tree, "u")
 ```
 
-![plot of chunk concat](vignettes/figs/concat-2.png) 
+![plot of chunk concat](vignettes/figs/concat-2.png)
 
 Building trees
 ---------------
@@ -566,7 +711,7 @@ trees
 ```r
 plot(trees, 4, type="unrooted")
 ```
-![plot of chunk plotMultiPhylo](vignettes/figs/plotMultiPhylo-1.png) 
+![plot of chunk plotMultiPhylo](vignettes/figs/plotMultiPhylo-1.png)
 
 As an alternative, all genes can be pooled into a single alignment to obtain a single tree using:
 
@@ -580,7 +725,7 @@ As an alternative, all genes can be pooled into a single alignment to obtain a s
 ## Unrooted; includes branch lengths.
 ```
 
-![plot of chunk plotPhyloSingle](vignettes/figs/plotPhyloSingle-1.png) 
+![plot of chunk plotPhyloSingle](vignettes/figs/plotPhyloSingle-1.png)
 
 ### Likelihood-based trees
 It is also possible to use functions from `phangorn` to estimate with maximum likelihood trees.
@@ -617,8 +762,11 @@ library(adegenet)
 
 ```
 ## Loading required package: ade4
+```
+
+```
 ## 
-##    /// adegenet 2.0.0 is loaded ////////////
+##    /// adegenet 2.0.1 is loaded ////////////
 ## 
 ##    > overview: '?adegenet'
 ##    > tutorials/doc/questions: 'adegenetWeb()' 

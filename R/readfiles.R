@@ -65,8 +65,8 @@ read.multiFASTA <- function(files, add.gaps=TRUE){
 #' @export
 read.multiphyDat <- function(files, add.gaps=TRUE, ...){
   gene.names <- gsub(".fasta","",sapply(strsplit(files, "/"), tail, 1))
-  dna <- lapply(files, read.phyDat, ...)
-  names(dna) <- gene.names
-  out <- new("multiphyDat", dna=dna, add.gaps=add.gaps)
+  seq <- lapply(files, read.phyDat, ...)
+  names(seq) <- gene.names
+  out <- new("multiphyDat", seq=seq, add.gaps=add.gaps)
   return(out)
 }
