@@ -73,7 +73,7 @@ getNumSequences(x, ...)
 
 getSequenceNames(x, ...)
 
-\S4method{getSequenceNames}{multidna}(x, exclude.gap.only = FALSE,
+\S4method{getSequenceNames}{multidna}(x, exclude.gap.only = TRUE,
   loci = NULL, ...)
 
 \S4method{getSequenceNames}{multiphyDat}(x, exclude.gap.only = TRUE,

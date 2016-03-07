@@ -179,7 +179,7 @@ setGeneric("getSequenceNames", function(x, ...) standardGeneric("getSequenceName
 #' @aliases getSequenceNames,multidna
 #' @export
 setMethod("getSequenceNames", "multidna",
-          function(x, exclude.gap.only = FALSE, loci = NULL, ...) {
+          function(x, exclude.gap.only = TRUE, loci = NULL, ...) {
   # check that object isn't empty
   if(is.null(x@dna)) {
     warning("'x' is empty. NULL returned.", call. = FALSE)
