@@ -40,7 +40,7 @@
 #' y
 #'
 read.multidna <- function(files, add.gaps=TRUE, ...){
-    gene.names <- gsub(".fasta","",sapply(strsplit(files, "/"), tail, 1))
+    gene.names <- gsub(".fasta","", basename(files))
     dna <- lapply(files, read.dna, ...)
     names(dna) <- gene.names
     out <- new("multidna", dna=dna, add.gaps=add.gaps)
@@ -52,7 +52,7 @@ read.multidna <- function(files, add.gaps=TRUE, ...){
 #' @rdname readfiles
 #' @export
 read.multiFASTA <- function(files, add.gaps=TRUE){
-    gene.names <- gsub(".fasta","",sapply(strsplit(files, "/"), tail, 1))
+    gene.names <- gsub(".fasta","",basename(files))
     dna <- lapply(files, read.FASTA)
     names(dna) <- gene.names
     out <- new("multidna", dna=dna, add.gaps=add.gaps)
@@ -64,7 +64,7 @@ read.multiFASTA <- function(files, add.gaps=TRUE){
 #' @rdname readfiles
 #' @export
 read.multiphyDat <- function(files, add.gaps=TRUE, ...){
-  gene.names <- gsub(".fasta","",sapply(strsplit(files, "/"), tail, 1))
+  gene.names <- gsub(".fasta","",basename(files))
   seq <- lapply(files, read.phyDat, ...)
   names(seq) <- gene.names
   out <- new("multiphyDat", seq=seq, add.gaps=add.gaps)
