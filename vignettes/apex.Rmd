@@ -41,6 +41,37 @@ Then, to load the package, use:
 library("apex")
 ```
 
+Importing data
+--------------
+### *ape* wrappers
+Two simple functions permit to import data from multiple alignements into `multidna` objects:
+* **read.multidna:** reads multiple DNA alignments with various formats
+* **read.multiFASTA:** same for FASTA files
+
+Both functions rely on the single-gene counterparts in *ape* and accept the same arguments.
+Each file should contain data from a given gene, where sequences should be named after individual labels only.
+Here is an example using a dataset from *apex*:
+```{r readfiles}
+## get address of the file within apex
+files <- dir(system.file(package="apex"),patter="patr", full=TRUE)
+files # this will change on your computer
+
+## read these files
+x <- read.multiFASTA(files)
+x
+names(x@dna) # names of the genes
+par(mar=c(6,11,2,1))
+plot(x)
+```
+
+### *phangorn* wrappers
+In addition to the above functions for importing data:
+* **read.multiphyDat:** reads multiple DNA alignments with various formats.
+The arguments are the same as the single-gene `read.phyDat` in *phangorn*:
+```{r readfiles phyDat}
+z <- read.multiphyDat(files, format="fasta")
+z
+```
 
 New object classes
 ------------------
@@ -148,40 +179,6 @@ genes <- list(gene1=subset(Laurasiatherian,,1:1600, FALSE),
       	 gene2=subset(Laurasiatherian,,1601:3179, FALSE))
 x <- new("multiphyDat", genes, type="DNA")
 x
-```
-
-
-
-Importing data
---------------
-### *ape* wrappers
-Two simple functions permit to import data from multiple alignements into `multidna` objects:
-* **read.multidna:** reads multiple DNA alignments with various formats
-* **read.multiFASTA:** same for FASTA files
-
-Both functions rely on the single-gene counterparts in *ape* and accept the same arguments.
-Each file should contain data from a given gene, where sequences should be named after individual labels only.
-Here is an example using a dataset from *apex*:
-```{r readfiles}
-## get address of the file within apex
-files <- dir(system.file(package="apex"),patter="patr", full=TRUE)
-files # this will change on your computer
-
-## read these files
-x <- read.multiFASTA(files)
-x
-names(x@dna) # names of the genes
-par(mar=c(6,11,2,1))
-plot(x)
-```
-
-### *phangorn* wrappers
-In addition to the above functions for importing data:
-* **read.multiphyDat:** reads multiple DNA alignments with various formats.
-The arguments are the same as the single-gene `read.phyDat` in *phangorn*:
-```{r readfiles phyDat}
-z <- read.multiphyDat(files, format="fasta")
-z
 ```
 
 
