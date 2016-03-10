@@ -34,6 +34,143 @@ Then, to load the package, use:
 library("apex")
 ```
 
+Importing data
+--------------
+### *ape* wrappers
+Two simple functions permit to import data from multiple alignements into `multidna` objects:
+* **read.multidna:** reads multiple DNA alignments with various formats
+* **read.multiFASTA:** same for FASTA files
+
+Both functions rely on the single-gene counterparts in *ape* and accept the same arguments.
+Each file should contain data from a given gene, where sequences should be named after individual labels only.
+Here is an example using a dataset from *apex*:
+
+```r
+## get address of the file within apex
+files <- dir(system.file(package="apex"),patter="patr", full=TRUE)
+files # this will change on your computer
+```
+
+```
+## [1] "/Users/zhian/R/apex/patr_poat43.fasta"
+## [2] "/Users/zhian/R/apex/patr_poat47.fasta"
+## [3] "/Users/zhian/R/apex/patr_poat48.fasta"
+## [4] "/Users/zhian/R/apex/patr_poat49.fasta"
+```
+
+```r
+## read these files
+x <- read.multiFASTA(files)
+x
+```
+
+```
+## === multidna ===
+## [ 32 DNA sequences in 4 genes ]
+## 
+## @n.ind: 8 individuals
+## @n.seq: 32 sequences in total
+## @n.seq.miss: 8 gap-only (missing) sequences
+## @labels: 2340_50156.ab1  2340_50149.ab1  2340_50674.ab1  2370_45312.ab1  2340_50406.ab1  2370_45424.ab1 ...
+## 
+## @dna: (list of DNAbin matrices)
+## $patr_poat43
+## 8 DNA sequences in binary format stored in a matrix.
+## 
+## All sequences of same length: 764 
+## 
+## Labels: 2340_50156.ab1  2340_50149.ab1  2340_50674.ab1  2370_45312.ab1  2340_50406.ab1  2370_45424.ab1  ...
+## 
+## Base composition:
+##     a     c     g     t 
+## 0.320 0.158 0.166 0.356 
+## 
+## $patr_poat47
+## 8 DNA sequences in binary format stored in a matrix.
+## 
+## All sequences of same length: 626 
+## 
+## Labels: 2340_50156.ab1  2340_50149.ab1  2340_50674.ab1  2370_45312.ab1  2340_50406.ab1  2370_45424.ab1  ...
+## 
+## Base composition:
+##     a     c     g     t 
+## 0.227 0.252 0.256 0.266 
+## 
+## $patr_poat48
+## 8 DNA sequences in binary format stored in a matrix.
+## 
+## All sequences of same length: 560 
+## 
+## Labels: 2340_50156.ab1  2340_50149.ab1  2340_50674.ab1  2370_45312.ab1  2340_50406.ab1  2370_45424.ab1  ...
+## 
+## Base composition:
+##     a     c     g     t 
+## 0.305 0.185 0.182 0.327 
+## 
+## $patr_poat49
+## 8 DNA sequences in binary format stored in a matrix.
+## 
+## All sequences of same length: 556 
+## 
+## Labels: 2340_50156.ab1  2340_50149.ab1  2340_50674.ab1  2370_45312.ab1  2340_50406.ab1  2370_45424.ab1  ...
+## 
+## Base composition:
+##     a     c     g     t 
+## 0.344 0.149 0.187 0.320
+```
+
+```r
+names(x@dna) # names of the genes
+```
+
+```
+## [1] "patr_poat43" "patr_poat47" "patr_poat48" "patr_poat49"
+```
+
+```r
+par(mar=c(6,11,2,1))
+plot(x)
+```
+
+![plot of chunk readfiles](vignettes/figs/readfiles-1.png)
+
+### *phangorn* wrappers
+In addition to the above functions for importing data:
+* **read.multiphyDat:** reads multiple DNA alignments with various formats.
+The arguments are the same as the single-gene `read.phyDat` in *phangorn*:
+
+```r
+z <- read.multiphyDat(files, format="fasta")
+z
+```
+
+```
+## === multiphyDat ===
+## [ 32 DNA sequences in 4 genes ]
+## 
+## @type: 
+## @n.ind: 8 individuals
+## @n.seq: 32 sequences in total
+## @n.seq.miss: 8 gap-only (missing) sequences
+## @labels: 2340_50156.ab1  2340_50149.ab1  2340_50674.ab1  2370_45312.ab1  2340_50406.ab1  2370_45424.ab1 ...
+## 
+## @seq: (list of phyDat objects)
+## $patr_poat43
+## 8 sequences with 764 character and 8 different site patterns.
+## The states are a c g t 
+## 
+## $patr_poat47
+## 8 sequences with 626 character and 29 different site patterns.
+## The states are a c g t 
+## 
+## $patr_poat48
+## 8 sequences with 560 character and 24 different site patterns.
+## The states are a c g t 
+## 
+## $patr_poat49
+## 8 sequences with 556 character and 8 different site patterns.
+## The states are a c g t
+```
 
 New object classes
 ------------------
@@ -411,146 +548,6 @@ x
 ```
 
 
-
-Importing data
---------------
-### *ape* wrappers
-Two simple functions permit to import data from multiple alignements into `multidna` objects:
-* **read.multidna:** reads multiple DNA alignments with various formats
-* **read.multiFASTA:** same for FASTA files
-
-Both functions rely on the single-gene counterparts in *ape* and accept the same arguments.
-Each file should contain data from a given gene, where sequences should be named after individual labels only.
-Here is an example using a dataset from *apex*:
-
-```r
-## get address of the file within apex
-files <- dir(system.file(package="apex"),patter="patr", full=TRUE)
-files # this will change on your computer
-```
-
-```
-## [1] "/Users/eric.archer/Library/R/3.2/library/apex/patr_poat43.fasta"
-## [2] "/Users/eric.archer/Library/R/3.2/library/apex/patr_poat47.fasta"
-## [3] "/Users/eric.archer/Library/R/3.2/library/apex/patr_poat48.fasta"
-## [4] "/Users/eric.archer/Library/R/3.2/library/apex/patr_poat49.fasta"
-```
-
-```r
-## read these files
-x <- read.multiFASTA(files)
-x
-```
-
-```
-## === multidna ===
-## [ 32 DNA sequences in 4 genes ]
-## 
-## @n.ind: 8 individuals
-## @n.seq: 32 sequences in total
-## @n.seq.miss: 8 gap-only (missing) sequences
-## @labels: 2340_50156.ab1  2340_50149.ab1  2340_50674.ab1  2370_45312.ab1  2340_50406.ab1  2370_45424.ab1 ...
-## 
-## @dna: (list of DNAbin matrices)
-## $patr_poat43
-## 8 DNA sequences in binary format stored in a matrix.
-## 
-## All sequences of same length: 764 
-## 
-## Labels: 2340_50156.ab1  2340_50149.ab1  2340_50674.ab1  2370_45312.ab1  2340_50406.ab1  2370_45424.ab1  ...
-## 
-## Base composition:
-##     a     c     g     t 
-## 0.320 0.158 0.166 0.356 
-## 
-## $patr_poat47
-## 8 DNA sequences in binary format stored in a matrix.
-## 
-## All sequences of same length: 626 
-## 
-## Labels: 2340_50156.ab1  2340_50149.ab1  2340_50674.ab1  2370_45312.ab1  2340_50406.ab1  2370_45424.ab1  ...
-## 
-## Base composition:
-##     a     c     g     t 
-## 0.227 0.252 0.256 0.266 
-## 
-## $patr_poat48
-## 8 DNA sequences in binary format stored in a matrix.
-## 
-## All sequences of same length: 560 
-## 
-## Labels: 2340_50156.ab1  2340_50149.ab1  2340_50674.ab1  2370_45312.ab1  2340_50406.ab1  2370_45424.ab1  ...
-## 
-## Base composition:
-##     a     c     g     t 
-## 0.305 0.185 0.182 0.327 
-## 
-## $patr_poat49
-## 8 DNA sequences in binary format stored in a matrix.
-## 
-## All sequences of same length: 556 
-## 
-## Labels: 2340_50156.ab1  2340_50149.ab1  2340_50674.ab1  2370_45312.ab1  2340_50406.ab1  2370_45424.ab1  ...
-## 
-## Base composition:
-##     a     c     g     t 
-## 0.344 0.149 0.187 0.320
-```
-
-```r
-names(x@dna) # names of the genes
-```
-
-```
-## [1] "patr_poat43" "patr_poat47" "patr_poat48" "patr_poat49"
-```
-
-```r
-par(mar=c(6,11,2,1))
-plot(x)
-```
-
-![plot of chunk readfiles](vignettes/figs/readfiles-1.png)
-
-### *phangorn* wrappers
-In addition to the above functions for importing data:
-* **read.multiphyDat:** reads multiple DNA alignments with various formats.
-The arguments are the same as the single-gene `read.phyDat` in *phangorn*:
-
-```r
-z <- read.multiphyDat(files, format="fasta")
-z
-```
-
-```
-## === multiphyDat ===
-## [ 32 DNA sequences in 4 genes ]
-## 
-## @type: 
-## @n.ind: 8 individuals
-## @n.seq: 32 sequences in total
-## @n.seq.miss: 8 gap-only (missing) sequences
-## @labels: 2340_50156.ab1  2340_50149.ab1  2340_50674.ab1  2370_45312.ab1  2340_50406.ab1  2370_45424.ab1 ...
-## 
-## @seq: (list of phyDat objects)
-## $patr_poat43
-## 8 sequences with 764 character and 8 different site patterns.
-## The states are a c g t 
-## 
-## $patr_poat47
-## 8 sequences with 626 character and 29 different site patterns.
-## The states are a c g t 
-## 
-## $patr_poat48
-## 8 sequences with 560 character and 24 different site patterns.
-## The states are a c g t 
-## 
-## $patr_poat49
-## 8 sequences with 556 character and 8 different site patterns.
-## The states are a c g t
-```
-
-
 Handling data
 --------------
 Several functions facilitate data handling:
@@ -568,10 +565,10 @@ files
 ```
 
 ```
-## [1] "/Users/eric.archer/Library/R/3.2/library/apex/patr_poat43.fasta"
-## [2] "/Users/eric.archer/Library/R/3.2/library/apex/patr_poat47.fasta"
-## [3] "/Users/eric.archer/Library/R/3.2/library/apex/patr_poat48.fasta"
-## [4] "/Users/eric.archer/Library/R/3.2/library/apex/patr_poat49.fasta"
+## [1] "/Users/zhian/R/apex/patr_poat43.fasta"
+## [2] "/Users/zhian/R/apex/patr_poat47.fasta"
+## [3] "/Users/zhian/R/apex/patr_poat48.fasta"
+## [4] "/Users/zhian/R/apex/patr_poat49.fasta"
 ```
 
 ```r
@@ -770,7 +767,7 @@ library(adegenet)
 ## 
 ##    > overview: '?adegenet'
 ##    > tutorials/doc/questions: 'adegenetWeb()' 
-##    > bug reports/feature resquests: adegenetIssues()
+##    > bug reports/feature requests: adegenetIssues()
 ```
 
 ```r
