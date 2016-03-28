@@ -34,6 +34,18 @@ Then, to load the package, use:
 library("apex")
 ```
 
+```
+## Loading required package: ape
+```
+
+```
+## Loading required package: phangorn
+```
+
+```
+## Loading required package: rmarkdown
+```
+
 Importing data
 --------------
 ### *ape* wrappers
@@ -52,10 +64,10 @@ files # this will change on your computer
 ```
 
 ```
-## [1] "/Users/zhian/R/apex/patr_poat43.fasta"
-## [2] "/Users/zhian/R/apex/patr_poat47.fasta"
-## [3] "/Users/zhian/R/apex/patr_poat48.fasta"
-## [4] "/Users/zhian/R/apex/patr_poat49.fasta"
+## [1] "/usr/local/lib/R/site-library/apex/patr_poat43.fasta"
+## [2] "/usr/local/lib/R/site-library/apex/patr_poat47.fasta"
+## [3] "/usr/local/lib/R/site-library/apex/patr_poat48.fasta"
+## [4] "/usr/local/lib/R/site-library/apex/patr_poat49.fasta"
 ```
 
 ```r
@@ -565,10 +577,10 @@ files
 ```
 
 ```
-## [1] "/Users/zhian/R/apex/patr_poat43.fasta"
-## [2] "/Users/zhian/R/apex/patr_poat47.fasta"
-## [3] "/Users/zhian/R/apex/patr_poat48.fasta"
-## [4] "/Users/zhian/R/apex/patr_poat49.fasta"
+## [1] "/usr/local/lib/R/site-library/apex/patr_poat43.fasta"
+## [2] "/usr/local/lib/R/site-library/apex/patr_poat47.fasta"
+## [3] "/usr/local/lib/R/site-library/apex/patr_poat48.fasta"
+## [4] "/usr/local/lib/R/site-library/apex/patr_poat49.fasta"
 ```
 
 ```r
