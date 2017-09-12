@@ -70,21 +70,21 @@ setMethod("add.gaps", "multiphyDat", function(x, ...){
     if(is.null(x@seq)) return(x)
 
     ## FUNCTION TO REORDER MATRIX AND ADD MISSING SEQUENCES ##
-    form.dna.phyDat <- function(dna, labels){
-        ## convert dna to matrix of characters
-        dna <- as.character(dna)
-
-        ## make matrix of missing sequences if needed
+    form.dna.phyDat <- function(dna, labels, gap="-"){
+        ## add missing sequences if needed
         lab.missing <- labels[!(labels %in% labels(dna))]
         n.missing <- length(lab.missing)
         if(n.missing>0){
-            mat.NA <- matrix("-", ncol=ncol(dna), nrow=n.missing)
-            rownames(mat.NA) <- lab.missing
-            dna <- rbind(dna, mat.NA)
+            gap_code <- match(gap, attr(dna, "allLevels"))
+            nr <- attr(dna,"nr")
+            l <- length(dna)
+            tmp <- vector("list", n.missing)
+            for(i in seq_len(n.missing)) tmp[[i]] <- rep(gap_code, nr)
+            dna[(l+1L):(l+n.missing)] <- tmp
+            attr(dna, "names")[(l+1L):(l+n.missing)] <- lab.missing
         }
-
         ## return ordered sequences
-        return(as.phyDat(dna[labels,]))
+        return(subset(dna,labels))
     }
 
     ## APPLY THIS FUNCTION TO ALL MATRICES ##
