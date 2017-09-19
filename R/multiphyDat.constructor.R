@@ -84,7 +84,7 @@ setMethod("initialize", "multiphyDat", function(.Object, seq=NULL, type=characte
     ## convert matrices of characters into phyDat ##
     N.GENES <- length(seq)
     for(i in 1:N.GENES){
-        if(is.character(seq[[i]])) seq[[i]] <- phyDat(seq[[i]])
+        if(is.character(seq[[i]])) seq[[i]] <- as.phyDat(seq[[i]])
     }
 
     ## replace with generic names if needed ##
