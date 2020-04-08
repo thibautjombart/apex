@@ -61,7 +61,7 @@ multidna2genind <- function(x, genes=TRUE, mlst=FALSE, gapIsNA=FALSE){
       }
     }
   }
-  xdfnum <- data.frame(lapply(xdf, as.numeric))
+  xdfnum <- data.frame(lapply(xdf, as.numeric), stringsAsFactors=TRUE)
   xgid   <- df2genind(xdfnum, ploidy = 1, ind.names = x@labels)
   names(xlevs)   <- names(xgid@all.names)
   xgid@all.names <- xlevs
