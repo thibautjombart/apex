@@ -82,10 +82,10 @@ setMethod("rm.gaps", "multiphyDat", function(x, ...){
     x@seq <- lapply(x@seq, form.dna.phyDat, x@labels)
 
     ## REMOVE EMPTY OBJECTS ##
-    x@seq <- x@seq[sapply(x@seq, length)>0]
+    x@seq <- x@seq[lengths(x@seq)>0]
 
     ## UPDATE NUMBER OF SEQUENCES ##
-    x@n.seq <- as.integer(sum(sapply(x@seq, length)))
+    x@n.seq <- as.integer(sum(lengths(x@seq)))
     x@n.seq.miss <- .nMissingSequences(x@seq)
 
     ## RETURN OBJECT ##

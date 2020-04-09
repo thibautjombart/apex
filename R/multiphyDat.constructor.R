@@ -115,7 +115,7 @@ setMethod("initialize", "multiphyDat", function(.Object, seq=NULL, type=characte
     x@type <- as.character(type)
     x@labels <- all.labels
     x@n.ind <- N.IND
-    x@n.seq <- as.integer(sum(sapply(x@seq, length)))
+    x@n.seq <- as.integer(sum(lengths(x@seq)))
     x@ind.info <- ind.info
     x@gene.info <- gene.info
 
