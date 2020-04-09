@@ -16,8 +16,6 @@
 #'
 #' @aliases multiphyDat
 #' @aliases multiphyDat-class
-#' @aliases listOrNULL
-#' @aliases data.frameOrNULL
 #'
 #' @slot seq a list of phyDat objects; empty slot should be NULL
 #' @slot type a character string indicating the type of the sequences stored: "DNA" for DNA sequences, "AA" for amino-acids.

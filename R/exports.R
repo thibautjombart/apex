@@ -13,8 +13,6 @@
 #'
 #' @author Thibaut Jombart \email{t.jombart@@imperial.ac.uk}, Zhian N. Kamvar, Klaus Schliep
 #'
-#' @rdname multidna2genind
-#'
 #' @aliases multidna2genind
 #' @aliases multiphyDat2genind
 #'
@@ -120,8 +118,6 @@ multiphyDat2genind <- function(x, genes=TRUE, mlst=FALSE, gapIsNA=FALSE){
 #'
 #' ## check round trip
 #' identical(x, multiphyDat2multidna(y))
-#'
-#' @rdname multidna2multiphyDat
 #'
 #' @export
 #'

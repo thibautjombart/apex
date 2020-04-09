@@ -48,5 +48,6 @@ Suggests:
     testthat,
     knitr,
     rmarkdown
+Encoding: UTF-8    
 RoxygenNote: 7.1.0
 Roxygen: list(old_usage = TRUE)
