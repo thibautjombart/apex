@@ -18,7 +18,6 @@ Imports:
     utils,
     graphics,
     stats,
-    grDevices,
     adegenet
 License: GPL (>=2)
 LazyData: true

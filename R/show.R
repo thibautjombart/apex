@@ -12,6 +12,8 @@
 #' @aliases show.multidna
 #'
 #' @param object a multidna object
+#' 
+#' @importFrom utils head
 #'
 #' @author Thibaut Jombart \email{t.jombart@@imperial.ac.uk}
 #'
@@ -73,6 +75,8 @@ setMethod ("show", "multidna", function(object){
 #' @aliases show.multiphyDat
 #'
 #' @param object a multiphyDat object
+#' 
+#' @importFrom utils head
 #'
 #' @author Thibaut Jombart \email{t.jombart@@imperial.ac.uk}
 #'

@@ -22,7 +22,9 @@
 #' @aliases plot,multidna-method
 #' @aliases plot.multidna
 #'
-#' @docType methods
+#' @importFrom graphics image mtext par
+#'
+#' @docType methods 
 #'
 #' @examples
 #' ## simple conversion with nicely ordered output

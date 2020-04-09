@@ -4,9 +4,9 @@
 #'
 #' @docType package
 #' @name apex
-#' @import utils
-#' @import stats
-#' @import graphics
-#' @import grDevices
+## @import utils
+## @import stats
+## @import graphics
+## @import grDevices
 #'
 NULL
