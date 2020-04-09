@@ -35,9 +35,11 @@
 #' ltrees <- lapply(lD, nj)
 #' tree <- nj(D)
 #'
+#' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(3,1))
 #' for(i in 1:2) plot(ltrees[[i]], main=names(ltrees)[i])
 #' plot(tree, main="Pooled distances")
+#' par(opar)
 #'
 dist.multidna <- function(x, pool=FALSE, genes=TRUE, ...){
     ## subset data
