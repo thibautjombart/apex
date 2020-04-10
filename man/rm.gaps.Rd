@@ -3,6 +3,9 @@
 \docType{methods}
 \name{rm.gaps}
 \alias{rm.gaps}
+\alias{rm.gaps.generic}
+\alias{rm.gaps.multidna}
+\alias{rm.gaps.multiphyDat}
 \alias{rm.gaps,multidna-method}
 \alias{rm.gaps,multiphyDat-method}
 \title{Remove gap-only sequences for missing data}
@@ -22,4 +25,3 @@ rm.gaps(x, ...)
 In \linkS4class{multidna} and \linkS4class{multiphyDat}, some individuals may not be sequenced for all genes, resulting in gap-only sequences for missing data.
 The generic function \code{rm.gaps} has method for both objects; it identifies the missing sequences, and removes gap-only sequences from the alignments wherever needed.
 }
-

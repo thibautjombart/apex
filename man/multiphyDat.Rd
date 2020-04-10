@@ -2,8 +2,8 @@
 % Please edit documentation in R/multiphyDat.class.R
 \docType{class}
 \name{multiphyDat-class}
-\alias{multiphyDat}
 \alias{multiphyDat-class}
+\alias{multiphyDat}
 \title{multiphyDat: class for multiple gene data}
 \description{
 This formal (S4) class is identical to \linkS4class{multidna}, except that DNA sequences are stored using \code{phyDat} objects from the \code{phangorn} package.
@@ -29,6 +29,7 @@ The rows of the separate matrices all correspond to the same individuals, ordere
 
 \item{\code{gene.info}}{a data.frame containing information on the genes, where genes are in rows; empty slot should be NULL}
 }}
+
 \examples{
 data(Laurasiatherian)
 
@@ -55,4 +56,3 @@ Klaus Schliep \email{klaus.schliep@gmail.com}
 
 Thibaut Jombart \email{t.jombart@imperial.ac.uk}
 }
-

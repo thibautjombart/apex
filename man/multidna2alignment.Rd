@@ -34,13 +34,12 @@ x2 <- multidna2multiphyDat(x)
 z <- multiphyDat2alignment(x2)
 }
 }
-\author{
-Thibaut Jombart \email{t.jombart@imperial.ac.uk}, Zhian N. Kamvar, Klaus Schliep
-}
 \seealso{
 \itemize{
 \item concatenate
 \item \code{\link{as.alignment}} to convert single DNAbin objects.
 }
 }
-
+\author{
+Thibaut Jombart \email{t.jombart@imperial.ac.uk}, Zhian N. Kamvar, Klaus Schliep
+}

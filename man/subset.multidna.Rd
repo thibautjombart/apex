@@ -4,6 +4,9 @@
 \name{[,multidna,ANY,ANY,ANY-method}
 \alias{[,multidna,ANY,ANY,ANY-method}
 \alias{[,multidna-method}
+\alias{[.multidna}
+\alias{[,multiphyDat-method}
+\alias{[.multiphyDat}
 \alias{[,multiphyDat,ANY,ANY,ANY-method}
 \title{Subset multidna objects}
 \usage{
@@ -23,7 +26,8 @@
 \item{drop}{present for compatibility with the generic; currently not used.}
 }
 \description{
-Individuals in a \linkS4class{multidna} or \linkS4class{multiphyDat} object can be subsetted like the rows of a matrix, with the form x[i,].
+Individuals in a \linkS4class{multidna} or \linkS4class{multiphyDat} object 
+can be subsetted like the rows of a matrix, with the form x[i,].
 Genes can be subsetted like the columns of a matrix, i.e. with the form x[,j].
 }
 \examples{
@@ -46,4 +50,3 @@ plot(x[c(2,4,6),2])
 \author{
 Thibaut Jombart \email{t.jombart@imperial.ac.uk}
 }
-

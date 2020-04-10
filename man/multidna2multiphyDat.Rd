@@ -32,13 +32,12 @@ y
 identical(x, multiphyDat2multidna(y))
 
 }
-\author{
-Thibaut Jombart \email{t.jombart@imperial.ac.uk}, Zhian N. Kamvar, Klaus Schliep
-}
 \seealso{
 \itemize{
 \item concatenate
 \item \code{\link{DNAbin2genind}} to convert single DNAbin objects.
 }
 }
-
+\author{
+Thibaut Jombart \email{t.jombart@imperial.ac.uk}, Zhian N. Kamvar, Klaus Schliep
+}

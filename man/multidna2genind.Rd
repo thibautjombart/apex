@@ -40,13 +40,12 @@ z2 <- multiphyDat2genind(y)
 all.equal(z1, z2)
 
 }
-\author{
-Thibaut Jombart \email{t.jombart@imperial.ac.uk}, Zhian N. Kamvar, Klaus Schliep
-}
 \seealso{
 \itemize{
 \item concatenate
 \item \code{\link{DNAbin2genind}} to convert single DNAbin objects.
 }
 }
-
+\author{
+Thibaut Jombart \email{t.jombart@imperial.ac.uk}, Zhian N. Kamvar, Klaus Schliep
+}

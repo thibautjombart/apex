@@ -3,9 +3,7 @@
 \docType{package}
 \name{apex}
 \alias{apex}
-\alias{apex-package}
 \title{apex: Extensions of Ape for Multiple Gene Data}
 \description{
 Toolkit for the analysis of multiple gene data. Apex implements the new S4 classes multidna, multiphyDat and associated methods to handle aligned DNA sequences from multiple genes.
 }
-
