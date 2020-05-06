@@ -4,5 +4,10 @@ language: r
 
 sudo: required
 
+addons:
+  apt:
+    packages:
+      - libudunits2-dev
+
 env:
   - WARNINGS_ARE_ERRORS=false
