@@ -1,4 +1,3 @@
-^\.travis\.yml$
 README.Rmd
 .*.tar.gz$
 cran-comments.Rmd
@@ -9,3 +8,4 @@ cran-comments.md
 ^docs$
 ^pkgdown$
 ^_pkgdown\.yml$
+^\.github$

@@ -1,4 +1,4 @@
-[![Travis-CI Build Status](https://travis-ci.org/thibautjombart/apex.png?branch=master)](https://travis-ci.org/thibautjombart/apex)
+[![R-CMD-check](https://github.com/thibautjombart/apex/workflows/R-CMD-check/badge.svg)](https://github.com/thibautjombart/apex/actions)
 [![DOI](https://zenodo.org/badge/11430/thibautjombart/apex.svg)](http://dx.doi.org/10.5281/zenodo.16822)
 
 
