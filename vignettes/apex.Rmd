@@ -217,7 +217,7 @@ image(y)
 z <- multidna2multiphyDat(x)
 u <- concatenate(z)
 u
-tree <- pratchet(u, trace=0)
+tree <- pratchet(u, trace=0, all = FALSE)
 plot(tree, "u")
 ```
 

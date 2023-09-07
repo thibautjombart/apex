@@ -65,15 +65,19 @@ setLocusNames(x) <- value
 
 getNumSequences(x, ...)
 
-\S4method{getNumSequences}{multidna}(x, exclude.gap.only = TRUE, loci = NULL, ...)
+\S4method{getNumSequences}{multidna}(x, exclude.gap.only = TRUE,
+  loci = NULL, ...)
 
-\S4method{getNumSequences}{multiphyDat}(x, exclude.gap.only = TRUE, loci = NULL, ...)
+\S4method{getNumSequences}{multiphyDat}(x, exclude.gap.only = TRUE,
+  loci = NULL, ...)
 
 getSequenceNames(x, ...)
 
-\S4method{getSequenceNames}{multidna}(x, exclude.gap.only = TRUE, loci = NULL, ...)
+\S4method{getSequenceNames}{multidna}(x, exclude.gap.only = TRUE,
+  loci = NULL, ...)
 
-\S4method{getSequenceNames}{multiphyDat}(x, exclude.gap.only = TRUE, loci = NULL, ...)
+\S4method{getSequenceNames}{multiphyDat}(x, exclude.gap.only = TRUE,
+  loci = NULL, ...)
 
 getSequences(x, ...)
 

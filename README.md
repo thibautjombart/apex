@@ -696,7 +696,7 @@ u
 ```
 
 ```r
-tree <- pratchet(u, trace=0)
+tree <- pratchet(u, trace=0, all = FALSE)
 plot(tree, "u")
 ```
 
