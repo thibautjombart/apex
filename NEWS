@@ -1,4 +1,8 @@
-			CHANGES IN APEX VERSION 1.0.4
+			CHANGES IN APEX VERSION 1.0.5
+
+BUG FIXES
+
+  - fixed maintainer email.
 
 NEW MANAGEMENT
 
@@ -6,4 +10,4 @@ NEW MANAGEMENT
 
 BUG FIXES
 
-  - small changes to be compatible with R 4.0  
+  - small changes to be compatible with R 4.0
