@@ -251,7 +251,6 @@ As an alternative, all genes can be pooled into a single alignment to obtain a s
 ## make one single tree based on concatenated genes
 tree <- getTree(x, pool=TRUE)
 tree
-#par(mfrow=c(1,1))
 plot(tree, type="unrooted")
 ```
 
