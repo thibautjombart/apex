@@ -27,6 +27,9 @@
 
 \item{...}{further arguments to be passed to other methods}
 }
+\value{
+an object of class \linkS4class{multiphyDat} containing alignments.
+}
 \description{
 New \linkS4class{multiphyDat} objects can be created using \code{new("multiphyDat", ...)} where "..." are arguments documented below.
 The main input is a list of phyDat matrices. The constructor ensures that all matrices will be reordered in the same way, and genes with missing individuals will be filled by sequences of gaps ("-").
@@ -37,16 +40,14 @@ data(Laurasiatherian)
 new("multiphyDat")
 
 ## simple conversion with nicely ordered output
-\dontrun{
-genes <- list(gene1=subset(Laurasiatherian,, 1:1600, FALSE),
-    gene2=subset(Laurasiatherian,, 1601:3179, FALSE))
+genes <- list(gene1=Laurasiatherian[, 1:1600],
+    gene2=Laurasiatherian[, 1601:3179])
 x <- new("multiphyDat", genes)
 x
-}
 
 ## trickier conversion with missing sequences / wrong order
-genes <- list(gene1=subset(Laurasiatherian, 1:40),
-    gene2=subset(Laurasiatherian, 8:47))
+genes <- list(gene1=Laurasiatherian[1:40,],
+    gene2=Laurasiatherian[8:47, ])
 x <- new("multiphyDat", genes)
 x
 

@@ -22,7 +22,6 @@ a alignment object
 The functions \code{multidna2alignment} and \code{multiphyDat2alignment} concatenates separate sequences and return an alignment object of the seqinr package.
 }
 \examples{
-\dontrun{
 ## simple conversion with nicely ordered output
 data(woodmouse)
 genes <- list(gene1=woodmouse[,1:500], gene2=woodmouse[,501:965])
@@ -32,7 +31,6 @@ y <- multidna2alignment(x)
 y
 x2 <- multidna2multiphyDat(x)
 z <- multiphyDat2alignment(x2)
-}
 }
 \seealso{
 \itemize{

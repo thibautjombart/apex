@@ -106,6 +106,9 @@ sequences to return within a locus.}
 DNAbin sequences. If \code{TRUE} and only one locus has been requested,
 return a single DNAbin object.}
 }
+\value{
+returns the information stored in a slot, see details.
+}
 \description{
 Accessors for slots in \linkS4class{multidna} and \linkS4class{multiphyDat} objects.
 }

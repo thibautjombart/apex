@@ -13,6 +13,9 @@
 #' @param files a vector of characters indicating the paths to the files to read from.
 #' @param add.gaps a logical indicating if gap-only sequences should be added wherever sequences are missing; defaults to TRUE.
 #' @param ... further arguments to be passed to the functions \code{\link[ape]{read.dna}} and \code{\link[ape]{read.FASTA}}.
+#' @return \code{read.multidna} and \code{read.multiFASTA} return an object of
+#' class \linkS4class{multidna}, \code{read.multiphyDat} returns an object of
+#' class \linkS4class{multiphyDat}.
 #'
 #' @author Thibaut Jombart \email{t.jombart@@imperial.ac.uk}
 #' @author Klaus Schliep \email{klaus.schliep@@gmail.com}

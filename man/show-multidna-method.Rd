@@ -10,6 +10,9 @@
 \arguments{
 \item{object}{a multidna object}
 }
+\value{
+\code{show} returns an invisible NULL, called for side effects.
+}
 \description{
 Default printing for multidna objects
 }

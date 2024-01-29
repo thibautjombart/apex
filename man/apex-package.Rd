@@ -6,7 +6,7 @@
 \alias{apex-package}
 \title{apex: Phylogenetic Methods for Multiple Gene Data}
 \description{
-Toolkit for the analysis of multiple gene data (Jombart et al. 2017) \doi{10.1111/1755-0998.12567}. Apex implements the new S4 classes 'multidna', 'multiphyDat' and associated methods to handle aligned DNA sequences from multiple genes.
+Toolkit for the analysis of multiple gene data (Jombart et al. 2017) \doi{10.1111/1755-0998.12567}. 'apex' implements the new S4 classes 'multidna', 'multiphyDat' and associated methods to handle aligned DNA sequences from multiple genes.
 }
 \seealso{
 Useful links:

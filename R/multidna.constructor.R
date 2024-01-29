@@ -20,7 +20,7 @@
 #' @param add.gaps a logical indicating if gap-only sequences should be used where sequences are missing; defaults to TRUE.
 #' @param quiet a logical indicating if messages should be shown; defaults to FALSE.
 #' @param ... further arguments to be passed to other methods
-#'
+#' @return an object of class \linkS4class{multidna} containing alignments.
 #' @seealso
 #' \itemize{
 #' \item the \linkS4class{multidna} class

@@ -167,7 +167,6 @@ multiphyDat2multidna <- function(x){
 #' @return a alignment object
 #'
 #' @examples
-#' \dontrun{
 #' ## simple conversion with nicely ordered output
 #' data(woodmouse)
 #' genes <- list(gene1=woodmouse[,1:500], gene2=woodmouse[,501:965])
@@ -177,7 +176,6 @@ multiphyDat2multidna <- function(x){
 #' y
 #' x2 <- multidna2multiphyDat(x)
 #' z <- multiphyDat2alignment(x2)
-#' }
 #' @export
 #'
 multidna2alignment <- function(x, genes=TRUE){

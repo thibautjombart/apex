@@ -16,7 +16,7 @@
 #' @param exclude.gap.only logical. Remove or ignore sequences containing all gaps?
 #' @param value a replacement value for the slot.
 #' @param ... further arguments passed on to other functions.
-#'
+#' @return returns the information stored in a slot, see details.
 #' @details
 #' \describe{
 #'   \item{getNumInd}{Returns the number of individuals.}

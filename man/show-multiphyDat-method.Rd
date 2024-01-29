@@ -10,6 +10,9 @@
 \arguments{
 \item{object}{a multiphyDat object}
 }
+\value{
+\code{show} returns an invisible NULL, called for side effects.
+}
 \description{
 Default printing for multiphyDat objects
 }

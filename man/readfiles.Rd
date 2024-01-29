@@ -19,6 +19,11 @@ read.multiphyDat(files, add.gaps = TRUE, ...)
 
 \item{...}{further arguments to be passed to the functions \code{\link[ape]{read.dna}} and \code{\link[ape]{read.FASTA}}.}
 }
+\value{
+\code{read.multidna} and \code{read.multiFASTA} return an object of
+class \linkS4class{multidna}, \code{read.multiphyDat} returns an object of
+class \linkS4class{multiphyDat}.
+}
 \description{
 These functions read multiple DNA alignments and store the output in a \linkS4class{multidna} object.
 They are relying on ape's original functions \code{\link[ape]{read.dna}} and \code{\link[ape]{read.FASTA}}.

@@ -22,7 +22,7 @@
 #' @param add.gaps a logical indicating if gap-only sequences should be used where sequences are missing; defaults to TRUE.
 #' @param quiet a logical indicating if messages should be shown; defaults to FALSE.
 #' @param ... further arguments to be passed to other methods
-#'
+#' @return an object of class \linkS4class{multiphyDat} containing alignments.
 #' @seealso
 #' \itemize{
 #' \item the \linkS4class{multiphyDat} class
@@ -34,16 +34,14 @@
 #' new("multiphyDat")
 #'
 #' ## simple conversion with nicely ordered output
-#' \dontrun{
-#' genes <- list(gene1=subset(Laurasiatherian,, 1:1600, FALSE),
-#'     gene2=subset(Laurasiatherian,, 1601:3179, FALSE))
+#' genes <- list(gene1=Laurasiatherian[, 1:1600],
+#'     gene2=Laurasiatherian[, 1601:3179])
 #' x <- new("multiphyDat", genes)
 #' x
-#' }
 #'
 #' ## trickier conversion with missing sequences / wrong order
-#' genes <- list(gene1=subset(Laurasiatherian, 1:40),
-#'     gene2=subset(Laurasiatherian, 8:47))
+#' genes <- list(gene1=Laurasiatherian[1:40,],
+#'     gene2=Laurasiatherian[8:47, ])
 #' x <- new("multiphyDat", genes)
 #' x
 #'

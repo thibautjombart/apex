@@ -24,6 +24,9 @@
 
 \item{...}{further arguments to be passed to other methods}
 }
+\value{
+an object of class \linkS4class{multidna} containing alignments.
+}
 \description{
 New \linkS4class{multidna} objects can be created using \code{new("multidna", ...)} where "..." are arguments documented below.
 The main input is a list of DNAbin matrices. The constructor ensures that all matrices will be reordered in the same way, and as an option (setting \code{add.gaps=TRUE}, gap-only sequences ("...-----...") will be added wherever sequences are missing.
