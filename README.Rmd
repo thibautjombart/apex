@@ -6,7 +6,8 @@
 ```{r compileVignette, results="hide",echo=FALSE,message=FALSE}
 ## recompile vignette
 setwd("vignettes")
-knit("apex.Rmd")
+library(knitr)
+knitr::knit("apex.Rmd", output = "apex.md")
 setwd("../")
 ```
 
@@ -20,6 +21,6 @@ mdInput <- mdInput[-toRemove]
 
 ## restore right path for figures
 mdInput <- gsub("figs/","vignettes/figs/",mdInput)
-cat(paste(mdInput,collapse="\n"))
+cat(paste(mdInput,collapse="\n"), file = "README.md")
 ```
 

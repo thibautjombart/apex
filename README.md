@@ -1,7 +1,3 @@
-[![R-CMD-check](https://github.com/thibautjombart/apex/workflows/R-CMD-check/badge.svg)](https://github.com/thibautjombart/apex/actions)
-[![DOI](https://zenodo.org/badge/11430/thibautjombart/apex.svg)](http://dx.doi.org/10.5281/zenodo.16822)
-
-
 
 
 
@@ -34,18 +30,6 @@ Then, to load the package, use:
 library("apex")
 ```
 
-```
-## Loading required package: ape
-```
-
-```
-## Loading required package: phangorn
-```
-
-```
-## Loading required package: rmarkdown
-```
-
 Importing data
 --------------
 ### *ape* wrappers
@@ -60,17 +44,7 @@ Here is an example using a dataset from *apex*:
 ```r
 ## get address of the file within apex
 files <- dir(system.file(package="apex"),patter="patr", full=TRUE)
-files # this will change on your computer
-```
 
-```
-## [1] "/usr/local/lib/R/site-library/apex/patr_poat43.fasta"
-## [2] "/usr/local/lib/R/site-library/apex/patr_poat47.fasta"
-## [3] "/usr/local/lib/R/site-library/apex/patr_poat48.fasta"
-## [4] "/usr/local/lib/R/site-library/apex/patr_poat49.fasta"
-```
-
-```r
 ## read these files
 x <- read.multiFASTA(files)
 x
@@ -91,44 +65,76 @@ x
 ## 
 ## All sequences of same length: 764 
 ## 
-## Labels: 2340_50156.ab1  2340_50149.ab1  2340_50674.ab1  2370_45312.ab1  2340_50406.ab1  2370_45424.ab1  ...
+## Labels:
+## 2340_50156.ab1 
+## 2340_50149.ab1 
+## 2340_50674.ab1 
+## 2370_45312.ab1 
+## 2340_50406.ab1 
+## 2370_45424.ab1 
+## ...
 ## 
 ## Base composition:
 ##     a     c     g     t 
 ## 0.320 0.158 0.166 0.356 
+## (Total: 6.11 kb)
 ## 
 ## $patr_poat47
 ## 8 DNA sequences in binary format stored in a matrix.
 ## 
 ## All sequences of same length: 626 
 ## 
-## Labels: 2340_50156.ab1  2340_50149.ab1  2340_50674.ab1  2370_45312.ab1  2340_50406.ab1  2370_45424.ab1  ...
+## Labels:
+## 2340_50156.ab1 
+## 2340_50149.ab1 
+## 2340_50674.ab1 
+## 2370_45312.ab1 
+## 2340_50406.ab1 
+## 2370_45424.ab1 
+## ...
 ## 
 ## Base composition:
 ##     a     c     g     t 
 ## 0.227 0.252 0.256 0.266 
+## (Total: 5.01 kb)
 ## 
 ## $patr_poat48
 ## 8 DNA sequences in binary format stored in a matrix.
 ## 
 ## All sequences of same length: 560 
 ## 
-## Labels: 2340_50156.ab1  2340_50149.ab1  2340_50674.ab1  2370_45312.ab1  2340_50406.ab1  2370_45424.ab1  ...
+## Labels:
+## 2340_50156.ab1 
+## 2340_50149.ab1 
+## 2340_50674.ab1 
+## 2370_45312.ab1 
+## 2340_50406.ab1 
+## 2370_45424.ab1 
+## ...
 ## 
 ## Base composition:
 ##     a     c     g     t 
 ## 0.305 0.185 0.182 0.327 
+## (Total: 4.48 kb)
 ## 
 ## $patr_poat49
 ## 8 DNA sequences in binary format stored in a matrix.
 ## 
 ## All sequences of same length: 556 
 ## 
-## Labels: 2340_50156.ab1  2340_50149.ab1  2340_50674.ab1  2370_45312.ab1  2340_50406.ab1  2370_45424.ab1  ...
+## Labels:
+## 2340_50156.ab1 
+## 2340_50149.ab1 
+## 2340_50674.ab1 
+## 2370_45312.ab1 
+## 2340_50406.ab1 
+## 2370_45424.ab1 
+## ...
 ## 
 ## Base composition:
 ##     a     c     g     t 
-## 0.344 0.149 0.187 0.320
+## 0.344 0.149 0.187 0.320 
+## (Total: 4.45 kb)
 ```
 
 ```r
@@ -140,11 +146,15 @@ names(x@dna) # names of the genes
 ```
 
 ```r
-par(mar=c(6,11,2,1))
+oldpar <-par(mar=c(6,11,4,1))
 plot(x)
 ```
 
 ![plot of chunk readfiles](vignettes/figs/readfiles-1.png)
+
+```r
+par(oldpar)
+```
 
 ### *phangorn* wrappers
 In addition to the above functions for importing data:
@@ -204,12 +214,12 @@ getClassDef("multidna")
 ## Class "multidna" [package "apex"]
 ## 
 ## Slots:
-##                                                                           
-## Name:               dna           labels            n.ind            n.seq
-## Class:       listOrNULL        character          integer          integer
-##                                                          
-## Name:        n.seq.miss         ind.info        gene.info
-## Class:          integer data.frameOrNULL data.frameOrNULL
+##                                                                                            
+## Name:               dna           labels            n.ind            n.seq       n.seq.miss
+## Class:       listOrNULL        character          integer          integer          integer
+##                                         
+## Name:          ind.info        gene.info
+## Class: data.frameOrNULL data.frameOrNULL
 ## 
 ## Extends: "multiinfo"
 ```
@@ -231,6 +241,7 @@ New `multidna` objects can be created via different ways:
 
 We illustrate the use of the constructor below (see `?new.multidna`) for more information.
 We use *ape*'s dataset *woodmouse*, which we artificially split in two 'genes', keeping the first 500 nucleotides for the first gene, and using the rest as second gene. Note that the individuals need not match across different genes: matching is handled by the constructor.
+
 
 ```r
 ## empty object
@@ -258,11 +269,19 @@ woodmouse
 ## 
 ## All sequences of same length: 965 
 ## 
-## Labels: No305 No304 No306 No0906S No0908S No0909S ...
+## Labels:
+## No305
+## No304
+## No306
+## No0906S
+## No0908S
+## No0909S
+## ...
 ## 
 ## Base composition:
 ##     a     c     g     t 
-## 0.307 0.261 0.126 0.306
+## 0.307 0.261 0.126 0.306 
+## (Total: 14.47 kb)
 ```
 
 ```r
@@ -286,22 +305,38 @@ x
 ## 
 ## All sequences of same length: 500 
 ## 
-## Labels: No305 No304 No306 No0906S No0908S No0909S ...
+## Labels:
+## No305
+## No304
+## No306
+## No0906S
+## No0908S
+## No0909S
+## ...
 ## 
 ## Base composition:
 ##     a     c     g     t 
 ## 0.326 0.230 0.147 0.297 
+## (Total: 7.5 kb)
 ## 
 ## $gene2
 ## 15 DNA sequences in binary format stored in a matrix.
 ## 
 ## All sequences of same length: 465 
 ## 
-## Labels: No305 No304 No306 No0906S No0908S No0909S ...
+## Labels:
+## No305
+## No304
+## No306
+## No0906S
+## No0908S
+## No0909S
+## ...
 ## 
 ## Base composition:
 ##     a     c     g     t 
-## 0.286 0.295 0.103 0.316
+## 0.286 0.295 0.103 0.316 
+## (Total: 6.97 kb)
 ```
 
 ```r
@@ -335,14 +370,12 @@ getSequenceNames(x) # A list of the names of the sequences at each locus
 
 ```
 ## $gene1
-##  [1] "No305"   "No304"   "No306"   "No0906S" "No0908S" "No0909S" "No0910S"
-##  [8] "No0912S" "No0913S" "No1103S" "No1007S" "No1114S" "No1202S" "No1206S"
-## [15] "No1208S"
+##  [1] "No305"   "No304"   "No306"   "No0906S" "No0908S" "No0909S" "No0910S" "No0912S" "No0913S" "No1103S"
+## [11] "No1007S" "No1114S" "No1202S" "No1206S" "No1208S"
 ## 
 ## $gene2
-##  [1] "No305"   "No304"   "No306"   "No0906S" "No0908S" "No0909S" "No0910S"
-##  [8] "No0912S" "No0913S" "No1103S" "No1007S" "No1114S" "No1202S" "No1206S"
-## [15] "No1208S"
+##  [1] "No305"   "No304"   "No306"   "No0906S" "No0908S" "No0909S" "No0910S" "No0912S" "No0913S" "No1103S"
+## [11] "No1007S" "No1114S" "No1202S" "No1206S" "No1208S"
 ```
 
 ```r
@@ -355,22 +388,38 @@ getSequences(x) # A list of all loci
 ## 
 ## All sequences of same length: 500 
 ## 
-## Labels: No305 No304 No306 No0906S No0908S No0909S ...
+## Labels:
+## No305
+## No304
+## No306
+## No0906S
+## No0908S
+## No0909S
+## ...
 ## 
 ## Base composition:
 ##     a     c     g     t 
 ## 0.326 0.230 0.147 0.297 
+## (Total: 7.5 kb)
 ## 
 ## $gene2
 ## 15 DNA sequences in binary format stored in a list.
 ## 
 ## All sequences of same length: 465 
 ## 
-## Labels: No305 No304 No306 No0906S No0908S No0909S ...
+## Labels:
+## No305
+## No304
+## No306
+## No0906S
+## No0908S
+## No0909S
+## ...
 ## 
 ## Base composition:
 ##     a     c     g     t 
-## 0.286 0.295 0.103 0.316
+## 0.286 0.295 0.103 0.316 
+## (Total: 6.97 kb)
 ```
 
 ```r
@@ -383,11 +432,19 @@ getSequences(x, loci = 2, simplify = FALSE) # Just the second locus (a single el
 ## 
 ## All sequences of same length: 465 
 ## 
-## Labels: No305 No304 No306 No0906S No0908S No0909S ...
+## Labels:
+## No305
+## No304
+## No306
+## No0906S
+## No0908S
+## No0909S
+## ...
 ## 
 ## Base composition:
 ##     a     c     g     t 
-## 0.286 0.295 0.103 0.316
+## 0.286 0.295 0.103 0.316 
+## (Total: 6.97 kb)
 ```
 
 ```r
@@ -399,16 +456,24 @@ getSequences(x, loci = "gene1") # Just the first locus as a DNAbin object
 ## 
 ## All sequences of same length: 500 
 ## 
-## Labels: No305 No304 No306 No0906S No0908S No0909S ...
+## Labels:
+## No305
+## No304
+## No306
+## No0906S
+## No0908S
+## No0909S
+## ...
 ## 
 ## Base composition:
 ##     a     c     g     t 
-## 0.326 0.230 0.147 0.297
+## 0.326 0.230 0.147 0.297 
+## (Total: 7.5 kb)
 ```
 
 ```r
 ## compare the input dataset and the new multidna
-par(mfrow=c(3,1), mar=c(6,6,2,1))
+oldpar <- par(mfrow=c(3,1), mar=c(6,6,2,1))
 image(woodmouse)
 image(as.matrix(getSequences(x, 1)))
 image(as.matrix(getSequences(x, 2)))
@@ -417,6 +482,7 @@ image(as.matrix(getSequences(x, 2)))
 ![plot of chunk multidnaclass](vignettes/figs/multidnaclass-1.png)
 
 ```r
+par(oldpar)
 ## same but with missing sequences and wrong order
 genes <- list(gene1=woodmouse[,1:500], gene2=woodmouse[c(5:1,14:15),501:965])
 x <- new("multidna", genes)
@@ -438,30 +504,50 @@ x
 ## 
 ## All sequences of same length: 500 
 ## 
-## Labels: No305 No304 No306 No0906S No0908S No0909S ...
+## Labels:
+## No305
+## No304
+## No306
+## No0906S
+## No0908S
+## No0909S
+## ...
 ## 
 ## Base composition:
 ##     a     c     g     t 
 ## 0.326 0.230 0.147 0.297 
+## (Total: 7.5 kb)
 ## 
 ## $gene2
 ## 15 DNA sequences in binary format stored in a matrix.
 ## 
 ## All sequences of same length: 465 
 ## 
-## Labels: No305 No304 No306 No0906S No0908S No0909S ...
+## Labels:
+## No305
+## No304
+## No306
+## No0906S
+## No0908S
+## No0909S
+## ...
 ## 
 ## Base composition:
 ##     a     c     g     t 
-## 0.286 0.294 0.103 0.316
+## 0.286 0.294 0.103 0.316 
+## (Total: 6.97 kb)
 ```
 
 ```r
-par(mar=c(6,6,2,1))
+oldpar <- par(mar=c(6,6,2,1))
 plot(x)
 ```
 
 ![plot of chunk multidnaclass](vignettes/figs/multidnaclass-2.png)
+
+```r
+par(oldpar)
+```
 
 
 ###  multiphyDat
@@ -477,12 +563,12 @@ getClassDef("multiphyDat")
 ## Class "multiphyDat" [package "apex"]
 ## 
 ## Slots:
-##                                                                           
-## Name:               seq             type           labels            n.ind
-## Class:       listOrNULL        character        character          integer
-##                                                                           
-## Name:             n.seq       n.seq.miss         ind.info        gene.info
-## Class:          integer          integer data.frameOrNULL data.frameOrNULL
+##                                                                                            
+## Name:               seq             type           labels            n.ind            n.seq
+## Class:       listOrNULL        character        character          integer          integer
+##                                                          
+## Name:        n.seq.miss         ind.info        gene.info
+## Class:          integer data.frameOrNULL data.frameOrNULL
 ## 
 ## Extends: "multiinfo"
 ```
@@ -533,8 +619,7 @@ new("multiphyDat")
 
 ```r
 ## simple conversion after artificially splitting data into 2 genes
-genes <- list(gene1=subset(Laurasiatherian,,1:1600, FALSE),
-      	 gene2=subset(Laurasiatherian,,1601:3179, FALSE))
+genes <- list(gene1=Laurasiatherian[,1:1600], gene2=Laurasiatherian[,1601:3179])
 x <- new("multiphyDat", genes, type="DNA")
 x
 ```
@@ -573,17 +658,7 @@ Example code:
 
 ```r
 files <- dir(system.file(package="apex"),patter="patr", full=TRUE)
-files
-```
 
-```
-## [1] "/usr/local/lib/R/site-library/apex/patr_poat43.fasta"
-## [2] "/usr/local/lib/R/site-library/apex/patr_poat47.fasta"
-## [3] "/usr/local/lib/R/site-library/apex/patr_poat48.fasta"
-## [4] "/usr/local/lib/R/site-library/apex/patr_poat49.fasta"
-```
-
-```r
 ## read files
 x <- read.multiFASTA(files)
 x
@@ -604,48 +679,80 @@ x
 ## 
 ## All sequences of same length: 764 
 ## 
-## Labels: 2340_50156.ab1  2340_50149.ab1  2340_50674.ab1  2370_45312.ab1  2340_50406.ab1  2370_45424.ab1  ...
+## Labels:
+## 2340_50156.ab1 
+## 2340_50149.ab1 
+## 2340_50674.ab1 
+## 2370_45312.ab1 
+## 2340_50406.ab1 
+## 2370_45424.ab1 
+## ...
 ## 
 ## Base composition:
 ##     a     c     g     t 
 ## 0.320 0.158 0.166 0.356 
+## (Total: 6.11 kb)
 ## 
 ## $patr_poat47
 ## 8 DNA sequences in binary format stored in a matrix.
 ## 
 ## All sequences of same length: 626 
 ## 
-## Labels: 2340_50156.ab1  2340_50149.ab1  2340_50674.ab1  2370_45312.ab1  2340_50406.ab1  2370_45424.ab1  ...
+## Labels:
+## 2340_50156.ab1 
+## 2340_50149.ab1 
+## 2340_50674.ab1 
+## 2370_45312.ab1 
+## 2340_50406.ab1 
+## 2370_45424.ab1 
+## ...
 ## 
 ## Base composition:
 ##     a     c     g     t 
 ## 0.227 0.252 0.256 0.266 
+## (Total: 5.01 kb)
 ## 
 ## $patr_poat48
 ## 8 DNA sequences in binary format stored in a matrix.
 ## 
 ## All sequences of same length: 560 
 ## 
-## Labels: 2340_50156.ab1  2340_50149.ab1  2340_50674.ab1  2370_45312.ab1  2340_50406.ab1  2370_45424.ab1  ...
+## Labels:
+## 2340_50156.ab1 
+## 2340_50149.ab1 
+## 2340_50674.ab1 
+## 2370_45312.ab1 
+## 2340_50406.ab1 
+## 2370_45424.ab1 
+## ...
 ## 
 ## Base composition:
 ##     a     c     g     t 
 ## 0.305 0.185 0.182 0.327 
+## (Total: 4.48 kb)
 ## 
 ## $patr_poat49
 ## 8 DNA sequences in binary format stored in a matrix.
 ## 
 ## All sequences of same length: 556 
 ## 
-## Labels: 2340_50156.ab1  2340_50149.ab1  2340_50674.ab1  2370_45312.ab1  2340_50406.ab1  2370_45424.ab1  ...
+## Labels:
+## 2340_50156.ab1 
+## 2340_50149.ab1 
+## 2340_50674.ab1 
+## 2370_45312.ab1 
+## 2340_50406.ab1 
+## 2370_45424.ab1 
+## ...
 ## 
 ## Base composition:
 ##     a     c     g     t 
-## 0.344 0.149 0.187 0.320
+## 0.344 0.149 0.187 0.320 
+## (Total: 4.45 kb)
 ```
 
 ```r
-par(mar=c(6,11,2,1))
+oldpar <- par(mar=c(6,11,4,1))
 plot(x)
 ```
 
@@ -659,6 +766,11 @@ plot(x[1:3,2:4])
 ![plot of chunk handling](vignettes/figs/handling-2.png)
 
 ```r
+par(oldpar)
+```
+
+
+```r
 ## concatenate
 y <- concatenate(x)
 y
@@ -669,21 +781,31 @@ y
 ## 
 ## All sequences of same length: 2506 
 ## 
-## Labels: 2340_50156.ab1  2340_50149.ab1  2340_50674.ab1  2370_45312.ab1  2340_50406.ab1  2370_45424.ab1  ...
+## Labels:
+## 2340_50156.ab1 
+## 2340_50149.ab1 
+## 2340_50674.ab1 
+## 2370_45312.ab1 
+## 2340_50406.ab1 
+## 2370_45424.ab1 
+## ...
 ## 
 ## Base composition:
 ##     a     c     g     t 
-## 0.298 0.187 0.197 0.319
+## 0.298 0.187 0.197 0.319 
+## (Total: 20.05 kb)
 ```
 
 ```r
-par(mar=c(5,8,2,1))
+oldpar <- par(mar=c(5,8,4,1))
 image(y)
 ```
 
 ![plot of chunk concat](vignettes/figs/concat-1.png)
 
 ```r
+par(oldpar)
+
 ## concatenate multiphyDat object
 z <- multidna2multiphyDat(x)
 u <- concatenate(z)
@@ -697,10 +819,15 @@ u
 
 ```r
 tree <- pratchet(u, trace=0, all = FALSE)
+oldpar <- par(mar=c(1,1,1,1))
 plot(tree, "u")
 ```
 
 ![plot of chunk concat](vignettes/figs/concat-2.png)
+
+```r
+par(oldpar)
+```
 
 Building trees
 ---------------
@@ -729,7 +856,7 @@ As an alternative, all genes can be pooled into a single alignment to obtain a s
 ## Phylogenetic tree with 8 tips and 6 internal nodes.
 ## 
 ## Tip labels:
-## 	2340_50156.ab1 , 2340_50149.ab1 , 2340_50674.ab1 , 2370_45312.ab1 , 2340_50406.ab1 , 2370_45424.ab1 , ...
+##   2340_50156.ab1 , 2340_50149.ab1 , 2340_50674.ab1 , 2370_45312.ab1 , 2340_50406.ab1 , 2370_45424.ab1 , ...
 ## 
 ## Unrooted; includes branch lengths.
 ```
@@ -767,22 +894,6 @@ This is illustrated below:
 ```r
 ## find source files in apex
 library(adegenet)
-```
-
-```
-## Loading required package: ade4
-```
-
-```
-## 
-##    /// adegenet 2.0.1 is loaded ////////////
-## 
-##    > overview: '?adegenet'
-##    > tutorials/doc/questions: 'adegenetWeb()' 
-##    > bug reports/feature requests: adegenetIssues()
-```
-
-```r
 files <- dir(system.file(package="apex"),patter="patr", full=TRUE)
 
 ## import data
@@ -805,44 +916,76 @@ x
 ## 
 ## All sequences of same length: 764 
 ## 
-## Labels: 2340_50156.ab1  2340_50149.ab1  2340_50674.ab1  2370_45312.ab1  2340_50406.ab1  2370_45424.ab1  ...
+## Labels:
+## 2340_50156.ab1 
+## 2340_50149.ab1 
+## 2340_50674.ab1 
+## 2370_45312.ab1 
+## 2340_50406.ab1 
+## 2370_45424.ab1 
+## ...
 ## 
 ## Base composition:
 ##     a     c     g     t 
 ## 0.320 0.158 0.166 0.356 
+## (Total: 6.11 kb)
 ## 
 ## $patr_poat47
 ## 8 DNA sequences in binary format stored in a matrix.
 ## 
 ## All sequences of same length: 626 
 ## 
-## Labels: 2340_50156.ab1  2340_50149.ab1  2340_50674.ab1  2370_45312.ab1  2340_50406.ab1  2370_45424.ab1  ...
+## Labels:
+## 2340_50156.ab1 
+## 2340_50149.ab1 
+## 2340_50674.ab1 
+## 2370_45312.ab1 
+## 2340_50406.ab1 
+## 2370_45424.ab1 
+## ...
 ## 
 ## Base composition:
 ##     a     c     g     t 
 ## 0.227 0.252 0.256 0.266 
+## (Total: 5.01 kb)
 ## 
 ## $patr_poat48
 ## 8 DNA sequences in binary format stored in a matrix.
 ## 
 ## All sequences of same length: 560 
 ## 
-## Labels: 2340_50156.ab1  2340_50149.ab1  2340_50674.ab1  2370_45312.ab1  2340_50406.ab1  2370_45424.ab1  ...
+## Labels:
+## 2340_50156.ab1 
+## 2340_50149.ab1 
+## 2340_50674.ab1 
+## 2370_45312.ab1 
+## 2340_50406.ab1 
+## 2370_45424.ab1 
+## ...
 ## 
 ## Base composition:
 ##     a     c     g     t 
 ## 0.305 0.185 0.182 0.327 
+## (Total: 4.48 kb)
 ## 
 ## $patr_poat49
 ## 8 DNA sequences in binary format stored in a matrix.
 ## 
 ## All sequences of same length: 556 
 ## 
-## Labels: 2340_50156.ab1  2340_50149.ab1  2340_50674.ab1  2370_45312.ab1  2340_50406.ab1  2370_45424.ab1  ...
+## Labels:
+## 2340_50156.ab1 
+## 2340_50149.ab1 
+## 2340_50674.ab1 
+## 2370_45312.ab1 
+## 2340_50406.ab1 
+## 2370_45424.ab1 
+## ...
 ## 
 ## Base composition:
 ##     a     c     g     t 
-## 0.344 0.149 0.187 0.320
+## 0.344 0.149 0.187 0.320 
+## (Total: 4.45 kb)
 ```
 
 ```r
@@ -854,7 +997,7 @@ obj1
 ```
 ## /// GENIND OBJECT /////////
 ## 
-##  // 8 individuals; 11 loci; 22 alleles; size: 10.1 Kb
+##  // 8 individuals; 11 loci; 22 alleles; size: 11 Kb
 ## 
 ##  // Basic content
 ##    @tab:  8 x 22 matrix of allele counts
@@ -880,7 +1023,7 @@ obj3
 ```
 ## /// GENIND OBJECT /////////
 ## 
-##  // 8 individuals; 4 loci; 27 alleles; size: 26 Kb
+##  // 8 individuals; 4 loci; 27 alleles; size: 26.8 Kb
 ## 
 ##  // Basic content
 ##    @tab:  8 x 27 matrix of allele counts
