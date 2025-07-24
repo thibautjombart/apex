@@ -17,7 +17,7 @@
 
 \item{ask}{a logical indicating if the user should be prompted between graphs}
 
-\item{...}{arguments passed to \code{\link{image.DNAbin}}}
+\item{...}{arguments passed to \code{\link[ape]{image.DNAbin}}}
 }
 \description{
 Default printing for multidna objects

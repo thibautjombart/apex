@@ -35,7 +35,7 @@ identical(x, multiphyDat2multidna(y))
 \seealso{
 \itemize{
 \item concatenate
-\item \code{\link{DNAbin2genind}} to convert single DNAbin objects.
+\item \code{\link[adegenet]{DNAbin2genind}} to convert single DNAbin objects.
 }
 }
 \author{

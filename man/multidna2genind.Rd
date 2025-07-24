@@ -20,10 +20,10 @@ multiphyDat2genind(x, genes = TRUE, mlst = FALSE, gapIsNA = FALSE)
 \item{gapIsNA}{if \code{TRUE} and \code{mlst = TRUE}, sequences that consist entirely of gaps will be considered as NAs. (Default to \code{FALSE})}
 }
 \value{
-a \linkS4class{genind} object
+a \code{\link[adegenet:genind-class]{genind}}   object
 }
 \description{
-The functions \code{multidna2genind} and \code{multiphyDat2genind} concatenates separate DNA alignments, and then extracts SNPs of the resulting alignment into a \linkS4class{genind} object.
+The functions \code{multidna2genind} and \code{multiphyDat2genind} concatenates separate DNA alignments, and then extracts SNPs of the resulting alignment into a \code{\link[adegenet:genind-class]{genind}} object.
 }
 \examples{
 
@@ -43,7 +43,7 @@ all.equal(z1, z2)
 \seealso{
 \itemize{
 \item concatenate
-\item \code{\link{DNAbin2genind}} to convert single DNAbin objects.
+\item \code{\link[adegenet]{DNAbin2genind}} to convert single DNAbin objects.
 }
 }
 \author{

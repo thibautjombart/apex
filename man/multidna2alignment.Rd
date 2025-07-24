@@ -35,7 +35,7 @@ z <- multiphyDat2alignment(x2)
 \seealso{
 \itemize{
 \item concatenate
-\item \code{\link{as.alignment}} to convert single DNAbin objects.
+\item \code{\link[ape]{as.alignment}} to convert single DNAbin objects.
 }
 }
 \author{

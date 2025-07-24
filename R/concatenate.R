@@ -50,11 +50,10 @@ setMethod("concatenate", "multidna", function(x, genes=TRUE, ...){
 })
 
 #' @rdname concatenate
-#'
 #' @export
 #'
 setMethod("concatenate", "multiphyDat", function(x, genes=TRUE, ...){
     x <- add.gaps(x)
-    out <- do.call(cbind.phyDat, x@seq[genes])
+    out <- do.call(cbind, x@seq[genes])
     return(out)
 })

@@ -1,7 +1,7 @@
 #'
 #' Convert multidna into genind
 #'
-#' The functions \code{multidna2genind} and \code{multiphyDat2genind} concatenates separate DNA alignments, and then extracts SNPs of the resulting alignment into a \linkS4class{genind} object.
+#' The functions \code{multidna2genind} and \code{multiphyDat2genind} concatenates separate DNA alignments, and then extracts SNPs of the resulting alignment into a \code{\link[adegenet:genind-class]{genind}} object.
 #'
 #' @docType methods
 #' @rdname multidna2genind
@@ -19,14 +19,14 @@
 #' @seealso
 #' \itemize{
 #' \item concatenate
-#' \item \code{\link{DNAbin2genind}} to convert single DNAbin objects.
+#' \item \code{\link[adegenet]{DNAbin2genind}} to convert single DNAbin objects.
 #' }
 #'
 #' @export
 #'
 #' @importFrom adegenet DNAbin2genind df2genind
 #'
-#' @return a \linkS4class{genind} object
+#' @return a \code{\link[adegenet:genind-class]{genind}}   object
 #'
 #' @examples
 #'
@@ -99,7 +99,7 @@ multiphyDat2genind <- function(x, genes=TRUE, mlst=FALSE, gapIsNA=FALSE){
 #' @seealso
 #' \itemize{
 #' \item concatenate
-#' \item \code{\link{DNAbin2genind}} to convert single DNAbin objects.
+#' \item \code{\link[adegenet]{DNAbin2genind}} to convert single DNAbin objects.
 #' }
 #'
 #' @export
@@ -159,7 +159,7 @@ multiphyDat2multidna <- function(x){
 #' @seealso
 #' \itemize{
 #' \item concatenate
-#' \item \code{\link{as.alignment}} to convert single DNAbin objects.
+#' \item \code{\link[ape]{as.alignment}} to convert single DNAbin objects.
 #' }
 #'
 #' @export

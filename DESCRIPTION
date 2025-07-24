@@ -1,6 +1,6 @@
 Package: apex
 Title: Phylogenetic Methods for Multiple Gene Data
-Version: 1.0.6
+Version: 1.0.7
 Authors@R: c(KS=person("Klaus", "Schliep", email="klaus.schliep@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0003-2941-0161")),
        TJ=person("Thibaut", "Jombart", , "t.jombart@imperial.ac.uk", role = c("aut")),
 	   ZK=person("Zhian Namir", "Kamvar", email = "kamvarz@science.oregonstate.edu", role = c("aut")),
@@ -46,5 +46,5 @@ Suggests:
     knitr,
     rmarkdown
 Encoding: UTF-8
-RoxygenNote: 7.3.0
+RoxygenNote: 7.3.2
 Roxygen: list(old_usage = TRUE)

@@ -14,7 +14,7 @@
 #' @param y an integer vector indicating the genes to plot
 #' @param rows a logical indicating if different genes should be displayed in separate rows
 #' @param ask a logical indicating if the user should be prompted between graphs
-#' @param ... arguments passed to \code{\link{image.DNAbin}}
+#' @param ... arguments passed to \code{\link[ape]{image.DNAbin}}
 #' @author Thibaut Jombart \email{t.jombart@@imperial.ac.uk}
 #'
 #' @import ape
@@ -24,7 +24,7 @@
 #'
 #' @importFrom graphics image mtext par
 #'
-#' @docType methods 
+#' @docType methods
 #'
 #' @examples
 #' ## simple conversion with nicely ordered output
